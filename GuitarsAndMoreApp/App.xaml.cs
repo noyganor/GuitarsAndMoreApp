@@ -24,5 +24,15 @@ namespace GuitarsAndMoreApp
         protected override void OnResume()
         {
         }
+
+        public static bool IsDevEnv
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+
     }
 }
