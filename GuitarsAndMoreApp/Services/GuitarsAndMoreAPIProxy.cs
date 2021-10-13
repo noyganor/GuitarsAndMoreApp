@@ -11,6 +11,10 @@ using System.Text.Encodings.Web;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.IO;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using GuitarsAndMoreApp.Services;
+using GuitarsAndMoreApp.Views;
 
 namespace GuitarsAndMoreApp.Services
 {
@@ -20,7 +24,7 @@ namespace GuitarsAndMoreApp.Services
         private const string CLOUD_PHOTOS_URL = "TBD";
         private const string DEV_ANDROID_EMULATOR_URL = "http://10.0.2.2:30991/GuitarsAndMoreAPI"; //API url when using emulator on android
         private const string DEV_ANDROID_PHYSICAL_URL = "http://10.58.55.40:30991/GuitarsAndMoreAPI"; //API url when using physucal device on android
-        private const string DEV_WINDOWS_URL = "https://localhost:44345/GuitarsAndMoreAPI"; //API url when using windoes on development
+        private const string DEV_WINDOWS_URL = "http://localhost:30991/GuitarsAndMoreAPI"; //API url when using windoes on development
         private const string DEV_ANDROID_EMULATOR_PHOTOS_URL = "http://10.0.2.2:30991/Images/"; //API url when using emulator on android
         private const string DEV_ANDROID_PHYSICAL_PHOTOS_URL = "http://10.58.55.40:30991/Images/"; //API url when using physucal device on android
         private const string DEV_WINDOWS_PHOTOS_URL = "https://localhost:44345/Images/"; //API url when using windoes on development
@@ -80,5 +84,34 @@ namespace GuitarsAndMoreApp.Services
             this.basePhotosUri = basePhotosUri;
         }
 
+        //Login - if email and password are correct User object is returned. otherwise a null will be returned
+        public async Task<User> LoginAsync(string email, string pass)
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?email={email}&pass={pass}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    User u = JsonSerializer.Deserialize<User>(content, options);
+                    return u;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }
