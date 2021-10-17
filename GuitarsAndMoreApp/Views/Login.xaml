@@ -9,9 +9,9 @@
 
         <Entry Placeholder="Email" Text="{Binding Email}"/>
         <Entry Placeholder="Password" Text="{Binding Password}"/>
-        <Button Text="Login" Command="{Binding LoginC}"/>
+        <Button Text="Login" Command="{Binding LoginButton}"/>
         <Label Text="{Binding Message}" TextColor="Red"/>
-        <Button Text=" אין לך חשבון? להרשמה" Command="{Binding RegisterPageC}"/>
+            <Button Text=" אין לך חשבון? להרשמה" Command="{Binding MoveToSignUpPage}"/>
 
         </StackLayout>
     </ContentPage.Content>

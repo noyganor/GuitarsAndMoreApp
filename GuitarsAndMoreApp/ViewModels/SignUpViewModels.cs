@@ -7,9 +7,10 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
+
 namespace GuitarsAndMoreApp.ViewModels
 {
-    class LoginViewModel : INotifyPropertyChanged
+    class SignUpViewModels : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
@@ -34,6 +35,23 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        private string nickname;
+        public string Nickname
+        {
+            get
+            {
+                return this.nickname;
+            }
+            set
+            {
+                if (this.nickname != value)
+                {
+                    this.nickname = value;
+                    OnPropertyChanged("Nickname");
+                }
+            }
+        }
+
         private string password;
         public string Password
         {
@@ -47,6 +65,23 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.password = value;
                     OnPropertyChanged("Password");
+                }
+            }
+        }
+
+        private string verPassword;
+        public string VerPassword
+        {
+            get
+            {
+                return this.verPassword;
+            }
+            set
+            {
+                if (this.verPassword != value)
+                {
+                    this.verPassword = value;
+                    OnPropertyChanged("VerPassword");
                 }
             }
         }
@@ -68,32 +103,12 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public Command LoginButton => new Command(LoginAsync);
-        public async void LoginAsync()
-        {
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            User u = await proxy.LoginAsync(Email, Password);
-            if (u == null)
-            {
-                Message = "אחד מהנתונים שהזנת שגוי";
-            }
-            else
-            {
-                App app = (App)App.Current;
-                app.CurrentUser = u;
-                Page p = new HomePage();
+        //public Command SignUpNextButton => new Command<string>(SignUpNextPage(Email));
 
-                app.MainPage = new NavigationPage(p);
-            }
-        }
-
-        public Command MoveToSignUpPage => new Command(SignUpUserPage);
-        public async void SignUpUserPage()
-        {
-            App app = (App)App.Current;
-            app.MainPage = new SignUp();
-        }
-
-
+        //public async void SignUpNextPage(email, nickname, password, verPassword)
+        //{
+        //    App app = (App)App.Current;
+        //    app.MainPage = new SignUpSecondPage();
+        //}
     }
 }
