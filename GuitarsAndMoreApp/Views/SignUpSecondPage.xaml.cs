@@ -12,9 +12,9 @@ namespace GuitarsAndMoreApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignUpSecondPage : ContentPage
     {
-        public SignUpSecondPage()
+        public SignUpSecondPage(string email, string nickname, string password, string verPassword)
         {
-            this.BindingContext = new SignUpSecondPageViewModels();
+            this.BindingContext = new SignUpSecondPageViewModels(email, nickname, password, verPassword);
             InitializeComponent();
         }
     }

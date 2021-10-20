@@ -5,11 +5,11 @@
              x:Title ="Sign Up">
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}"/>
-            <Entry Placeholder="Gender" Text="{Binding Gender}"/>
-            <Entry Placeholder="Favorite Band Or Singer" Text="{Binding FavoriteBand}"/>
+            <Entry Placeholder="מספר טלפון" Text="{Binding PhoneNumber}"/>
+            <Picker Title="מגדר" ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding GenderID} "/>
+            <Entry Placeholder="זמר או להקה אהובה" Text="{Binding FavoriteBand}"/>
 
-            <Button Text="SUBMIT" Command="{Binding SignUpSubmitButton}"/>
+            <Button Text="שליחה" Command="{Binding SignUpSubmitButton}"/>
             <Label Text="{Binding Message}" TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>

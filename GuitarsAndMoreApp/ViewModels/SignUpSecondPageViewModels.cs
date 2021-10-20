@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GuitarsAndMoreApp.Models;
+using System.Threading.Tasks;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using GuitarsAndMoreApp.Models;
 using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
 
@@ -12,12 +16,25 @@ namespace GuitarsAndMoreApp.ViewModels
 {
     class SignUpSecondPageViewModels : INotifyPropertyChanged
     {
+        private string email;
+        private string nickname;
+        private string password;
+        private string verPassword;
+        public SignUpSecondPageViewModels(string email, string nickname, string password, string verPassword)
+        {
+            this.email = email;
+            this.nickname = nickname;
+            this.password = password;
+            this.verPassword = verPassword;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Phone number
         private string phoneNumber;
         public string PhoneNumber
         {
@@ -29,14 +46,43 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.phoneNumber != value)
                 {
+                    ValidatePhoneNumber();
                     this.phoneNumber = value;
                     OnPropertyChanged("PhoneNumber");
                 }
             }
         }
 
-        private string gender;
-        public string Gender
+        private string phoneNumberError;
+        public string PhoneNumberError
+        {
+            get => phoneNumberError;
+            set
+            {
+                phoneNumberError = value;
+                OnPropertyChanged("PhoneNumberError");
+            }
+        }
+
+        private bool showPhoneNumberError;
+        public bool ShowPhoneNumberError
+        {
+            get => showPhoneNumberError;
+            set
+            {
+                showPhoneNumberError = value;
+                OnPropertyChanged("ShowPhoneNumberError");
+            }
+        }
+
+        private void ValidatePhoneNumber()
+        {
+            this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNumber);
+        }
+        #endregion
+
+        public Gender gender;
+        public Gender Gender
         {
             get
             {
@@ -49,6 +95,15 @@ namespace GuitarsAndMoreApp.ViewModels
                     this.gender = value;
                     OnPropertyChanged("Gender");
                 }
+            }
+        }
+
+        public List<Gender> Genders
+        {
+            get
+            {
+                App app = (App)App.Current;
+                return app.Genders;
             }
         }
 
@@ -86,38 +141,36 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+
         public Command SignUpSumbitButton => new Command(SignUpSubmitButton);
 
         public async void SignUpSubmitButton()
         {
 
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            int gID = 0;
-            if (Gender == "בת")
-                gID = 1;
-            if (Gender == "בן")
-                gID = 2;
-            else
-                gID = 3;
+
+            
 
             User uu = new User
             {
-                NickName = this.nickname,
+                Nickname = this.nickname,
                 Email = this.email,
-                Password = this.password,
+                Pass = this.password,
                 PhoneNum = this.phoneNumber,
-                GenderId = gID,
+                GenderId = this.Gender.GenderId,
                 FavBand = this.favoriteBand
             };
             bool u = await proxy.RegisterUser(uu);
+
             if (!u)
             {
-                Message = "Registration isn't completed successfully";
+                Message = "ההרשמה לא בוצעה כראוי";
             }
             else
             {
                 App app = (App)App.Current;
                 app.CurrentUser = uu;
+                Message = "ההרשמה בוצעה כראוי";
                 await app.MainPage.Navigation.PopModalAsync();
             }
 

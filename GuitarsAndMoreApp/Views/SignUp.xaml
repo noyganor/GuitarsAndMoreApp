@@ -6,12 +6,12 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Entry Placeholder="Email" Text="{Binding Email}"/>
-            <Entry Placeholder="Nickname" Text="{Binding Nickname}"/>
-            <Entry Placeholder="Password" Text="{Binding Password}"/>
-            <Entry Placeholder="Verify Password" Text="{Binding VerPassword}"/>
+            <Entry Placeholder="אימייל" Text="{Binding Email}"/>
+            <Entry Placeholder="שם משתמש" Text="{Binding Nickname}"/>
+            <Entry Placeholder="סיסמה" Text="{Binding Password}"/>
+            <Entry Placeholder="אימות סיסמה" Text="{Binding VerPassword}"/>
             
-            <Button Text="Next" Command="{Binding SignUpNextButton}"/>
+            <Button Text="הבא" Command="{Binding SignUpNextButton}"/>
             <Label Text="{Binding Message}" TextColor="Red"/>
             
         </StackLayout>
