@@ -2,14 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.SignUpSecondPage"
-             x:Title ="Sign Up">
+             Title="הרשמה">
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="מספר טלפון" Text="{Binding PhoneNumber}"/>
-            <Picker Title="מגדר" ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding GenderID} "/>
-            <Entry Placeholder="זמר או להקה אהובה" Text="{Binding FavoriteBand}"/>
 
-            <Button Text="שליחה" Command="{Binding SignUpSubmitButton}"/>
+            <Label Text="מספר טלפון" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Entry Text="{Binding PhoneNumber}"/>
+
+            <Label Text="מגדר" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Picker ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding GenderID} "/>
+
+            <Label Text="זמר או להקה אהובה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Entry Text="{Binding FavoriteBand}"/>
+
+            <Button Text="שליחה" Command="{Binding SignUpSubmitButton}" HorizontalOptions="Center"/>
             <Label Text="{Binding Message}" TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>

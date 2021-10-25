@@ -2,16 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.Login"
-              Title="התחברות">
+             Title="התחברות">
     <ContentPage.Content>
         <StackLayout>
-        <Label Text="היי, כיף לראותך שוב" />
+            <Label Text="היי, כיף לראותך שוב" TextColor="#1b3a4b" HorizontalOptions="Center" FontAttributes="Bold"/>
 
-        <Entry Placeholder="Email" Text="{Binding Email}"/>
-        <Entry Placeholder="Password" Text="{Binding Password}"/>
-        <Button Text="Login" Command="{Binding LoginButton}"/>
-        <Label Text="{Binding Message}" TextColor="Red"/>
-            <Button Text=" אין לך חשבון? להרשמה" Command="{Binding MoveToSignUpPage}"/>
+            <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None"/>
+            <Entry Text="{Binding Email}"/>
+
+            <Label Text="סיסמה" TextColor="#3d405b" FontAttributes="None"/>
+            <Entry Text="{Binding Password}"/>
+            
+            <Button Text="התחברות" Command="{Binding LoginButton}" HorizontalOptions="Center"/>
+            <Label Text="{Binding Message}" TextColor="Red"/>
+            <Button Text=" אין לך חשבון? להרשמה" Command="{Binding MoveToSignUpPage}" HorizontalOptions="Center" />
 
         </StackLayout>
     </ContentPage.Content>

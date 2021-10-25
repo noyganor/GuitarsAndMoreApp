@@ -149,8 +149,6 @@ namespace GuitarsAndMoreApp.ViewModels
 
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
 
-            
-
             User uu = new User
             {
                 Nickname = this.nickname,
@@ -160,18 +158,21 @@ namespace GuitarsAndMoreApp.ViewModels
                 GenderId = this.Gender.GenderId,
                 FavBand = this.favoriteBand
             };
-            bool u = await proxy.RegisterUser(uu);
+            User u = await proxy.RegisterUser(uu);
 
-            if (!u)
+            if (u == null)
             {
                 Message = "ההרשמה לא בוצעה כראוי";
             }
+
             else
             {
                 App app = (App)App.Current;
                 app.CurrentUser = uu;
                 Message = "ההרשמה בוצעה כראוי";
-                await app.MainPage.Navigation.PopModalAsync();
+                Page p = new HomePage();
+                app.MainPage = new NavigationPage(p);
+
             }
 
         }

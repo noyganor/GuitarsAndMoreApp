@@ -2,17 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.SignUp"
-             x:Title="Sign Up">
+             Title="הרשמה">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#f2e9e4">
 
-            <Entry Placeholder="אימייל" Text="{Binding Email}"/>
-            <Entry Placeholder="שם משתמש" Text="{Binding Nickname}"/>
-            <Entry Placeholder="סיסמה" Text="{Binding Password}"/>
-            <Entry Placeholder="אימות סיסמה" Text="{Binding VerPassword}"/>
-            
-            <Button Text="הבא" Command="{Binding SignUpNextButton}"/>
-            <Label Text="{Binding Message}" TextColor="Red"/>
+            <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Entry Text="{Binding Email}"/>
+
+            <Label Text="שם משתמש" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Entry Text="{Binding Nickname}"/>
+
+            <Label Text="סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Entry Text="{Binding Password}" />
+
+            <Label Text="אימות סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Entry Text="{Binding VerPassword}"/>
+
+            <Button Text="הבא" Command="{Binding SignUpNextButton}" HorizontalOptions="Center" FontSize="Caption"/>
+            <Label Text="{Binding Message}" TextColor="Red" />
             
         </StackLayout>
     </ContentPage.Content>

@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Xamarin.Essentials;
+using GuitarsAndMoreApp.Views;
 
 namespace GuitarsAndMoreApp.ViewModels
 {
@@ -178,6 +179,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region verPassword
         private string verPassword;
         public string VerPassword
         {
@@ -189,11 +191,41 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.verPassword != value)
                 {
+                    ValidateVerPassword();
                     this.verPassword = value;
                     OnPropertyChanged("VerPassword");
                 }
             }
         }
+
+        private bool showVerPasswordError;
+        public bool ShowVerPasswordError
+        {
+            get => showVerPasswordError;
+            set
+            {
+                showVerPasswordError = value;
+                OnPropertyChanged("ShowVerPasswordError");
+            }
+        }
+
+        private string verPasswordError;
+        public string VerPasswordError
+        {
+            get => verPasswordError;
+            set
+            {
+                verPasswordError = value;
+                OnPropertyChanged("VerPasswordError");
+            }
+        }
+
+
+        private void ValidateVerPassword()
+        {
+
+        }
+        #endregion
 
         private string message;
         public string Message
@@ -214,7 +246,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
         public Command SignUpNextButton => new Command(SignUpNextPage);
 
-        public async void SignUpNextPage()
+        public void SignUpNextPage()
         {
             App app = (App)App.Current;
             app.MainPage = new SignUpSecondPage(Email, Nickname, Password, VerPassword);

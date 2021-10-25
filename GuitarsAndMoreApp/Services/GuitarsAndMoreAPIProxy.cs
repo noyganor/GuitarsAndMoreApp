@@ -114,7 +114,7 @@ namespace GuitarsAndMoreApp.Services
             }
         }
 
-        public async Task<bool> RegisterUser(User u)
+        public async Task<User> RegisterUser(User u)
         {
             try
             {
@@ -129,18 +129,19 @@ namespace GuitarsAndMoreApp.Services
                 {
 
                     string jsonContent = await response.Content.ReadAsStringAsync();
-                    bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    User b = JsonSerializer.Deserialize<User>(jsonContent, options);
                     return b;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
+
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return null;
             }
         }
     }
