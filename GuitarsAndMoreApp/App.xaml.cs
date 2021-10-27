@@ -14,11 +14,30 @@ namespace GuitarsAndMoreApp
         {
             InitializeComponent();
             Genders = new List<Gender>();
+            FillGenders();
             MainPage = new NavigationPage(new Login());
 
 
         }
 
+        private void FillGenders()
+        {
+            this.Genders.Add(new Gender()
+            {
+                GenderId = 2,
+                Gender1 = "זכר"
+            });
+            this.Genders.Add(new Gender()
+            {
+                GenderId = 1,
+                Gender1 = "נקבה"
+            });
+            this.Genders.Add(new Gender()
+            {
+                GenderId = 3,
+                Gender1 = "אחר"
+            });
+        }
         protected override void OnStart()
         {
         }

@@ -5,7 +5,31 @@
              Title ="מסך הבית">
     <ContentPage.Content>
         <StackLayout>
-         
+            <Image Source="treasperlogo.png"  />
+
+            <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding PostButton}" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+                <Button Text="גיטרות" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" BackgroundColor="#9a8c98"  Command="{Binding GuitarsPageButoon}"/>
+
+                <Button Text="סאונד והגברה" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0"  Command="{Binding SoundPageButton}"/>
+
+                <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1"  Command="{Binding AccessoriesPageButton}"/>
+
+                <Button Text="קייסים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0"  Command="{Binding CasesPageButton}"/>
+            </Grid>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

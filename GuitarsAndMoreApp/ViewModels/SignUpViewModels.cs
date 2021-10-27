@@ -106,29 +106,29 @@ namespace GuitarsAndMoreApp.ViewModels
         }
 
         private string nicknameError;
-        public string NickNameError
+        public string NicknameError
         {
             get => nicknameError;
             set
             {
                 nicknameError = value;
-                OnPropertyChanged("NickNameError");
+                OnPropertyChanged("NicknameError");
             }
         }
 
-        private bool showNickNameError;
-        public bool ShowNickNameError
+        private bool showNicknameError;
+        public bool ShowNicknameError
         {
-            get => showNickNameError;
+            get => showNicknameError;
             set
             {
-                showNickNameError = value;
-                OnPropertyChanged("ShowNickNameError");
+                showNicknameError = value;
+                OnPropertyChanged("ShowNicknameError");
             }
         }
         private void ValidateNickName()
         {
-            this.ShowNickNameError = string.IsNullOrEmpty(Nickname);
+            this.ShowNicknameError = string.IsNullOrEmpty(Nickname);
         }
         #endregion
 
@@ -175,6 +175,14 @@ namespace GuitarsAndMoreApp.ViewModels
 
         private void ValidatePassword()
         {
+            if (Password.Length < 8 )
+            {
+                PasswordError = "aaa";
+                ShowPasswordError = true;
+            
+            }
+            
+            
 
         }
         #endregion

@@ -124,7 +124,7 @@ namespace GuitarsAndMoreApp.Services
                 };
                 string json = JsonSerializer.Serialize<User>(u, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/RegisterUser", content);
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/SignUp", content);
                 if (response.IsSuccessStatusCode)
                 {
 

@@ -7,16 +7,16 @@
         <StackLayout BackgroundColor="#f2e9e4">
 
             <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding Email}"/>
+            <Entry Text="{Binding Email}" IsVisible="{Binding ShowEmailError}" />
 
             <Label Text="שם משתמש" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding Nickname}"/>
+            <Entry Text="{Binding Nickname}" IsVisible="{Binding ShowNicknameError}"/>
 
             <Label Text="סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding Password}" />
+            <Entry Text="{Binding Password}" IsVisible="{Binding ShowPasswordError}"/>
 
             <Label Text="אימות סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding VerPassword}"/>
+            <Entry Text="{Binding VerPassword}" IsVisible="{Binding ShowVerPasswordError}"/>
 
             <Button Text="הבא" Command="{Binding SignUpNextButton}" HorizontalOptions="Center" FontSize="Caption"/>
             <Label Text="{Binding Message}" TextColor="Red" />

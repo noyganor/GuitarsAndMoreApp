@@ -10,12 +10,12 @@
             <Entry Text="{Binding PhoneNumber}"/>
 
             <Label Text="מגדר" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Picker ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding GenderID} "/>
+            <Picker ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender} "/>
 
             <Label Text="זמר או להקה אהובה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
             <Entry Text="{Binding FavoriteBand}"/>
 
-            <Button Text="שליחה" Command="{Binding SignUpSubmitButton}" HorizontalOptions="Center"/>
+            <Button Text="שליחה" Command="{Binding SignUpSumbitButton}" HorizontalOptions="Center"/>
             <Label Text="{Binding Message}" TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>
