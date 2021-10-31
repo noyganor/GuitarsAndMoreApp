@@ -18,42 +18,33 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //public Command PostButton => new Command(MoveToPostPage);
-        //public void MoveToPostPage()
-        //{
-        //    App app = (App)App.Current;
-        //    app.MainPage.Navigation.PushAsync(new Game());
-        //}
+        public Command GuitarsPageButoon => new Command(MoveToGuitarsPage);
+        public void MoveToGuitarsPage()
+        {
+            App app = (App)App.Current;
+            app.MainPage.Navigation.PushAsync(new Guitars());
+        }
 
-        //public Command LoginPageGame => new Command(MoveToLoginPage);
-        //public void MoveToLoginPage()
-        //{
-        //    App app = (App)App.Current;
-        //    app.MainPage.Navigation.PushAsync(new Login());
-        //}
+        public Command SoundPageButton => new Command(MoveToSoundPage);
+        public void MoveToSoundPage()
+        {
+            App app = (App)App.Current;
+            app.MainPage.Navigation.PushAsync(new Sound());
+        }
 
-        //public Command RegisterPageGame => new Command(MoveToRegisterPage);
-        //public void MoveToRegisterPage()
-        //{
-        //    App app = (App)App.Current;
-        //    app.MainPage.Navigation.PushAsync(new Register());
-        //}
+        public Command AccessoriesPageButton => new Command(MoveToAccessoriesPage);
+        public void MoveToAccessoriesPage()
+        {
+            App app = (App)App.Current;
+            app.MainPage.Navigation.PushAsync(new Accessories());
+        }
 
-        //private string user1;
-        //public string User1
-        //{
-        //    get
-        //    {
-        //        return this.user1;
-        //    }
-        //    set
-        //    {
-        //        if (this.user1 != value)
-        //        {
-        //            this.user1 = value;
-        //            OnPropertyChanged("User1");
-        //        }
-        //    }
-        //}
+        public Command CasesPageButton => new Command(MoveToCasesPage);
+        public void MoveToCasesPage()
+        {
+            App app = (App)App.Current;
+            app.MainPage.Navigation.PushAsync(new Cases());
+        }
+
     }
 }

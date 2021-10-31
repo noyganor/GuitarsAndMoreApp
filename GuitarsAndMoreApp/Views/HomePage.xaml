@@ -22,11 +22,11 @@
 
                 <Button Text="גיטרות" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" BackgroundColor="#9a8c98"  Command="{Binding GuitarsPageButoon}"/>
 
-                <Button Text="סאונד והגברה" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0"  Command="{Binding SoundPageButton}"/>
+                <Button Text="סאונד והגברה" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0" BackgroundColor="#9a8c98" Command="{Binding SoundPageButton}"/>
 
-                <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1"  Command="{Binding AccessoriesPageButton}"/>
+                <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1" BackgroundColor="#9a8c98" Command="{Binding AccessoriesPageButton}"/>
 
-                <Button Text="קייסים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0"  Command="{Binding CasesPageButton}"/>
+                <Button Text="קייסים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" BackgroundColor="#9a8c98" Command="{Binding CasesPageButton}"/>
             </Grid>
 
 

@@ -175,14 +175,12 @@ namespace GuitarsAndMoreApp.ViewModels
 
         private void ValidatePassword()
         {
-            if (Password.Length < 8 )
+            if (Password.Length < 8)
             {
-                PasswordError = "aaa";
+                PasswordError = "Password has to be at least 8 characters";
                 ShowPasswordError = true;
             
-            }
-            
-            
+            }       
 
         }
         #endregion
@@ -231,7 +229,18 @@ namespace GuitarsAndMoreApp.ViewModels
 
         private void ValidateVerPassword()
         {
+            if (VerPassword != Password)
+            {
+                PasswordError = "The two passwords have to match";
+                ShowPasswordError = true;
+            }
+                
+            if (Password.Length < 8)
+            {
+                PasswordError = "Password has to be at least 8 characters";
+                ShowPasswordError = true;
 
+            }
         }
         #endregion
 
