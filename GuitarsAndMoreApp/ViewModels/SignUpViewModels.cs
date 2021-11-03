@@ -41,8 +41,8 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.email != value)
                 {
-                    ValidateEmail();
                     this.email = value;
+                    ValidateEmail();
                     OnPropertyChanged("Email");
                 }
             }
@@ -82,7 +82,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
             else
+            {
                 this.EmailError = ERROR_MESSAGES.REQUIRED_FIELD;
+            }
         }
         #endregion
 
@@ -98,8 +100,8 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.nickname != value)
                 {
-                    ValidateNickName();
                     this.nickname = value;
+                    ValidateNickname();
                     OnPropertyChanged("Nickname");
                 }
             }
@@ -126,9 +128,10 @@ namespace GuitarsAndMoreApp.ViewModels
                 OnPropertyChanged("ShowNicknameError");
             }
         }
-        private void ValidateNickName()
+        private void ValidateNickname()
         {
             this.ShowNicknameError = string.IsNullOrEmpty(Nickname);
+            this.NicknameError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -144,8 +147,9 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.password != value)
                 {
-                    ValidatePassword();
                     this.password = value;
+                    ValidatePassword();
+                 
                     OnPropertyChanged("Password");
                 }
             }
@@ -177,10 +181,10 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             if (Password.Length < 8)
             {
-                PasswordError = "Password has to be at least 8 characters";
+                PasswordError = "הסיסמה חייבת לכלול לפחות 8 תווים";
                 ShowPasswordError = true;
-            
-            }       
+                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+            }
 
         }
         #endregion
@@ -197,8 +201,9 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.verPassword != value)
                 {
-                    ValidateVerPassword();
                     this.verPassword = value;
+                    ValidateVerPassword();
+                    
                     OnPropertyChanged("VerPassword");
                 }
             }
@@ -231,16 +236,10 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             if (VerPassword != Password)
             {
-                PasswordError = "The two passwords have to match";
-                ShowPasswordError = true;
+                VerPasswordError = "הסיסמאות חייבות להיות תואמות";
+                ShowVerPasswordError = true;
             }
-                
-            if (Password.Length < 8)
-            {
-                PasswordError = "Password has to be at least 8 characters";
-                ShowPasswordError = true;
-
-            }
+            
         }
         #endregion
 

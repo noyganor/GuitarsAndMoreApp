@@ -15,7 +15,10 @@ namespace GuitarsAndMoreApp
             InitializeComponent();
             Genders = new List<Gender>();
             FillGenders();
-            MainPage = new NavigationPage(new Login());
+            NavigationPage p = new NavigationPage(new Login());
+            p.BarBackgroundColor = Color.White;
+            MainPage = p;
+            
 
 
         }

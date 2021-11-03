@@ -46,8 +46,9 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.phoneNumber != value)
                 {
-                    ValidatePhoneNumber();
                     this.phoneNumber = value;
+                    ValidatePhoneNumber();
+                  
                     OnPropertyChanged("PhoneNumber");
                 }
             }
@@ -81,6 +82,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Gender
         public Gender gender;
         public Gender Gender
         {
@@ -106,7 +108,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 return app.Genders;
             }
         }
+        #endregion
 
+        #region favorite Band
         private string favoriteBand;
         public string FavoriteBand
         {
@@ -123,6 +127,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
+        #endregion
 
         private string message;
         public string Message
@@ -154,6 +159,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 Nickname = this.nickname,
                 Email = this.email,
                 Pass = this.password,
+                VerPassword = this.verPassword,
                 PhoneNum = this.phoneNumber,
                 GenderId = this.Gender.GenderId,
                 FavBand = this.favoriteBand
