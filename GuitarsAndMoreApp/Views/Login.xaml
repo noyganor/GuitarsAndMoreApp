@@ -9,9 +9,11 @@
 
             <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None"/>
             <Entry Text="{Binding Email}"/>
+            <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
 
             <Label Text="סיסמה" TextColor="#3d405b" FontAttributes="None"/>
             <Entry Text="{Binding Password}"/>
+            <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
             
             <Button Text="התחברות" Command="{Binding LoginButton}" HorizontalOptions="Center"/>
             <Label Text="{Binding Message}" TextColor="Red"/>

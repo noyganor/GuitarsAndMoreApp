@@ -149,7 +149,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.password = value;
                     ValidatePassword();
-                 
+
                     OnPropertyChanged("Password");
                 }
             }
@@ -179,12 +179,15 @@ namespace GuitarsAndMoreApp.ViewModels
 
         private void ValidatePassword()
         {
-            if (Password.Length < 8)
+            if ( Password.Length>0 &&Password.Length < 8)
             {
                 PasswordError = "הסיסמה חייבת לכלול לפחות 8 תווים";
                 ShowPasswordError = true;
-                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
             }
+            else if(string.IsNullOrEmpty(Password))
+                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+            else
+                ShowPasswordError = false;
 
         }
         #endregion
@@ -203,7 +206,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.verPassword = value;
                     ValidateVerPassword();
-                    
+
                     OnPropertyChanged("VerPassword");
                 }
             }
@@ -239,7 +242,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 VerPasswordError = "הסיסמאות חייבות להיות תואמות";
                 ShowVerPasswordError = true;
             }
-            
+
         }
         #endregion
 

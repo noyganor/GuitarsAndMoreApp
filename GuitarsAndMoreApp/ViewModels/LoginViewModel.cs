@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using GuitarsAndMoreApp.Models;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Email
         private string email;
         public string Email
         {
@@ -34,6 +36,47 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        private bool showEmailError;
+        public bool ShowEmailError
+        {
+            get => showEmailError;
+            set
+            {
+                showEmailError = value;
+                OnPropertyChanged("ShowEmailError");
+            }
+        }
+
+        private string emailError;
+        public string EmailError
+        {
+            get => emailError;
+            set
+            {
+                emailError = value;
+                OnPropertyChanged("EmailError");
+            }
+        }
+
+        private void ValidateEmail()
+        {
+            this.ShowEmailError = string.IsNullOrEmpty(Email);
+            if (!this.ShowEmailError)
+            {
+                if (!Regex.IsMatch(this.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
+                {
+                    this.ShowEmailError = true;
+                    this.EmailError = ERROR_MESSAGES.BAD_EMAIL;
+                }
+            }
+            else
+            {
+                this.EmailError = ERROR_MESSAGES.REQUIRED_FIELD;
+            }
+        }
+        #endregion
+
+        #region Password
         private string password;
         public string Password
         {
@@ -50,6 +93,40 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
+
+        private bool showPasswordError;
+        public bool ShowPasswordError
+        {
+            get => showPasswordError;
+            set
+            {
+                showPasswordError = value;
+                OnPropertyChanged("ShowPasswordError");
+            }
+        }
+
+        private string passwordError;
+        public string PasswordError
+        {
+            get => passwordError;
+            set
+            {
+                passwordError = value;
+                OnPropertyChanged("PasswordError");
+            }
+        }
+
+        private void ValidatePassword()
+        {
+            if (Password.Length < 8)
+            {
+                PasswordError = "הסיסמה לא תקינה ";
+                ShowPasswordError = true;
+                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+            }
+
+        }
+        #endregion
 
         private string message;
         public string Message

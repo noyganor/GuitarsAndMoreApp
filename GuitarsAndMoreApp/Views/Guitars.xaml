@@ -4,7 +4,7 @@
              x:Class="GuitarsAndMoreApp.Views.Guitars">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Order="Primary" Icon="Microsoft.png" Text="Item 1" Priority="0" />
-        <ToolbarItem Name="MenuItem2" Order="Primary" Icon="Xamarin.png" Text="Item 2" Priority="1" />
+        <ToolbarItem Name="MenuItem2" Order="Primary" Icon="userimage.png" Text="Item 2" Priority="1" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -18,8 +18,8 @@
 
 
             <CollectionView x:Name="collectionName" 
-                            ItemsSource="{Binding MonkeyList}" SelectionMode="Single"
-            <CollectionView.ItemTemplate>
+                            ItemsSource="{Binding MonkeyList}" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView>
                         <SwipeView.LeftItems>

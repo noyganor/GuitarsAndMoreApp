@@ -5,8 +5,8 @@
     <ContentPage.Content>
         <StackLayout>
             <CollectionView x:Name="collectionName" 
-                            ItemsSource="{Binding MonkeyList}" SelectionMode="Single"
-            <CollectionView.ItemTemplate>
+                            ItemsSource="{Binding MonkeyList}" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView>
                         <SwipeView.LeftItems>
