@@ -10,11 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace GuitarsAndMoreApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Accessories : ContentPage
+    public partial class CategoryPage : ContentPage
     {
-        public Accessories()
+        public CategoryPage()
         {
             InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
         }
     }
 }

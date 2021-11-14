@@ -18,33 +18,22 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Command GuitarsPageButoon => new Command(MoveToGuitarsPage);
-        public void MoveToGuitarsPage()
+        public Command CategoryPageButoon => new Command<int>(MoveToCategoryPage);
+        public void MoveToCategoryPage(int index)
         {
             App app = (App)App.Current;
-            app.MainPage.Navigation.PushAsync(new Guitars());
+
+            if (index == 1)
+                app.MainPage.Navigation.PushAsync(new CategoryPage());
+            if (index == 2)
+                app.MainPage.Navigation.PushAsync(new CategoryPage());
+            if (index == 3)
+                app.MainPage.Navigation.PushAsync(new CategoryPage());
+            if (index == 4)
+                app.MainPage.Navigation.PushAsync(new CategoryPage());
         }
 
-        public Command SoundPageButton => new Command(MoveToSoundPage);
-        public void MoveToSoundPage()
-        {
-            App app = (App)App.Current;
-            app.MainPage.Navigation.PushAsync(new Sound());
-        }
 
-        public Command AccessoriesPageButton => new Command(MoveToAccessoriesPage);
-        public void MoveToAccessoriesPage()
-        {
-            App app = (App)App.Current;
-            app.MainPage.Navigation.PushAsync(new Accessories());
-        }
-
-        public Command CasesPageButton => new Command(MoveToCasesPage);
-        public void MoveToCasesPage()
-        {
-            App app = (App)App.Current;
-            app.MainPage.Navigation.PushAsync(new Cases());
-        }
 
     }
 }

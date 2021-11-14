@@ -13,33 +13,9 @@ namespace GuitarsAndMoreApp
         public App()
         {
             InitializeComponent();
-            Genders = new List<Gender>();
-            FillGenders();
             NavigationPage p = new NavigationPage(new HomePage());
             p.BarBackgroundColor = Color.White;
             MainPage = p;
-            
-
-
-        }
-
-        private void FillGenders()
-        {
-            this.Genders.Add(new Gender()
-            {
-                GenderId = 2,
-                Gender1 = "זכר"
-            });
-            this.Genders.Add(new Gender()
-            {
-                GenderId = 1,
-                Gender1 = "נקבה"
-            });
-            this.Genders.Add(new Gender()
-            {
-                GenderId = 3,
-                Gender1 = "אחר"
-            });
         }
 
         protected override void OnStart()

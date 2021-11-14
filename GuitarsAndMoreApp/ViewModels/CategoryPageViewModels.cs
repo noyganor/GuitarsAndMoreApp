@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GuitarsAndMoreApp.ViewModels
 {
-    class SoundViewModels
+    class CategoryPageViewModels
     {
     }
 }
