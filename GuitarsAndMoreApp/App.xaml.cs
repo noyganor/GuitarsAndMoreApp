@@ -4,22 +4,40 @@ using Xamarin.Forms.Xaml;
 using System.Collections.Generic;
 using GuitarsAndMoreApp.Models;
 using GuitarsAndMoreApp.Views;
+using GuitarsAndMoreApp.Services;
+
 namespace GuitarsAndMoreApp
 {
     public partial class App : Application
     {
         public User CurrentUser { get; set; }
-        public List<Gender> Genders { get; set; }
+        public LookUpTables Lookup { get; set; }
         public App()
         {
             InitializeComponent();
-            NavigationPage p = new NavigationPage(new HomePage());
-            p.BarBackgroundColor = Color.White;
+            LoadingView p = new LoadingView();
+            p.SetMessage("Loading data from server...");
             MainPage = p;
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
+            //Read look up tables 
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            this.Lookup = await proxy.GetLookupsAsync();
+            if (this.Lookup == null)
+            {
+                LoadingView loadingPage = (LoadingView)MainPage;
+                loadingPage.SetMessage("The server is down! Please try again later!!");
+            }
+            else
+            {
+                //Switch to home page
+                NavigationPage p = new NavigationPage(new HomePage());
+                p.BarBackgroundColor = Color.White;
+                MainPage = p;
+            }
+            
         }
 
         protected override void OnSleep()

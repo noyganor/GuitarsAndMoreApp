@@ -100,6 +100,16 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        public List<Gender> Genders
+        {
+            get
+            {
+                App app = (App)Application.Current;
+
+                return app.Lookup.Genders;
+            }
+        }
+
         #endregion
 
         #region favorite Band
