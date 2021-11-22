@@ -11,7 +11,9 @@ namespace GuitarsAndMoreApp
     public partial class App : Application
     {
         public User CurrentUser { get; set; }
-        public LookUpTables Lookup { get; set; }
+        public LookUpTables Lookup { get; set; }    
+        public Post Post { get; set; }
+       
         public App()
         {
             InitializeComponent();
