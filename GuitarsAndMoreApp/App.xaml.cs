@@ -12,11 +12,12 @@ namespace GuitarsAndMoreApp
     {
         public User CurrentUser { get; set; }
         public LookUpTables Lookup { get; set; }    
-        public Post Post { get; set; }
+        //public Post Post { get; set; }
        
         public App()
         {
             InitializeComponent();
+            //Loading view
             LoadingView p = new LoadingView();
             p.SetMessage("Loading data from server...");
             MainPage = p;
@@ -27,6 +28,7 @@ namespace GuitarsAndMoreApp
             //Read look up tables 
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
             this.Lookup = await proxy.GetLookupsAsync();
+            
             if (this.Lookup == null)
             {
                 LoadingView loadingPage = (LoadingView)MainPage;
@@ -35,7 +37,7 @@ namespace GuitarsAndMoreApp
             else
             {
                 //Switch to home page
-                NavigationPage p = new NavigationPage(new HomePage());
+                NavigationPage p = new NavigationPage(new CategoryPage());
                 p.BarBackgroundColor = Color.White;
                 MainPage = p;
             }

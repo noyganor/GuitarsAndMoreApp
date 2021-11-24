@@ -14,7 +14,9 @@ using System.IO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using GuitarsAndMoreApp.Services;
+using GuitarsAndMoreApp.Models;
 using GuitarsAndMoreApp.Views;
+using System.Linq;
 
 namespace GuitarsAndMoreApp.Services
 {
@@ -191,6 +193,15 @@ namespace GuitarsAndMoreApp.Services
                     };
                     string content = await response.Content.ReadAsStringAsync();
                     List<Post> posts = JsonSerializer.Deserialize<List<Post>>(content, options);
+
+                    //Attach lokup objects to each post
+                    App app = (App)App.Current;
+                    foreach(Post p in posts)
+                    {
+                        p.Town = app.Lookup.Towns.Where(t => t.TownId == p.TownId).FirstOrDefault();
+                        p.Model = app.Lookup.Models.Where(t => t.ModelId == p.ModelId).FirstOrDefault();
+                        p.Category = app.Lookup.Categories.Where(t => t.CategoryId == p.CategoryId).FirstOrDefault();         
+                    }
                     return posts;
                 }
                 else

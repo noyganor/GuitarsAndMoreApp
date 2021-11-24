@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GuitarsAndMoreApp.Models
 {
-    class Post
+    public class Post
     {
         public int PostId { get; set; }
         public int? ReviewId { get; set; }
@@ -15,6 +15,12 @@ namespace GuitarsAndMoreApp.Models
         public double Price { get; set; }
         public string Pdescription { get; set; }
         public string Link { get; set; }
+
+        public virtual Category Category { get; set; }
+        public virtual Model Model { get; set; }
+
+        public virtual Town Town { get; set; }
+        public virtual User User { get; set; }
 
     }
 }

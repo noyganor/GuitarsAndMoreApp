@@ -12,5 +12,6 @@ namespace GuitarsAndMoreApp.Models
         public int? AreaId { get; set; }
 
         public virtual Area Area { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

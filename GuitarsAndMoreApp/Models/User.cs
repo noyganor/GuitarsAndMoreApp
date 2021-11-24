@@ -6,14 +6,6 @@ namespace GuitarsAndMoreApp.Models
 {
     public class User
     {
-        //public User()
-        //{
-        //    ModelReviews = new HashSet<ModelReview>();
-        //    Posts = new HashSet<Post>();
-        //    UserFavoritePosts = new HashSet<UserFavoritePost>();
-        //    UserReviewSellers = new HashSet<UserReview>();
-        //    UserReviewUsers = new HashSet<UserReview>();
-        //}
 
         public int UserId { get; set; }
         public string Email { get; set; }
@@ -25,14 +17,8 @@ namespace GuitarsAndMoreApp.Models
         public string FavBand { get; set; }
         public DateTime JoinDate { get; set; }
 
-        //public virtual Gender Gender { get; set; }
-        //public virtual ICollection<ModelReview> ModelReviews { get; set; }
-        //public virtual ICollection<Post> Posts { get; set; }
-        //public virtual ICollection<UserFavoritePost> UserFavoritePosts { get; set; }
-        //public virtual ICollection<UserReview> UserReviewSellers { get; set; }
-        //public virtual ICollection<UserReview> UserReviewUsers { get; set; }
+        public virtual Gender Gender { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
+       
     }
-
-
-
 }

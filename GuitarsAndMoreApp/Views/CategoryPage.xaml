@@ -11,14 +11,14 @@
         <StackLayout>
             <Image Source="treasperlogo.png"  />
             <Frame>
-                <Label Text="גיטרות" TextColor="#4a4e69"/>
+                <Label Text="{Binding PageTitle}" TextColor="#4a4e69"/>
             </Frame>
 
             <Label Text="סינון תוצאות" TextColor="#4a4e69"/>
 
 
             <CollectionView x:Name="collectionName" 
-                            ItemsSource="{Binding MonkeyList}" SelectionMode="Single">
+                            ItemsSource="{Binding PostsList}" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>

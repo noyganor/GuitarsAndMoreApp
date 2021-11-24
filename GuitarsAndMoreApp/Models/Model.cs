@@ -7,9 +7,11 @@ namespace GuitarsAndMoreApp.Models
     public class Model
     {
 
+
         public int ModelId { get; set; }
         public string ModelName { get; set; }
         public int ProducerId { get; set; }
 
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }
