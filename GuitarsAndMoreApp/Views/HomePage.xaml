@@ -2,10 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.HomePage"
-             Title ="מסך הבית">
+             Title ="מסך הבית"
+             BackgroundColor="Beige">
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="treasperlogo.png"  />
+            <Frame BackgroundColor="Transparent">
+                <Image Source="treasperlogo.png"  />
+            </Frame>
+           
 
             <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding PostButton}" />
 
@@ -20,13 +24,13 @@
                 </Grid.RowDefinitions>
 
 
-                <Button Text="גיטרות" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" BackgroundColor="#9a8c98"  Command="{Binding CategoryPageButoon}" CommandParameter="1"/>
+                <Button Text="גיטרות" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButoon}" CommandParameter="1"/>
 
-                <Button Text="סאונד והגברה" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0" BackgroundColor="#9a8c98" Command="{Binding CategoryPageButoon}" CommandParameter="2"/>
+                <Button Text="סאונד והגברה" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButoon}" CommandParameter="2"/>
 
-                <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1" BackgroundColor="#9a8c98" Command="{Binding CategoryPageButoon}" CommandParameter="3"/>
+                <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButoon}" CommandParameter="3"/>
 
-                <Button Text="קייסים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" BackgroundColor="#9a8c98" Command="{Binding CategoryPageButoon}" CommandParameter="4"/>
+                <Button Text="קייסים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButoon}" CommandParameter="4"/>
             </Grid>
 
 

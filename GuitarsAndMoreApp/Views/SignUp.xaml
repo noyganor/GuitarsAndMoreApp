@@ -22,7 +22,7 @@
             <Entry Text="{Binding VerPassword}"/>
             <Label Text="{Binding VerPasswordError}" IsVisible="{Binding ShowVerPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
 
-            <Button Text="הבא" Command="{Binding SignUpNextButton}" HorizontalOptions="Center" FontSize="Caption"/>
+            <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" HorizontalOptions="Center" FontSize="Caption"/>
             <Label Text="{Binding Message}" TextColor="Red" />
             
         </StackLayout>

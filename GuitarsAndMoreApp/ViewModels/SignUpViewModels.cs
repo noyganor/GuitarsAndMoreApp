@@ -43,6 +43,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.email = value;
                     ValidateEmail();
+                    ValidateForm();
                     OnPropertyChanged("Email");
                 }
             }
@@ -102,6 +103,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.nickname = value;
                     ValidateNickname();
+                    ValidateForm();
                     OnPropertyChanged("Nickname");
                 }
             }
@@ -149,7 +151,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.password = value;
                     ValidatePassword();
-
+                    ValidateForm();
                     OnPropertyChanged("Password");
                 }
             }
@@ -179,12 +181,12 @@ namespace GuitarsAndMoreApp.ViewModels
 
         private void ValidatePassword()
         {
-            if ( Password.Length>0 &&Password.Length < 8)
+            if (Password.Length > 0 && Password.Length < 8)
             {
                 PasswordError = "הסיסמה חייבת לכלול לפחות 8 תווים";
                 ShowPasswordError = true;
             }
-            else if(string.IsNullOrEmpty(Password))
+            else if (string.IsNullOrEmpty(Password))
                 this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
             else
                 ShowPasswordError = false;
@@ -206,7 +208,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.verPassword = value;
                     ValidateVerPassword();
-
+                    ValidateForm();
                     OnPropertyChanged("VerPassword");
                 }
             }
@@ -242,6 +244,11 @@ namespace GuitarsAndMoreApp.ViewModels
                 VerPasswordError = "הסיסמאות חייבות להיות תואמות";
                 ShowVerPasswordError = true;
             }
+            else if (string.IsNullOrEmpty(VerPassword))
+                this.VerPasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+            else
+                ShowVerPasswordError = false;
+
 
         }
         #endregion
@@ -263,7 +270,37 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        private bool isEnable;
+        public bool IsEnable
+        {
+            get
+            {
+                return this.isEnable;
+            }
+            set
+            {
+                if (this.isEnable != value)
+                {
+                    this.isEnable = value;
+                    OnPropertyChanged("IsEnable");
+                }
+            }
+        }
+
         public Command SignUpNextButton => new Command(SignUpNextPage);
+
+        public void ValidateForm()
+        {
+            if (ShowEmailError == false || ShowNicknameError == false || ShowPasswordError == false || ShowVerPasswordError == false)
+            {
+                this.IsEnable = false;
+            }
+
+            else
+            {
+                this.IsEnable = true;
+            }
+        }
 
         public void SignUpNextPage()
         {
