@@ -291,7 +291,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
         public void ValidateForm()
         {
-            if (ShowEmailError == false || ShowNicknameError == false || ShowPasswordError == false || ShowVerPasswordError == false)
+            if (ShowEmailError  || ShowNicknameError || ShowPasswordError || ShowVerPasswordError )
             {
                 this.IsEnable = false;
             }
