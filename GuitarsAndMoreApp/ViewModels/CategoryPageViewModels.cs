@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
+using System.Threading.Tasks;
 
 namespace GuitarsAndMoreApp.ViewModels
 {
@@ -84,21 +85,21 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public async List<Post> GetPostsWhere(int category)
+        public async Task<List<Post>> GetPostsWhere(int category)
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
             try
             {
                 List<Post> pList = await proxy.GetListOfPostsAsync();
-
+                List<Post> postsL = new List<Post>();
                 if (pList == null)
                 {
-                    Message = "";
+                    return postsL;
                 }
 
                 else
                 {
-                    List<Post> postsL = new List<Post>();
+                    
                     foreach (Post p in pList)
                     {
                         if (p.CategoryId == category)

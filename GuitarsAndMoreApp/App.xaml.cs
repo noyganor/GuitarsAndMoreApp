@@ -37,7 +37,7 @@ namespace GuitarsAndMoreApp
             else
             {
                 //Switch to home page
-                NavigationPage p = new NavigationPage(new CategoryPage());
+                NavigationPage p = new NavigationPage(new HomePage());
                 p.BarBackgroundColor = Color.White;
                 MainPage = p;
             }
