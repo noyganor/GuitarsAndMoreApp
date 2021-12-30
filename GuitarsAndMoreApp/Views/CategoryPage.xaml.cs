@@ -12,15 +12,15 @@ namespace GuitarsAndMoreApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryPage : ContentPage
     {
-        public CategoryPage()
+        public CategoryPage(int index)
         {
-            this.BindingContext = new CategoryPageViewModels();
+            this.BindingContext = new CategoryPageViewModels(index);
             InitializeComponent();
         }
 
         private void InitializeComponent()
         {
-            throw new NotImplementedException();
+
         }
     }
 }
