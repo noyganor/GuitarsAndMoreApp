@@ -26,6 +26,27 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Search Term
+        private string searchTerm;
+        public string SearchTerm
+        {
+            get
+            {
+                return this.searchTerm;
+            }
+            set
+            {
+                if (this.searchTerm != value)
+                {
+
+                    this.searchTerm = value;
+                    OnTextChanged(value);
+                    OnPropertyChanged("SearchTerm");
+                }
+            }
+        }
+        #endregion
+
         #region Page Title
         private string pageTitle;
         public string PageTitle
@@ -113,6 +134,41 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
+
+        #region Search
+        public void OnTextChanged(string search)
+        {
+            //Filter the list of contacts based on the search term
+            if (this.fullPostsList == null)
+                return;
+            if (String.IsNullOrWhiteSpace(search) || String.IsNullOrEmpty(search))
+            {
+                foreach (UserContact uc in this.fullPostsList)
+                {
+                    if (!this.FilteredContacts.Contains(uc))
+                        this.FilteredContacts.Add(uc);
+
+
+                }
+            }
+            else
+            {
+                foreach (UserContact uc in this.fullPostsList)
+                {
+                    string contactString = $"{uc.FirstName}|{uc.LastName}|{uc.Email}";
+
+                    if (!this.FilteredContacts.Contains(uc) &&
+                        contactString.Contains(search))
+                        this.FilteredContacts.Add(uc);
+                    else if (this.FilteredContacts.Contains(uc) &&
+                        !contactString.Contains(search))
+                        this.FilteredContacts.Remove(uc);
+                }
+            }
+
+            this.FilteredContacts = new ObservableCollection<UserContact>(this.FilteredContacts.OrderBy(uc => uc.LastName));
+        }
+        #endregion
 
 
         public Command CategoryPageButton => new Command<int>(MoveToCategoryPage);

@@ -29,7 +29,7 @@ namespace GuitarsAndMoreApp
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
             this.Lookup = await proxy.GetLookupsAsync();
             
-            if (this.Lookup == null)
+           if (this.Lookup == null)
             {
                 LoadingView loadingPage = (LoadingView)MainPage;
                 loadingPage.SetMessage("The server is down! Please try again later!!");
@@ -37,7 +37,8 @@ namespace GuitarsAndMoreApp
             else
             {
                 //Switch to home page
-                NavigationPage p = new NavigationPage(new HomePage());
+                NavigationPage p = new NavigationPage(new MainTab());
+                
                 p.BarBackgroundColor = Color.White;
                 MainPage = p;
             }

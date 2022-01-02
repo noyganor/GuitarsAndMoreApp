@@ -1,123 +1,124 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuitarsAndMoreApp.Models;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using Xamarin.Forms;
-using GuitarsAndMoreApp.Services;
-using GuitarsAndMoreApp.Views;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
+//using GuitarsAndMoreApp.Models;
+//using System.ComponentModel;
+//using System.Collections.ObjectModel;
+//using Xamarin.Forms;
+//using GuitarsAndMoreApp.Services;
+//using GuitarsAndMoreApp.Views;
+//using System.Threading.Tasks;
 
-namespace GuitarsAndMoreApp.ViewModels
-{
-    public class CategoryPageViewModels : INotifyPropertyChanged
-    {
-        private int index;
-        public CategoryPageViewModels(int index)
-        {
-            this.index = index;
-            if (this.index == 1)
-            {
-                this.pageTitle = "גיטרות";
-            }
+//namespace GuitarsAndMoreApp.ViewModels
+//{
+//    public class CategoryPageViewModels : INotifyPropertyChanged
+//    {
+//        private int index;
+//        public CategoryPageViewModels(int index)
+//        {
+//            this.index = index;
+//            if (this.index == 1)
+//            {
+//                this.pageTitle = "גיטרות";
+//            }
 
-            if (this.index == 2)
-            {
-                this.pageTitle = "סאונד והגברה";
-            }
+//            if (this.index == 2)
+//            {
+//                this.pageTitle = "סאונד והגברה";
+//            }
 
-            if (this.index == 3)
-            {
-                this.pageTitle = "קייסים לגיטרות";
-            }
+//            if (this.index == 3)
+//            {
+//                this.pageTitle = "קייסים לגיטרות";
+//            }
 
-            if (this.index == 4)
-            {
-                this.pageTitle = "אביזרים לגיטרות";
-            }
+//            if (this.index == 4)
+//            {
+//                this.pageTitle = "אביזרים לגיטרות";
+//            }
 
-            this.postsList = GetPostsWhere(this.index);
-        }
+//            this.postsList = GetPostsWhere(this.index);
+//        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+//        public event PropertyChangedEventHandler PropertyChanged;
+//        void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+//        {
+//            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//        }
 
-        #region Page Title
-        private string pageTitle;
-        public string PageTitle
-        {
-            get
-            {
-                return this.pageTitle;
-            }
+//        #region Page Title
+//        private string pageTitle;
+//        public string PageTitle
+//        {
+//            get
+//            {
+//                return this.pageTitle;
+//            }
 
-            set
-            {
-                if (this.pageTitle != value)
-                {
-                    this.pageTitle = value;
-                    OnPropertyChanged("PageTitle");
-                }
-            }
-        }
-        #endregion
+//            set
+//            {
+//                if (this.pageTitle != value)
+//                {
+//                    this.pageTitle = value;
+//                    OnPropertyChanged("PageTitle");
+//                }
+//            }
+//        }
+//        #endregion
 
-        #region Posts List
-        private Post postsList;
-        public Post PostsList
-        {
-            get
-            {
-                return this.postsList;
-            }
+//        #region Posts List
+//        private Post postsList;
+//        public Post PostsList
+//        {
+//            get
+//            {
+//                return this.postsList;
+//            }
 
-            set
-            {
-                if (this.postsList != value)
-                {
-                    this.postsList = value;
-                    OnPropertyChanged("PostsList");
-                }
-            }
-        }
+//            set
+//            {
+//                if (this.postsList != value)
+//                {
+//                    this.postsList = value;
+//                    OnPropertyChanged("PostsList");
+//                }
+//            }
+//        }
+//        #endregion
 
-        public async Task<List<Post>> GetPostsWhere(int category)
-        {
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            try
-            {
-                List<Post> pList = await proxy.GetListOfPostsAsync();
-                List<Post> postsL = new List<Post>();
-                if (pList == null)
-                {
-                    return postsL;
-                }
+//        public async Task<List<Post>> GetPostsWhere(int category)
+//        {
+//            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+//            try
+//            {
+//                List<Post> pList = await proxy.GetListOfPostsAsync();
+//                List<Post> postsL = new List<Post>();
+//                if (pList == null)
+//                {
+//                    return postsL;
+//                }
 
-                else
-                {
+//                else
+//                {
                     
-                    foreach (Post p in pList)
-                    {
-                        if (p.CategoryId == category)
-                        {
-                            postsL.Add(p);
-                        }
-                    }
+//                    foreach (Post p in pList)
+//                    {
+//                        if (p.CategoryId == category)
+//                        {
+//                            postsL.Add(p);
+//                        }
+//                    }
 
-                    return postsL;
-                }
-            }
+//                    return postsL;
+//                }
+//            }
 
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
+//            catch (Exception e)
+//            {
+//                Console.WriteLine(e.Message);
+//                return null;
+//            }
+//        }
 
-    }
-}
+//    }
+//}

@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.HomePage"
-             Title ="מסך הבית"
              BackgroundColor="Beige">
     <ContentPage.Content>
         <StackLayout>
+            <SearchBar Placeholder="חיפוש..." />
             <Frame BackgroundColor="Transparent">
                 <Image Source="treasperlogo.png"  />
             </Frame>
@@ -33,7 +33,7 @@
                 <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButton}" CommandParameter="4"/>
             </Grid>
 
-            <CollectionView x:Name="collectionName" 
+            <!--<CollectionView x:Name="collectionName" 
                             ItemsSource="{Binding PostsList}" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -46,9 +46,9 @@
                                            Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteCommand}"
                                            CommandParameter="{Binding}" />
                                 </SwipeItems>
-                            </SwipeView.LeftItems>
+                            </SwipeView.LeftItems>-->
 
-                            <Frame BackgroundColor="#eae4e9">
+                            <!--<Frame BackgroundColor="#eae4e9">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
@@ -64,11 +64,11 @@
 
                                     <Label Text="" TextColor="#4a4e69"/>
                                 </Grid>
-                            </Frame>
-                        </SwipeView>
-                    </DataTemplate>
+                            </Frame>-->
+                        <!--</SwipeView>-->
+                    <!--</DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
 
         </StackLayout>
     </ContentPage.Content>
