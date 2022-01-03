@@ -16,9 +16,9 @@
             <FontImageSource Color="black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.House}"/>
         </local:HomePage.IconImageSource>
     </local:HomePage>
-    <!--<local:Tab2>
-        <local:Tab2.IconImageSource>
+    <local:Profile>
+        <local:Profile.IconImageSource>
             <FontImageSource Color="Black" FontFamily="MySolidFonts" Glyph="{x:Static fonts:IconSolidFonts.User}"/>
-        </local:Tab2.IconImageSource>
-    </local:Tab2>-->
+        </local:Profile.IconImageSource>
+    </local:Profile>
 </TabbedPage>

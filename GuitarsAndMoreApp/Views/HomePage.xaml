@@ -9,7 +9,7 @@
             <Frame BackgroundColor="Transparent">
                 <Image Source="treasperlogo.png"  />
             </Frame>
-           
+
 
             <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding PostButton}" />
 
@@ -19,26 +19,26 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
 
-                <Button Text="גיטרות" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButton}" CommandParameter="1"/>
+                <!--<Button Text="גיטרות" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButton}" CommandParameter="1"/>
 
                 <Button Text="סאונד והגברה" HorizontalOptions="Center" Grid.Row="0" Grid.Column="0" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButton}" CommandParameter="2"/>
 
                 <Button Text="קייסים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButton}" CommandParameter="3"/>
 
-                <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButton}" CommandParameter="4"/>
+                <Button Text="אביזרים לגיטרות" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" BackgroundColor="#9a8c98" CornerRadius="3" Command="{Binding CategoryPageButton}" CommandParameter="4"/>-->
             </Grid>
 
-            <!--<CollectionView x:Name="collectionName" 
+            <CollectionView x:Name="collectionName" 
                             ItemsSource="{Binding PostsList}" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
-                            <SwipeView.LeftItems>
+                            <!--<SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem Text="Delete"
                                            IconImageSource="delete.png"
@@ -48,11 +48,9 @@
                                 </SwipeItems>
                             </SwipeView.LeftItems>-->
 
-                            <!--<Frame BackgroundColor="#eae4e9">
+                            <Frame BorderColor="#5c374c" HeightRequest="50" >
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
@@ -60,15 +58,23 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
+                                    
+                                   
+                                    <Image Source="{Binding ImageUrl}" Grid.Column="2" Grid.Row="0" />
+                                    <!--add rate-->
+                                    <Label Text="{Binding PDescription}" Grid.Column="1" Grid.Row="0"/>
+                                    <ImageButton Source="https://static.thenounproject.com/png/2469910-200.png" Command="{Binding AddToFavButton}" Grid.Column="0" Grid.Row="0"/>
+                                    <Label Text="{Binding PTown}" Grid.Column="1" Grid.Row="1"/>
+                                    <Label Text="{Binding PPrice}" Grid.Column="0" Grid.Row="1"/>
 
-                                    <Label Text="" TextColor="#4a4e69"/>
                                 </Grid>
-                            </Frame>-->
-                        <!--</SwipeView>-->
-                    <!--</DataTemplate>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>-->
+            </CollectionView>
 
         </StackLayout>
     </ContentPage.Content>

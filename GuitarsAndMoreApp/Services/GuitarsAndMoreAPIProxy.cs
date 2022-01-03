@@ -196,11 +196,11 @@ namespace GuitarsAndMoreApp.Services
 
                     //Attach lokup objects to each post
                     App app = (App)App.Current;
-                    foreach(Post p in posts)
+                    foreach (Post p in posts)
                     {
                         p.Town = app.Lookup.Towns.Where(t => t.TownId == p.TownId).FirstOrDefault();
                         p.Model = app.Lookup.Models.Where(t => t.ModelId == p.ModelId).FirstOrDefault();
-                        p.Category = app.Lookup.Categories.Where(t => t.CategoryId == p.CategoryId).FirstOrDefault();         
+                        p.Category = app.Lookup.Categories.Where(t => t.CategoryId == p.CategoryId).FirstOrDefault();
                     }
                     return posts;
                 }
@@ -215,5 +215,41 @@ namespace GuitarsAndMoreApp.Services
                 return null;
             }
         }
+
+//        public async void AddPostToUserFavorites()
+//        {
+//            HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/");
+//            if (response.IsSuccessStatusCode)
+//            {
+//                JsonSerializerOptions options = new JsonSerializerOptions
+//                {
+//                    ReferenceHandler = ReferenceHandler.Preserve,
+//                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+//                    PropertyNameCaseInsensitive = true
+//                };
+//                string content = await response.Content.ReadAsStringAsync();
+//                List<Post> posts = JsonSerializer.Deserialize<List<Post>>(content, options);
+
+//                //Attach lokup objects to each post
+//                App app = (App)App.Current;
+//                foreach (Post p in posts)
+//                {
+//                    p.Town = app.Lookup.Towns.Where(t => t.TownId == p.TownId).FirstOrDefault();
+//                    p.Model = app.Lookup.Models.Where(t => t.ModelId == p.ModelId).FirstOrDefault();
+//                    p.Category = app.Lookup.Categories.Where(t => t.CategoryId == p.CategoryId).FirstOrDefault();
+//                }
+//                return posts;
+//            }
+//            else
+//            {
+//                return null;
+//            }
+//        }
+//            catch (Exception e)
+//            {
+//                Console.WriteLine(e.Message);
+//                return null;
+//            }
+//}
     }
 }
