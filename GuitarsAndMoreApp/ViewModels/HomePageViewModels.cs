@@ -108,85 +108,85 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        #region Image Url 
-        private string imageUrl;
-        public string ImageUrl
-        {
-            get
-            {
-                return this.imageUrl;
-            }
+        //#region Image Url 
+        //private string imageUrl;
+        //public string ImageUrl
+        //{
+        //    get
+        //    {
+        //        return this.imageUrl;
+        //    }
 
-            set
-            {
-                if (this.imageUrl != value)
-                {
-                    this.imageUrl = value;
-                    OnPropertyChanged("ImageUrl");
-                }
-            }
-        }
-        #endregion
+        //    set
+        //    {
+        //        if (this.imageUrl != value)
+        //        {
+        //            this.imageUrl = value;
+        //            OnPropertyChanged("ImageUrl");
+        //        }
+        //    }
+        //}
+        //#endregion
 
-        #region Post Description
-        private string pDescription;
-        public string PDescription
-        {
-            get
-            {
-                return this.pDescription;
-            }
+        //#region Post Description
+        //private string pDescription;
+        //public string PDescription
+        //{
+        //    get
+        //    {
+        //        return this.pDescription;
+        //    }
 
-            set
-            {
-                if (this.pDescription != value)
-                {
-                    this.pDescription = value;
-                    OnPropertyChanged("PDescription");
-                }
-            }
-        }
-        #endregion
+        //    set
+        //    {
+        //        if (this.pDescription != value)
+        //        {
+        //            this.pDescription = value;
+        //            OnPropertyChanged("PDescription");
+        //        }
+        //    }
+        //}
+        //#endregion
 
-        #region Post Town
-        private Town pTown;
-        public Town PTown
-        {
-            get
-            {
-                return this.pTown;
-            }
+        //#region Post Town
+        //private Town pTown;
+        //public Town PTown
+        //{
+        //    get
+        //    {
+        //        return this.pTown;
+        //    }
 
-            set
-            {
-                if (this.pTown != value)
-                {
-                    this.pTown = value;
-                    OnPropertyChanged("PTown");
-                }
-            }
-        }
-        #endregion
+        //    set
+        //    {
+        //        if (this.pTown != value)
+        //        {
+        //            this.pTown = value;
+        //            OnPropertyChanged("PTown");
+        //        }
+        //    }
+        //}
+        //#endregion
 
-        #region Post Price
-        private double pPrice;
-        public double PPrice
-        {
-            get
-            {
-                return this.pPrice;
-            }
+        //#region Post Price
+        //private double pPrice;
+        //public double PPrice
+        //{
+        //    get
+        //    {
+        //        return this.pPrice;
+        //    }
 
-            set
-            {
-                if (this.pPrice != value)
-                {
-                    this.pPrice = value;
-                    OnPropertyChanged("PPrice");
-                }
-            }
-        }
-        #endregion
+        //    set
+        //    {
+        //        if (this.pPrice != value)
+        //        {
+        //            this.pPrice = value;
+        //            OnPropertyChanged("PPrice");
+        //        }
+        //    }
+        //}
+        //#endregion
 
         private async void InitPosts()
         {
@@ -249,23 +249,49 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        public Command AddToFavButton => new Command(AddPostToFavorites);
-        public void AddPostToFavorites()
+        public Command AddToFavButton => new Command<int>(AddPostToFavorites);
+        public async void AddPostToFavorites(int postID)
         {
             App app = (App)App.Current;
 
             if (app.CurrentUser == null)
             {
-                //PopUpMessageToLogin pop = new ()PopUpMessageToLogin();
-                //app.MainPage.Navigation.PopAsync(new PopUpMessageToLogin());   
+                await app.MainPage.Navigation.PushModalAsync(new PopUpMessageToLogin());   
             }
 
             else
             {
+                GuitarsAndMoreAPIProxy cProxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                List<Post> lPost = await cProxy.GetListOfPostsAsync();
 
+                Post addPost = null;
+                foreach (Post p in lPost)
+                {
+                    if (p.PostId == postID)
+                    {
+                        addPost = new Post(p);
+                        return;
+                    }
+                }
+
+                if (addPost != null)
+                {
+                    bool succeeded = await cProxy.AddPostToUserFavorites(addPost);
+
+                    if (succeeded)
+                    {
+                        //Color.Black;
+                    }
+
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("שגיאה", " הפוסט לא נוסף לרשימת המועדפים שלך", "ביטול", FlowDirection.RightToLeft);
+                    }
+                }
+
+                else
+                    throw new Exception("הפוסט לא נמצא במאגר! נסו לרענן את העמוד");
             }
-
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
         }
 
         public Command CategoryPageButton => new Command<int>(MoveToCategoryPage);

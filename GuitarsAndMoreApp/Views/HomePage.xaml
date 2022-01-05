@@ -64,10 +64,10 @@
                                    
                                     <Image Source="{Binding ImageUrl}" Grid.Column="2" Grid.Row="0" />
                                     <!--add rate-->
-                                    <Label Text="{Binding PDescription}" Grid.Column="1" Grid.Row="0"/>
-                                    <ImageButton Source="https://static.thenounproject.com/png/2469910-200.png" Command="{Binding AddToFavButton}" Grid.Column="0" Grid.Row="0"/>
-                                    <Label Text="{Binding PTown}" Grid.Column="1" Grid.Row="1"/>
-                                    <Label Text="{Binding PPrice}" Grid.Column="0" Grid.Row="1"/>
+                                    <Label Text="{Binding Pdescription}" Grid.Column="1" Grid.Row="0"/>
+                                    <!--<ImageButton Source="https://static.thenounproject.com/png/2469910-200.png" Command="{Binding AddToFavButton}" Grid.Column="0" Grid.Row="0"/>-->
+                                    <Label Text="{Binding Town.Town1}" Grid.Column="1" Grid.Row="1"/>
+                                    <Label Text="{Binding Price}" Grid.Column="0" Grid.Row="1"/>
 
                                 </Grid>
                             </Frame>

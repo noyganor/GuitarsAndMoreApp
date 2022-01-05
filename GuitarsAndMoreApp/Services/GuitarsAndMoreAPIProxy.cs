@@ -14,7 +14,6 @@ using System.IO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using GuitarsAndMoreApp.Services;
-using GuitarsAndMoreApp.Models;
 using GuitarsAndMoreApp.Views;
 using System.Linq;
 
@@ -194,7 +193,7 @@ namespace GuitarsAndMoreApp.Services
                     string content = await response.Content.ReadAsStringAsync();
                     List<Post> posts = JsonSerializer.Deserialize<List<Post>>(content, options);
 
-                    //Attach lokup objects to each post
+                    //Attach lookup objects to each post
                     App app = (App)App.Current;
                     foreach (Post p in posts)
                     {
@@ -216,40 +215,38 @@ namespace GuitarsAndMoreApp.Services
             }
         }
 
-//        public async void AddPostToUserFavorites()
-//        {
-//            HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/");
-//            if (response.IsSuccessStatusCode)
-//            {
-//                JsonSerializerOptions options = new JsonSerializerOptions
-//                {
-//                    ReferenceHandler = ReferenceHandler.Preserve,
-//                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
-//                    PropertyNameCaseInsensitive = true
-//                };
-//                string content = await response.Content.ReadAsStringAsync();
-//                List<Post> posts = JsonSerializer.Deserialize<List<Post>>(content, options);
+        public async Task<bool> AddPostToUserFavorites(Post p) 
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<Post>(p, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddPostToFavorites", content);
+                if (response.IsSuccessStatusCode)
+                {
 
-//                //Attach lokup objects to each post
-//                App app = (App)App.Current;
-//                foreach (Post p in posts)
-//                {
-//                    p.Town = app.Lookup.Towns.Where(t => t.TownId == p.TownId).FirstOrDefault();
-//                    p.Model = app.Lookup.Models.Where(t => t.ModelId == p.ModelId).FirstOrDefault();
-//                    p.Category = app.Lookup.Categories.Where(t => t.CategoryId == p.CategoryId).FirstOrDefault();
-//                }
-//                return posts;
-//            }
-//            else
-//            {
-//                return null;
-//            }
-//        }
-//            catch (Exception e)
-//            {
-//                Console.WriteLine(e.Message);
-//                return null;
-//            }
-//}
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return b;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
+
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
     }
+
 }

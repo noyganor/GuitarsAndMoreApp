@@ -23,5 +23,20 @@ namespace GuitarsAndMoreApp.Models
         public virtual Town Town { get; set; }
         public virtual User User { get; set; }
 
+        //additional 
+        public Post() { }
+        public Post(Post p)
+        {
+            this.PostId = p.PostId;
+            this.ReviewId = p.ReviewId;
+            this.CategoryId = p.CategoryId;
+            this.UserId = p.UserId;
+            this.ModelId = p.ModelId;
+            this.TownId = p.TownId;
+            this.Price = p.Price;
+            this.Pdescription = p.Pdescription;
+            this.Link = p.Link;
+            this.ImageUrl = p.ImageUrl;
+        }
     }
 }
