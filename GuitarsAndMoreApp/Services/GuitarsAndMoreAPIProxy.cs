@@ -72,6 +72,10 @@ namespace GuitarsAndMoreApp.Services
             return proxy;
         }
 
+        public string GetPhotoUri()
+        {
+            return this.basePhotosUri;
+        }
 
         private GuitarsAndMoreAPIProxy(string baseUri, string basePhotosUri)
         {

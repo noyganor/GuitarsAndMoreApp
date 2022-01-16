@@ -19,5 +19,6 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     
+
     }
 }

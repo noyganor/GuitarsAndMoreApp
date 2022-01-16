@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GuitarsAndMoreApp.Services;
 
 namespace GuitarsAndMoreApp.Models
 {
@@ -15,7 +16,15 @@ namespace GuitarsAndMoreApp.Models
         public double Price { get; set; }
         public string Pdescription { get; set; }
         public string Link { get; set; }
-        public string ImageUrl { get; set; }
+        public string ImageUrl 
+        { 
+            get
+            {
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                return proxy.GetPhotoUri() + this.PostId + ".jpg";
+            }
+ 
+        }
 
         public virtual Category Category { get; set; }
         public virtual Model Model { get; set; }
@@ -36,7 +45,7 @@ namespace GuitarsAndMoreApp.Models
             this.Price = p.Price;
             this.Pdescription = p.Pdescription;
             this.Link = p.Link;
-            this.ImageUrl = p.ImageUrl;
+            
         }
     }
 }

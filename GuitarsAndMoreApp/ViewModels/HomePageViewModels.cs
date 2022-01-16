@@ -252,6 +252,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public Command AddToFavButton => new Command<int>(AddPostToFavorites);
         public async void AddPostToFavorites(int postID)
         {
+
             App app = (App)App.Current;
 
             if (app.CurrentUser == null)
@@ -294,13 +295,14 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public Command CategoryPageButton => new Command<int>(MoveToCategoryPage);
-        public void MoveToCategoryPage(int index)
+        public Command MoveToUploadPostPage => new Command(UploadAPostPage);
+        public void UploadAPostPage()
         {
             App app = (App)App.Current;
-            app.MainPage.Navigation.PushAsync(new CategoryPage(index));
+            app.MainPage.Navigation.PushAsync(new UploadAPost());
 
         }
+
 
 
 

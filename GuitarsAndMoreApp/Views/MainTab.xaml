@@ -6,7 +6,7 @@
              x:Class="GuitarsAndMoreApp.Views.MainTab"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            SelectedTabColor="Red"
+            SelectedTabColor="#5c374c"
             UnselectedTabColor="Black"
             NavigationPage.HasNavigationBar="False">
     

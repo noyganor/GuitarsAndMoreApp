@@ -4,7 +4,13 @@
              x:Class="GuitarsAndMoreApp.Views.UploadAPost">
     <ContentPage.Content>
         <StackLayout>
-
+            <ScrollView>
+                
+                
+                
+                
+                
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
