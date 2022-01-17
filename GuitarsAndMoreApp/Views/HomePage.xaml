@@ -28,9 +28,9 @@
               
             </Grid>
 
-            <CollectionView x:Name="collectionName" SelectedItem="{Binding SelectedPostID}"
+            <CollectionView x:Name="collectionName"  SelectedItem="{Binding SelectedPost}"
                             ItemsSource="{Binding PostsList}" SelectionMode="Single"
-                            SelectionChangedCommand="{Binding SelctionChanged}"
+                            SelectionChangedCommand="{Binding SelectionChanged}"
                             SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -67,7 +67,7 @@
                                     <Label Text="{Binding Town.Town1}" Grid.Column="2" Grid.Row="2" HorizontalTextAlignment="End" FontSize="12"/>
                                     <Image Source="outline_favorite_border_black_24dp.png" Grid.Column="2" Grid.Row="0"  WidthRequest="10">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding OnFavorite}" />
+                                            <TapGestureRecognizer CommandParameter="{Binding PostId}" Command="{Binding AddToFavButton}" />
                                         </Image.GestureRecognizers>
                                     </Image>
 

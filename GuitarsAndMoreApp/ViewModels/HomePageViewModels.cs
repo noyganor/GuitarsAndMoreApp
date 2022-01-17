@@ -9,6 +9,7 @@ using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Windows.Input;
 
 namespace GuitarsAndMoreApp.ViewModels
 {
@@ -19,6 +20,8 @@ namespace GuitarsAndMoreApp.ViewModels
             FullPostsList = new List<Post>();
             PostsList = new ObservableCollection<Post>();
             InitPosts();
+            AddToFavButton = new Command<int>(AddPostToFavorites);
+            SelectionChanged= new Command(PostView);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -107,6 +110,22 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
         #endregion
+
+
+        private object selectedPost;
+        public Post SelectedPost
+        {
+            get => (Post)selectedPost;
+            set
+            {
+                if (this.selectedPost != value)
+                {
+                    this.selectedPost = value;
+                    OnPropertyChanged("SelectedPost");
+                }
+
+            }
+        }
 
         //#region Image Url 
         //private string imageUrl;
@@ -249,7 +268,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        public Command AddToFavButton => new Command<int>(AddPostToFavorites);
+        public ICommand AddToFavButton { get; set; }
         public async void AddPostToFavorites(int postID)
         {
 
@@ -257,7 +276,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
             if (app.CurrentUser == null)
             {
-                await app.MainPage.Navigation.PushModalAsync(new PopUpMessageToLogin());   
+                await app.MainPage.Navigation.PushModalAsync(new PopUpMessageToLogin());
             }
 
             else
@@ -301,6 +320,17 @@ namespace GuitarsAndMoreApp.ViewModels
             App app = (App)App.Current;
             app.MainPage.Navigation.PushAsync(new UploadAPost());
 
+        }
+
+        public ICommand SelectionChanged { get; set; }
+        public void PostView()
+        {
+            if (SelectedPost != null)
+            {
+                App app = (App)App.Current;
+                app.MainPage.Navigation.PushAsync(new SignUp());
+                SelectedPost = null;
+            }
         }
 
 
