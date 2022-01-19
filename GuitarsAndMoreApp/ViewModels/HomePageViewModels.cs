@@ -20,7 +20,7 @@ namespace GuitarsAndMoreApp.ViewModels
             FullPostsList = new List<Post>();
             PostsList = new ObservableCollection<Post>();
             InitPosts();
-            AddToFavButton = new Command<int>(AddPostToFavorites);
+            AddToFavButton = new Command<Post>(AddPostToFavorites);
             SelectionChanged= new Command(PostView);
         }
 
@@ -269,34 +269,24 @@ namespace GuitarsAndMoreApp.ViewModels
         #endregion
 
         public ICommand AddToFavButton { get; set; }
-        public async void AddPostToFavorites(int postID)
+        public async void AddPostToFavorites(Post post)
         {
-
             App app = (App)App.Current;
 
             if (app.CurrentUser == null)
             {
-                await app.MainPage.Navigation.PushModalAsync(new PopUpMessageToLogin());
+                await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", FlowDirection.RightToLeft);
+                await app.MainPage.Navigation.PushModalAsync(new Login());
+                return;
             }
 
             else
             {
                 GuitarsAndMoreAPIProxy cProxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                List<Post> lPost = await cProxy.GetListOfPostsAsync();
 
-                Post addPost = null;
-                foreach (Post p in lPost)
+                if (post != null)
                 {
-                    if (p.PostId == postID)
-                    {
-                        addPost = new Post(p);
-                        return;
-                    }
-                }
-
-                if (addPost != null)
-                {
-                    bool succeeded = await cProxy.AddPostToUserFavorites(addPost);
+                    bool succeeded = await cProxy.AddPostToUserFavorites(post.PostId);
 
                     if (succeeded)
                     {

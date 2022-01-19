@@ -35,15 +35,15 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
-                            <!--<SwipeView.LeftItems>
+                            <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItem Text="Delete"
-                                           IconImageSource="delete.png"
+                                    <SwipeItem 
+                                           IconImageSource="addToFavorites.png"
                                            BackgroundColor="LightPink"
-                                           Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteCommand}"
-                                           CommandParameter="{Binding}" />
+                                           Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddToFavButton}"
+                                           CommandParameter="{Binding .}" />
                                 </SwipeItems>
-                            </SwipeView.LeftItems>-->
+                            </SwipeView.LeftItems>
 
                             <Frame BorderColor="#5c374c" HeightRequest="100" >
                                 <Grid>

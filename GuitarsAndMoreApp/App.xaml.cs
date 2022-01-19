@@ -11,9 +11,9 @@ namespace GuitarsAndMoreApp
     public partial class App : Application
     {
         public User CurrentUser { get; set; }
-        public LookUpTables Lookup { get; set; }    
+        public LookUpTables Lookup { get; set; }
         //public Post Post { get; set; }
-       
+
         public App()
         {
             InitializeComponent();
@@ -28,8 +28,8 @@ namespace GuitarsAndMoreApp
             //Read look up tables 
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
             this.Lookup = await proxy.GetLookupsAsync();
-            
-           if (this.Lookup == null)
+
+            if (this.Lookup == null)
             {
                 LoadingView loadingPage = (LoadingView)MainPage;
                 loadingPage.SetMessage("The server is down! Please try again later!!");
@@ -38,11 +38,9 @@ namespace GuitarsAndMoreApp
             {
                 //Switch to home page
                 NavigationPage p = new NavigationPage(new MainTab());
-                
-                p.BarBackgroundColor = Color.White;
                 MainPage = p;
             }
-            
+
         }
 
         protected override void OnSleep()

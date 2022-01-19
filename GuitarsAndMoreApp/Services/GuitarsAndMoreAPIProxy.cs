@@ -219,13 +219,18 @@ namespace GuitarsAndMoreApp.Services
             }
         }
 
-        public async Task<bool> AddPostToUserFavorites(Post p) 
+        public async Task<bool> AddPostToUserFavorites(int postID) 
         {
             try
             {
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
+                    ReferenceHandler = ReferenceHandler.Preserve,
                     PropertyNameCaseInsensitive = true
+                };
+                Post p = new Post
+                {
+                    PostId = postID
                 };
                 string json = JsonSerializer.Serialize<Post>(p, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");

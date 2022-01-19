@@ -158,9 +158,9 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 App app = (App)App.Current;
                 app.CurrentUser = u;
-                Page p = new HomePage();
 
-                app.MainPage = new NavigationPage(p);
+
+                await app.MainPage.Navigation.PopModalAsync();
             }
         }
 
@@ -168,7 +168,9 @@ namespace GuitarsAndMoreApp.ViewModels
         public async void SignUpUserPage()
         {
             App app = (App)App.Current;
-            app.MainPage = new SignUp();
+            await app.MainPage.Navigation.PopModalAsync();
+            await app.MainPage.Navigation.PushModalAsync(new SignUp());
+            
         }
 
 
