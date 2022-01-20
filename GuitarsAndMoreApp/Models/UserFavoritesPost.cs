@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GuitarsAndMoreApp.Models
 {
-    class UserFavoritesPost
+    public class UserFavoritePost
     {
         public int PostId { get; set; }
         public int UserId { get; set; }

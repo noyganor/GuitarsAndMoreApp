@@ -290,7 +290,28 @@ namespace GuitarsAndMoreApp.ViewModels
 
                     if (succeeded)
                     {
-                        //Color.Black;
+                        User user = app.CurrentUser;
+                        bool found = false;
+                        foreach (UserFavoritePost uf in user.UserFavoritesPosts)
+                        {
+                            if (post.PostId == uf.PostId)
+                            {
+                                user.UserFavoritesPosts.Remove(uf);
+                                found = true;
+                            }
+                        }
+                        if (!found)
+                        {
+                            user.UserFavoritesPosts.Add(new UserFavoritePost()
+                            {
+                                PostId = post.PostId,
+                                UserId = user.UserId,
+                                Post = post,
+                                User = user
+                            });
+                        }
+                        OnPropertyChanged("PostsList");
+
                     }
 
                     else

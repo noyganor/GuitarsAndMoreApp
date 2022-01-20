@@ -47,5 +47,47 @@ namespace GuitarsAndMoreApp.Models
             this.Link = p.Link;
             
         }
+
+        private const string FAV_OFF_URL = "outline_favorite_border_black_24dp.png";
+        private const string FAV_ON_URL = "fullHeart.png";
+
+        public string FavoriteImageUrl
+        {
+            get
+            {
+                if (IsFavByUser())
+                    return FAV_ON_URL;
+                else
+                    return FAV_OFF_URL;
+            }
+        }
+
+        private const string FAV_ACTION_ON_URL = "addToFavorites.png";
+        private const string FAV_ACTION_OFF_URL = "fullHeart.png";
+
+        public string FavoriteActionImageUrl
+        {
+            get
+            {
+                if (IsFavByUser())
+                    return FAV_ACTION_ON_URL;
+                else
+                    return FAV_ACTION_OFF_URL;
+            }
+        }
+
+        public bool IsFavByUser()
+        {
+            App app = (App)App.Current;
+            User user = app.CurrentUser;
+            if (user == null)
+                return false;
+            foreach (UserFavoritePost uf in user.UserFavoritesPosts)
+            {
+                if (this.PostId == uf.PostId)
+                    return true;
+            }
+            return false;
+        }
     }
 }

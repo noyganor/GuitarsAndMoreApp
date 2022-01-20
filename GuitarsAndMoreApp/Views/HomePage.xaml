@@ -38,7 +38,7 @@
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem 
-                                           IconImageSource="addToFavorites.png"
+                                           IconImageSource="{Binding FavoriteActionImageUrl}"
                                            BackgroundColor="LightPink"
                                            Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddToFavButton}"
                                            CommandParameter="{Binding .}" />
@@ -65,9 +65,9 @@
                                     <Label Text="{Binding Pdescription}" Grid.Column="1" Grid.Row="0"   Grid.RowSpan="2" LineBreakMode="WordWrap" FontSize="14" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                     <!--<ImageButton Source="https://static.thenounproject.com/png/2469910-200.png" Command="{Binding AddToFavButton}" Grid.Column="0" Grid.Row="0"/>-->
                                     <Label Text="{Binding Town.Town1}" Grid.Column="2" Grid.Row="2" HorizontalTextAlignment="End" FontSize="12"/>
-                                    <Image Source="outline_favorite_border_black_24dp.png" Grid.Column="2" Grid.Row="0"  WidthRequest="10">
+                                    <Image Source="{Binding FavoriteImageUrl}" Grid.Column="2" Grid.Row="0"  WidthRequest="10">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer CommandParameter="{Binding PostId}" Command="{Binding AddToFavButton}" />
+                                            <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddToFavButton}" />
                                         </Image.GestureRecognizers>
                                     </Image>
 
