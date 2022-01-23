@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GuitarsAndMoreApp.Views.PostView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <Image Source="{Binding Image}"/>
+                <Label Text="{Binding Price}"/>
+                <Label Text="{Binding Town}"/>
+                <Label Text="{Binding Producer}"/>
+                <Label Text="{Binding Model}"/>
+                <Label Text="{Binding Pdescription}"/>
+                <Label Text="{Binding Link}"/>
+                <Label Text="{Binding PhoneNum}"/>
+
+
+
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

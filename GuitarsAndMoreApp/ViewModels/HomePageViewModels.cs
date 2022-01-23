@@ -339,7 +339,7 @@ namespace GuitarsAndMoreApp.ViewModels
             if (SelectedPost != null)
             {
                 App app = (App)App.Current;
-                app.MainPage.Navigation.PushAsync(new SignUp());
+                app.MainPage.Navigation.PushAsync(new PostView(SelectedPost));
                 SelectedPost = null;
             }
         }

@@ -16,6 +16,8 @@ namespace GuitarsAndMoreApp.Models
         public double Price { get; set; }
         public string Pdescription { get; set; }
         public string Link { get; set; }
+
+        //additional
         public string ImageUrl 
         { 
             get
@@ -25,6 +27,9 @@ namespace GuitarsAndMoreApp.Models
             }
  
         }
+
+        public string Producer { get; set; }
+        public string PhoneNum { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Model Model { get; set; }
@@ -45,6 +50,8 @@ namespace GuitarsAndMoreApp.Models
             this.Price = p.Price;
             this.Pdescription = p.Pdescription;
             this.Link = p.Link;
+            this.Producer = p.Producer;
+            this.PhoneNum = p.PhoneNum;
             
         }
 
