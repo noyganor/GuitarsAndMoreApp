@@ -2,19 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.Login"
-              FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft">
 
     
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#5c374c">
+        <StackLayout BackgroundColor="#ffe5d9">
 
+            <Label Text="היי, כיף לראותך שוב" TextColor="#1b3a4b" HorizontalOptions="Center" FontAttributes="Bold"/>
+           
             <Frame BackgroundColor="#9a8c98" HeightRequest="100">
                 <Entry Placeholder ="הכנס דואר אלקטרוני" Text="{Binding Email}"/>
+                <!--<Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>-->
             </Frame>
-            <Label Text="היי, כיף לראותך שוב" TextColor="#1b3a4b" HorizontalOptions="Center" FontAttributes="Bold"/>
 
-            <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None"/>
+
+            <Frame BackgroundColor="#9a8c98" HeightRequest="100">
+                <Entry Placeholder ="הכנס סיסמה" Text="{Binding Password}"/>
+                <!--<Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>-->
+            </Frame>
+           
+            <Frame BackgroundColor="#9a8c98" HeightRequest="100">
+                <Label Text="{Binding Message}" TextColor="Red"/>
+            </Frame>
+            
+            <Button Text=" אין לך חשבון? להרשמה" Command="{Binding MoveToSignUpPage}" HorizontalOptions="Center" />
+            
+
+          
+
+        </StackLayout>
+      
+    </ContentPage.Content>
+</ContentPage>
+
+<!--<Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None"/>
             <Entry Text="{Binding Email}"/>
             <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
 
@@ -23,16 +45,12 @@
             <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
             
             <Button Text="התחברות" Command="{Binding LoginButton}" HorizontalOptions="Center"/>
-            <Label Text="{Binding Message}" TextColor="Red"/>
-            <Button Text=" אין לך חשבון? להרשמה" Command="{Binding MoveToSignUpPage}" HorizontalOptions="Center" />
+            <Label Text="{Binding Message}" TextColor="Red"/>-->
+<!--<Button Text=" אין לך חשבון? להרשמה" Command="{Binding MoveToSignUpPage}" HorizontalOptions="Center" />-->
+    
+    
 
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
-
-
-  
-    <!--<ContentPage.Content>
+<!--<ContentPage.Content>
         <StackLayout Style="{StaticResource RegisterBuyerStack}">
 
             <Grid Margin="0,0,0,0">

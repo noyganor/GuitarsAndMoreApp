@@ -52,6 +52,7 @@ namespace GuitarsAndMoreApp.Models
             this.Link = p.Link;
             this.Producer = p.Producer;
             this.PhoneNum = p.PhoneNum;
+
             
         }
 

@@ -24,12 +24,37 @@ namespace GuitarsAndMoreApp.ViewModels
             else
                 Town = "Town is null!";
             Producer = p.Producer;
+            Model = p.Model.ModelName;
+            Pdescription = p.Pdescription;
+            Link = p.Link;
+            PhoneNumber = p.PhoneNum;
+            Image = p.ImageUrl;
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #region Image
+        private ImageSource image;
+        public ImageSource Image
+        {
+            get
+            {
+                return this.image;
+            }
+            set
+            {
+                if (this.image != value)
+                {
+                    this.image = value;
+                    OnPropertyChanged("Image");
+                }
+            }
+        }
+        #endregion
 
         #region Price
         private double price;
