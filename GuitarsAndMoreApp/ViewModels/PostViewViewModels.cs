@@ -28,7 +28,7 @@ namespace GuitarsAndMoreApp.ViewModels
             Pdescription = p.Pdescription;
             Link = p.Link;
             PhoneNumber = p.PhoneNum;
-            Image = p.ImageUrl;
+            ImageUrl = p.ImageUrl;
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -38,19 +38,19 @@ namespace GuitarsAndMoreApp.ViewModels
         }
 
         #region Image
-        private ImageSource image;
-        public ImageSource Image
+        private ImageSource imageUrl;
+        public ImageSource ImageUrl
         {
             get
             {
-                return this.image;
+                return this.imageUrl;
             }
             set
             {
-                if (this.image != value)
+                if (this.imageUrl != value)
                 {
-                    this.image = value;
-                    OnPropertyChanged("Image");
+                    this.imageUrl = value;
+                    OnPropertyChanged("ImageUrl");
                 }
             }
         }

@@ -31,6 +31,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (this.email != value)
                 {
                     this.email = value;
+                    ValidateEmail();
                     OnPropertyChanged("Email");
                 }
             }
@@ -89,6 +90,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (this.password != value)
                 {
                     this.password = value;
+                    ValidatePassword();
                     OnPropertyChanged("Password");
                 }
             }

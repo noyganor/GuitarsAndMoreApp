@@ -7,7 +7,7 @@
         <ScrollView>
             <StackLayout>
 
-                <Image Source="{Binding Image}"/>
+                <Image Source="{Binding ImageUrl}"/>
                 <Label Text="{Binding Price}"/>
                 <Label Text="{Binding Town}"/>
                 <Label Text="{Binding Producer}"/>

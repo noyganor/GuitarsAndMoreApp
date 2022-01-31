@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
+using Xamarin.Essentials;
+using System.Windows.Input;
 
 namespace GuitarsAndMoreApp.ViewModels
 {
@@ -18,7 +20,44 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    
 
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+        public async void OnPickImage()
+        {
+            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            {
+                Title = "בחר תמונה"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
+        }
+
+        ///The following command handle the take photo button
+        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public async void OnCameraImage()
+        {
+            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+            {
+                Title = "צלם תמונה"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
+        }
     }
 }
