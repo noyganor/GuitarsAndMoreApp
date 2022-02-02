@@ -8,83 +8,99 @@
         <StackLayout>
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
-                    <!-- תמונה -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="150" />
-                        </Grid.RowDefinitions>
-                        <Image x:Name="theImage" Source="{Binding ImageUrl}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
-                        <!--<ImageButton Source="photogallery.png" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
-                        <ImageButton Source="camera.png" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>-->
-                    </Grid>
-
-                    <!-- שם פרטי -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        
-                        <!--<Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>-->
-                    </Grid>
                     <Label Text="הכנס מחיר מוצר"/>
-                    <Slider Minimum="0" Maximum="100000" Value="{Binding Price}"/>
-                    <!--<Entry Placeholder="הכנס מחיר המוצר" Text="{Binding Price}" Style="{StaticResource entryStyle}"/>-->
+                    <Label Text="{Binding SliderValue}"/>
+                    <Slider Minimum="0" Maximum="100000" Value="{Binding SliderValue}" />
 
-                    <!-- שם משפחה -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <!--<Label Text="שם משפחה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding LastNameError}" IsVisible="{Binding ShowLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>-->
-                    </Grid>
                     <Label Text="הכנס יישוב"/>
                     <Picker ItemsSource="{Binding Towns}" ItemDisplayBinding="{Binding Town1}" SelectedItem="{Binding Town}"/>
 
+                    <Label Text="הכנס יצרן"/>
+                    <Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer1}" SelectedItem="{Binding Producer}"/>
+                </StackLayout>
+            </ScrollView>
+            <Button Text="העלה מודעה" Command="{Binding SaveDataCommand}"></Button>
+        </StackLayout>
 
-                    <!-- דואר אלקטרוני-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <!--<Label Text="דואר אלקטרוני" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>-->
-                    </Grid>
-                    <Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer}" SelectedItem="{Binding ProducerText}"/>
+    </ContentPage.Content>
+</ContentPage>
+<!-- תמונה --><!--
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="30" />
+        <RowDefinition Height="150" />
+    </Grid.RowDefinitions>
+    <Image x:Name="theImage" Source="{Binding ImageUrl}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
+    --><!--<ImageButton Source="photogallery.png" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
+                        <ImageButton Source="camera.png" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>--><!--
+</Grid>
 
-                    <!-- רשימת טלפונים-->
-                    <!--<Label Text="טלפונים " Style="{StaticResource labelNameStyle}"/>-->
+--><!-- שם פרטי --><!--
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <!--<Label Text="סוג" Style="{StaticResource labelTableStyle}"  Grid.Row="0" Grid.Column="0"/>
-                        <Label Text="מספר" Style="{StaticResource labelTableStyle}"  Grid.Row="0" Grid.Column="1"/>-->
-                    </Grid>
+    --><!--<Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>--><!--
+</Grid>
+<Label Text="הכנס מחיר מוצר"/>
+<Slider Minimum="0" Maximum="100000" Value="{Binding SliderValue}" />
+--><!--<Entry Placeholder="הכנס מחיר המוצר" Text="{Binding Price}" Style="{StaticResource entryStyle}"/>-->
 
-                    <!--<CollectionView EmptyView="אין כרגע טלפונים לאיש הקשר" x:Name="collectionName" VerticalOptions="Start" ItemsSource="{Binding ContactPhones}"  SelectionMode="None">
+<!-- שם משפחה --><!--
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    --><!--<Label Text="שם משפחה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                        <Label Text="{Binding LastNameError}" IsVisible="{Binding ShowLastNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>--><!--
+</Grid>
+<Label Text="הכנס יישוב"/>
+<Picker ItemsSource="{Binding Towns}" ItemDisplayBinding="{Binding Town1}" SelectedItem="{Binding Town}"/>
+
+
+--><!-- דואר אלקטרוני--><!--
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    --><!--<Label Text="דואר אלקטרוני" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>--><!--
+</Grid>
+<Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer}" SelectedItem="{Binding ProducerText}"/>
+
+--><!-- רשימת טלפונים-->
+<!--<Label Text="טלפונים " Style="{StaticResource labelNameStyle}"/>--><!--
+
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    --><!--<Label Text="סוג" Style="{StaticResource labelTableStyle}"  Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="מספר" Style="{StaticResource labelTableStyle}"  Grid.Row="0" Grid.Column="1"/>--><!--
+</Grid>
+
+--><!--<CollectionView EmptyView="אין כרגע טלפונים לאיש הקשר" x:Name="collectionName" VerticalOptions="Start" ItemsSource="{Binding ContactPhones}"  SelectionMode="None">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Span="1" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
@@ -117,11 +133,3 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>-->
 
-
-                </StackLayout>
-            </ScrollView>
-            <Button Text="העלה מודעה" Command="{Binding SaveDataCommand}"></Button>
-        </StackLayout>
-
-    </ContentPage.Content>
-</ContentPage>

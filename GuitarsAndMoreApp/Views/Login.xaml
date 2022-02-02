@@ -8,7 +8,8 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="#ffe5d9">
-
+            <Button Text="חזרה למסך הבית" Command="{Binding BackToHomePageButton}" />
+            
             <Label Text="היי, כיף לראותך שוב" TextColor="#1b3a4b" HorizontalOptions="Center" FontAttributes="Bold"/>
 
             <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None"/>

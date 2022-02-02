@@ -19,18 +19,6 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Command MoveToLoginPageButton => new Command(LoginPage);
-        public async void LoginPage()
-        {
-            App app = (App)App.Current;
-            app.MainPage.Navigation.PushAsync(new Login());
-        }
-
-        public Command MoveToSignUpPageButton => new Command(SignUpUserPage);
-        public async void SignUpUserPage()
-        {
-            App app = (App)App.Current;
-            app.MainPage.Navigation.PushAsync(new SignUp());
-        }
+   
     }
 }

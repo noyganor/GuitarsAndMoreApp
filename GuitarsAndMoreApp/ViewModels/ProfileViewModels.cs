@@ -15,12 +15,49 @@ namespace GuitarsAndMoreApp.ViewModels
 {
     class ProfileViewModels : INotifyPropertyChanged
     {
+        public ProfileViewModels()
+        {
+            //ShowProfilePage();
+
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Is Visible
+        private bool isVisible;
+        public bool IsVisible
+        {
+            get
+            {
+                return this.isVisible;
+            }
 
+            set
+            {
+                if (this.isVisible != value)
+                {
+                    this.isVisible = value;
+                    OnPropertyChanged("IsVisible");
+                }
+            }
+        }
+        #endregion
+
+        public async void ShowProfilePage()
+        {
+            App app = (App)App.Current;
+
+            if (app.CurrentUser == null)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", FlowDirection.RightToLeft);
+                await app.MainPage.Navigation.PushModalAsync(new Login());
+                return;
+            }
+        }
+
+        
     }
 }

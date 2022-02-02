@@ -171,9 +171,21 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             App app = (App)App.Current;
             await app.MainPage.Navigation.PopModalAsync();
-            await app.MainPage.Navigation.PushModalAsync(new SignUp());
-            
+            await app.MainPage.Navigation.PushModalAsync(new SignUp());           
         }
+
+        public Command BackToHomePageButton => new Command(BackToHomePage);
+        public async void BackToHomePage()
+        {
+            App app = (App)App.Current;
+            NavigationPage nv = (NavigationPage)app.MainPage;
+            await nv.PopToRootAsync();
+            MainTab mt = (MainTab) nv.CurrentPage;
+            mt.SwitchToHomeTab();
+            await app.MainPage.Navigation.PopModalAsync();
+        }
+       
+
 
 
     }

@@ -16,5 +16,10 @@ namespace GuitarsAndMoreApp.Views
         {
             InitializeComponent();
         }
+
+        public void SwitchToHomeTab()
+        {
+            CurrentPage = Children[0];
+        }
     }
 }

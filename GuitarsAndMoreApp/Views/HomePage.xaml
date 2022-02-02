@@ -7,12 +7,12 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar Placeholder="חיפוש..." />
-            <Frame BackgroundColor="Transparent">
-                <Image Source="treasperlogo.png"  />
-            </Frame>
+          
+                <Image Source="newlogo.png" BackgroundColor="Transparent" />
+           
 
 
-            <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding MoveToUploadPostPage}" />
+            <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding MoveToUploadPostPage}" CornerRadius="10" BackgroundColor="White"/>
 
             <Grid>
                 <Grid.ColumnDefinitions>
