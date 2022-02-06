@@ -1,12 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GuitarsAndMoreApp.Views.Profile">
+             x:Class="GuitarsAndMoreApp.Views.Profile"
+             xmlns:fontAwesome="clr-namespace:Fonts"
+              FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
-            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label Text=" Welcome" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"/>
+                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}"  HeightRequest="100" WidthRequest="100" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                    <ImageButton.Source>
+                        <FontImageSource
+                    FontFamily="MySolidFonts"
+                    Glyph="{x:Static fontAwesome:IconSolidFonts.CircleUser}"
+                    Color="#3d405b" />
+                    </ImageButton.Source>
+                </ImageButton>
+                
+                <!--<ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" CommandParameter="RegisterBuyer" HorizontalOptions="Center" Grid.Column="0" Grid.Row="0">
+                    <ImageButton.Source>
+                        <FontImageSource
+                    FontFamily="MyRegularFonts"
+                    Glyph="{x:Static fontAwesome:IconRegularFonts.#f044}" />
+                    </ImageButton.Source>
+                </ImageButton>-->
+
+                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" HeightRequest="80" WidthRequest="80" HorizontalOptions="Center" Grid.Column="1" Grid.Row="2">
+                    <ImageButton.Source>
+                        <FontImageSource
+                    FontFamily="MyRegularFonts"
+                    Glyph="{x:Static fontAwesome:IconRegularFonts.Bookmark}"
+                    
+                    Color="#d8f3dc"/>
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <!--<ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" CommandParameter="RegisterBuyer" HorizontalOptions="Center" Grid.Column="0" Grid.Row="1">
+                    <ImageButton.Source>
+                        <FontImageSource
+                    FontFamily="MyRegularFonts"
+                    Glyph="{x:Static fontAwesome:IconRegularFonts.#f044}"
+                    Size="Medium"
+                    Color="#d8f3dc"/>
+                    </ImageButton.Source>
+                </ImageButton>-->
+
+                <!--<ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" CommandParameter="RegisterBuyer" HorizontalOptions="Center" Grid.Column="1" Grid.Row="1">
+                    <ImageButton.Source>
+                        <FontImageSource
+                    FontFamily="MySolidFonts"
+                    Glyph="{x:Static fontAwesome:IconSolidFonts.Cogs}"
+                    Size="Medium"
+                    Color="#d8f3dc"/>
+                    </ImageButton.Source>
+                </ImageButton>-->
+            </Grid>
         </StackLayout>
 
- 
+
     </ContentPage.Content>
 </ContentPage>

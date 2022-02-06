@@ -6,7 +6,7 @@
              FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar Placeholder="חיפוש..." />
+            <SearchBar Placeholder="חיפוש..."  SearchCommand="{Binding Search}"/>
           
                 <Image Source="newlogo.png" BackgroundColor="Transparent" />
            

@@ -18,6 +18,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public UploadAPostViewModels()
         {
             this.SliderValue = 0;
+            List<Model> Models = new List<Model>();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
@@ -87,6 +88,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (this.producer != value)
                 {
                     this.producer = value;
+                    ProducerChanged();
                     OnPropertyChanged("Producer");
                 }
             }
@@ -103,6 +105,104 @@ namespace GuitarsAndMoreApp.ViewModels
 
         #endregion
 
+        #region Model
+        public Model model;
+        public Model Model
+        {
+            get
+            {
+                return this.model;
+            }
+            set
+            {
+                if (this.model != value)
+                {
+                    this.model = value;
+                    OnPropertyChanged("Model");
+                }
+            }
+        }
+
+        public List<Model> Models
+        {
+            get
+            {
+                return this.Models;
+            }
+        }
+        #endregion
+
+        #region Post Description
+        private string pdescription;
+        public string Pdescription
+        {
+            get
+            {
+                return this.pdescription;
+            }
+
+            set
+            {
+                if (this.pdescription != value)
+                {
+                    this.pdescription = value;
+                    OnPropertyChanged("Pdescription");
+                }
+            }
+        }
+        #endregion
+
+        #region Video Link
+        private string link;
+        public string Link
+        {
+            get
+            {
+                return this.link;
+            }
+            set
+            {
+                if (this.link != value)
+                {
+                    this.link = value;
+                    OnPropertyChanged("Link");
+                }
+            }
+        }
+        #endregion
+
+        #region Phone Number
+        private string phoneNum;
+        public string PhoneNum
+        {
+            get
+            {
+                return this.phoneNum;
+            }
+            set
+            {
+                if (this.phoneNum != value)
+                {
+                    this.phoneNum = value;
+                    OnPropertyChanged("PhoneNum");
+                }
+            }
+        }
+        #endregion
+
+        private async void ProducerChanged()
+        {
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            List<Model> mList = await proxy.GetListOfModelsAsync();
+            if (mList != null)
+            {
+                foreach (Model m in mList)
+                {
+                    if (m.ProducerId == Producer.ProducerId)
+                        Models.Add(m);
+                }
+            }
+        }
 
         FileResult imageFileResult;
         public event Action<ImageSource> SetImageSourceEvent;

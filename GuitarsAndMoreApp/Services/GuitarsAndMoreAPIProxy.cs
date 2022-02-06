@@ -219,6 +219,36 @@ namespace GuitarsAndMoreApp.Services
             }
         }
 
+        public async Task<List<Model>> GetListOfModelsAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetModels");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<Model> models = JsonSerializer.Deserialize<List<Model>>(content, options);
+
+                    return models;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
         public async Task<bool> AddPostToUserFavorites(int postID) 
         {
             try
