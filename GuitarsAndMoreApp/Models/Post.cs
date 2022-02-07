@@ -71,7 +71,7 @@ namespace GuitarsAndMoreApp.Models
         }
 
         private const string FAV_ACTION_ON_URL = "addToFavorites.png";
-        private const string FAV_ACTION_OFF_URL = "fullHeart.png";
+        private const string FAV_ACTION_OFF_URL = "deleteFromFavorites.png";
 
         public string FavoriteActionImageUrl
         {

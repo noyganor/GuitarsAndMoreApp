@@ -18,7 +18,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public UploadAPostViewModels()
         {
             this.SliderValue = 0;
-            List<Model> Models = new List<Model>();
+            Models = new ObservableCollection<Model>();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
@@ -106,7 +106,7 @@ namespace GuitarsAndMoreApp.ViewModels
         #endregion
 
         #region Model
-        public Model model;
+        private Model model;
         public Model Model
         {
             get
@@ -123,11 +123,20 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public List<Model> Models
+        private ObservableCollection<Model> models;
+        public ObservableCollection<Model> Models
         {
             get
             {
-                return this.Models;
+                return this.models;
+            }
+            set
+            {
+                if (this.models != value)
+                {
+                    this.models = value;
+                    OnPropertyChanged("Models");
+                }
             }
         }
         #endregion

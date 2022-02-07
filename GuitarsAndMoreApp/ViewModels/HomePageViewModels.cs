@@ -22,6 +22,7 @@ namespace GuitarsAndMoreApp.ViewModels
             InitPosts();
             AddToFavButton = new Command<Post>(AddPostToFavorites);
             SelectionChanged= new Command(PostView);
+            isVisible = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -111,7 +112,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-
+        #region Selected Post
         private object selectedPost;
         public Post SelectedPost
         {
@@ -125,7 +126,27 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
 
             }
-        }      
+        }
+        #endregion
+
+        #region Is Visible
+        private bool isVisible;
+        public bool IsVisible
+        {
+            get
+            {
+                return this.isVisible;
+            }
+            set
+            {
+                if (this.isVisible != value)
+                {
+                    this.isVisible = value;
+                    OnPropertyChanged("IsVisible");
+                }
+            }
+        }
+        #endregion
 
         private async void InitPosts()
         {

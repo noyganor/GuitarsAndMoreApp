@@ -37,6 +37,7 @@
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
+                                    <!--IsEnabled="{Binding IsVisible}"-->
                                     <SwipeItem 
                                            IconImageSource="{Binding FavoriteActionImageUrl}"
                                            BackgroundColor="LightPink"
