@@ -40,9 +40,43 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (this.sliderValue != value)
                 {
                     this.sliderValue = value;
+                    ValidatePrice();
                     OnPropertyChanged("SliderValue");
                 }
             }
+        }
+
+        private string priceError;
+        public string PriceError
+        {
+            get => priceError;
+            set
+            {
+                priceError = value;
+                OnPropertyChanged("PriceError");
+            }
+        }
+
+        private bool showPriceError;
+        public bool ShowPriceError
+        {
+            get => showPriceError;
+            set
+            {
+                showPriceError = value;
+                OnPropertyChanged("ShowPriceError");
+            }
+        }
+        private void ValidatePrice()
+        {
+            //if (SliderValue == 0)
+            //{
+            this.ShowPriceError = SliderValue.Equals(0);
+            this.PriceError = "שים לב! הפריט מיועד לתרומה";
+                
+            
+            //else
+            //    this.showPriceError = false;        
         }
         #endregion
 
@@ -59,6 +93,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (this.town != value)
                 {
                     this.town = value;
+                    ValidateTown();
                     OnPropertyChanged("Town");
                 }
             }
@@ -71,6 +106,34 @@ namespace GuitarsAndMoreApp.ViewModels
                 App app = (App)Application.Current;
                 return app.Lookup.Towns;
             }
+        }
+
+        private string townError;
+        public string TownError
+        {
+            get => townError;
+            set
+            {
+                townError = value;
+                OnPropertyChanged("TownError");
+            }
+        }
+
+        private bool showTownError;
+        public bool ShowTownError
+        {
+            get => showTownError;
+            set
+            {
+                showTownError = value;
+                OnPropertyChanged("ShowTownError");
+            }
+        }
+        private void ValidateTown()
+        {
+            string town = Town.Town1;
+            this.ShowTownError = string.IsNullOrEmpty(town);
+            this.TownError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
 
         #endregion
@@ -155,9 +218,38 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (this.pdescription != value)
                 {
                     this.pdescription = value;
+                    ValidateDescription();
                     OnPropertyChanged("Pdescription");
                 }
             }
+        }
+
+        private string descriptionError;
+        public string DescriptionError
+        {
+            get => descriptionError;
+            set
+            {
+                descriptionError = value;
+                OnPropertyChanged("DescriptionError");
+            }
+        }
+
+        private bool showDescriptionError;
+        public bool ShowDescriptionError
+        {
+            get => showDescriptionError;
+            set
+            {
+                showDescriptionError = value;
+                OnPropertyChanged("ShowDescriptionError");
+            }
+        }
+        private void ValidateDescription()
+        {
+           
+            this.ShowDescriptionError = string.IsNullOrEmpty(Pdescription);
+            this.DescriptionError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -193,9 +285,38 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (this.phoneNum != value)
                 {
                     this.phoneNum = value;
+                    ValidatePhoneNumber();
                     OnPropertyChanged("PhoneNum");
                 }
             }
+        }
+
+        private string phoneNumberError;
+        public string PhoneNumberError
+        {
+            get => phoneNumberError;
+            set
+            {
+                phoneNumberError = value;
+                OnPropertyChanged("PhoneNumberError");
+            }
+        }
+
+        private bool showPhoneNumberError;
+        public bool ShowPhoneNumberError
+        {
+            get => showPhoneNumberError;
+            set
+            {
+                showPhoneNumberError = value;
+                OnPropertyChanged("ShowPhoneNumberError");
+            }
+        }
+
+        private void ValidatePhoneNumber()
+        {
+            this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNum);
+            this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -205,6 +326,8 @@ namespace GuitarsAndMoreApp.ViewModels
             List<Model> mList = await proxy.GetListOfModelsAsync();
             if (mList != null)
             {
+                Models.Clear();
+
                 foreach (Model m in mList)
                 {
                     if (m.ProducerId == Producer.ProducerId)
@@ -262,6 +385,12 @@ namespace GuitarsAndMoreApp.ViewModels
                 await app.MainPage.Navigation.PushModalAsync(new Login());
                 return;
             }
+        }
+
+        public Command SaveDataCommand => new Command(SaveData);
+        public void SaveData()
+        {
+
         }
     }
 }

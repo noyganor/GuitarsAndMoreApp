@@ -9,10 +9,6 @@
             <SearchBar Placeholder="חיפוש..."  SearchCommand="{Binding Search}"/>
           
                 <Image Source="newlogo.png" BackgroundColor="Transparent" />
-           
-
-
-            <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding MoveToUploadPostPage}" CornerRadius="10" BackgroundColor="White"/>
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -20,14 +16,12 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
+                    <RowDefinition Height="45" />
                 </Grid.RowDefinitions>
-
-
-              
+                <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding MoveToUploadPostPage}" CornerRadius="10" BackgroundColor="White" Grid.Column="0" Grid.Row="0"/>
+                <Button Text="התחברות" HorizontalOptions="Center" Command="{Binding MoveToLoginPage}" CornerRadius="10" BackgroundColor="White" Grid.Column="1" Grid.Row="0"/>
             </Grid>
-
+          
             <CollectionView x:Name="collectionName"  SelectedItem="{Binding SelectedPost}"
                             ItemsSource="{Binding PostsList}" SelectionMode="Single"
                             SelectionChangedCommand="{Binding SelectionChanged}"
@@ -37,8 +31,8 @@
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <!--IsEnabled="{Binding IsVisible}"-->
-                                    <SwipeItem 
+                                    <SwipeItem
+                                           IsVisible="{Binding Source={x:Reference collectionName}, Path=BindingContext.IsVisible}"
                                            IconImageSource="{Binding FavoriteActionImageUrl}"
                                            BackgroundColor="LightPink"
                                            Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddToFavButton}"

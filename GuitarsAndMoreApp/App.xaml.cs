@@ -14,6 +14,7 @@ namespace GuitarsAndMoreApp
         public LookUpTables Lookup { get; set; }
         //public Post Post { get; set; }
 
+        public MainTab TheMainTab { get; set; }
         public App()
         {
             InitializeComponent();

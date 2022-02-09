@@ -79,6 +79,7 @@ namespace GuitarsAndMoreApp.ViewModels
         private void ValidatePhoneNumber()
         {
             this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNumber);
+            this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 

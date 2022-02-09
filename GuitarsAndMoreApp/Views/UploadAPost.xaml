@@ -9,22 +9,54 @@
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
                     <!--<Entry Text="{Binding ImageUrl}" Placeholder="קישור לסרטון על המוצר"/>-->
-                    <Label Text="הכנס מחיר מוצר"/>
-                    <Label Text="{Binding SliderValue}"/>
-                    <Slider Minimum="0" Maximum="100000" Value="{Binding SliderValue}" />
+                    <!--upload an image-->
+                    <Frame>
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                            </Grid>
+                            
+                            <Label Text="הכנס מחיר מוצר"/>
+                            <Label Text="{Binding SliderValue}"/>
+                            <Slider Minimum="0" Maximum="100000" Value="{Binding SliderValue}" MaximumTrackColor="LightGray" MinimumTrackColor="#c9ada7"/>
+                            <Label Text="{Binding PriceError}" IsVisible="{Binding ShowPriceError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
 
-                    <Label Text="הכנס יישוב"/>
-                    <Picker ItemsSource="{Binding Towns}" ItemDisplayBinding="{Binding Town1}" SelectedItem="{Binding Town}"/>
+                            <Label Text="הכנס יישוב" Grid.Column="0" Grid.Row="1"/>
+                            <Picker ItemsSource="{Binding Towns}" ItemDisplayBinding="{Binding Town1}" SelectedItem="{Binding Town}" Grid.Column="1" Grid.Row="1"/>
+                            <!--<Label Text="{Binding TownError}" IsVisible="{Binding ShowTownError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Column="1" Grid.Row="1"/>-->
 
-                    <Label Text="הכנס יצרן"/>
-                    <Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer1}" SelectedItem="{Binding Producer}"/>
+                            <Label Text="הכנס יצרן" Grid.Column="0" Grid.Row="2"/>
+                            <Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer1}" SelectedItem="{Binding Producer}" Grid.Column="1" Grid.Row="2"/>
 
-                    <Label Text="הכנס דגם"/>
-                    <Picker ItemsSource="{Binding Models}" ItemDisplayBinding="{Binding ModelName}" SelectedItem="{Binding Model}"/> <!---בהתאם ליצרן-->
+                            <Label Text="הכנס דגם" Grid.Column="0" Grid.Row="3"/>
+                            <Picker ItemsSource="{Binding Models}" ItemDisplayBinding="{Binding ModelName}" SelectedItem="{Binding Model}" Grid.Column="1" Grid.Row="3"/>
+                            <!---בהתאם ליצרן-->
 
-                    <Entry Text="{Binding Pdescription}" Placeholder="תאר את המוצר"/>
-                    <Entry Text="{Binding Link}" Placeholder="קישור לסרטון על המוצר"/>
-                    <Entry Text="{Binding PhoneNum}" Placeholder="טלפון ליצירת קשר"/>
+                            <Label Text="תאר את המוצר" Grid.Column="0" Grid.Row="4"/>
+                            <Entry Text="{Binding Pdescription}" Placeholder="תאר את המוצר" Grid.Column="1" Grid.Row="4"/>
+                            <Label Text="{Binding DescriptionError}" IsVisible="{Binding ShowDescriptionError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+
+                            <Label Text="קישור לסרטון על המוצר" Grid.Column="0" Grid.Row="5"/>
+                            <Entry Text="{Binding Link}" Placeholder="קישור לסרטון על המוצר"  Grid.Column="1" Grid.Row="5"/>
+
+                            <Label Text="טלפון ליצירת קשר" Grid.Column="0" Grid.Row="6"/>
+                            <Entry Text="{Binding PhoneNum}" Placeholder="טלפון ליצירת קשר" Grid.Column="1" Grid.Row="6"/>
+                            <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+                        </StackLayout>
+                    </Frame>
+                    
 
                 </StackLayout>
             </ScrollView>

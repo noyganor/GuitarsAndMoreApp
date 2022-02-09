@@ -6,6 +6,7 @@
               FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="התנתקות" Command="{Binding LogOutButton}" HorizontalOptions="Start" CornerRadius="7" BackgroundColor="Transparent"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="400" />

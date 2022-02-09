@@ -160,6 +160,8 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 App app = (App)App.Current;
                 app.CurrentUser = u;
+                MainTab mainTab = app.TheMainTab;
+                mainTab.OnLogin();
 
 
                 await app.MainPage.Navigation.PopModalAsync();

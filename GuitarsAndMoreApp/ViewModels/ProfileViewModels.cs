@@ -58,6 +58,14 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        public Command LogOutButton => new Command(LogOut);
+        public async void LogOut()
+        {
+            App app = ((App)App.Current);
+            app.CurrentUser = null;
+            await app.MainPage.Navigation.PopToRootAsync();
+        }
+
         
     }
 }

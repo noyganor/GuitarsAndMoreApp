@@ -8,9 +8,11 @@
 
             <Label Text="מספר טלפון" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
             <Entry Text="{Binding PhoneNumber}"/>
+            <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+
 
             <Label Text="מגדר" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Picker ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender} "/>
+            <Picker ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}"/>
 
             <Label Text="זמר או להקה אהובה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
             <Entry Text="{Binding FavoriteBand}"/>

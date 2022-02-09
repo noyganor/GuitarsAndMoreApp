@@ -22,7 +22,8 @@ namespace GuitarsAndMoreApp.ViewModels
             InitPosts();
             AddToFavButton = new Command<Post>(AddPostToFavorites);
             SelectionChanged= new Command(PostView);
-            isVisible = false;
+            
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -129,21 +130,20 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        #region Is Visible
-        private bool isVisible;
+        #region Is Visible 
         public bool IsVisible
         {
             get
             {
-                return this.isVisible;
+                App theApp = (App)Application.Current;
+                if (theApp.CurrentUser == null)
+                    return false;
+                else
+                    return true;
             }
             set
             {
-                if (this.isVisible != value)
-                {
-                    this.isVisible = value;
-                    OnPropertyChanged("IsVisible");
-                }
+                OnPropertyChanged("IsVisible");
             }
         }
         #endregion
@@ -282,6 +282,23 @@ namespace GuitarsAndMoreApp.ViewModels
                 App app = (App)App.Current;
                 app.MainPage.Navigation.PushAsync(new PostView(SelectedPost));
                 SelectedPost = null;
+            }
+        }
+
+        public Command MoveToLoginPage => new Command(GoToLogin);
+        public async void GoToLogin()
+        {
+            App app = (App)App.Current;
+
+            if (app.CurrentUser == null)
+            {
+                await app.MainPage.Navigation.PushModalAsync(new Login());
+                return;
+            }
+
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("הינך מחובר", "הינך מחובר...", "אישור", FlowDirection.RightToLeft);
             }
         }
 
