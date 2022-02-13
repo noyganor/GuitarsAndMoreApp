@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
+using System.Windows.Input;
+
 namespace GuitarsAndMoreApp.ViewModels
 {
     class LoginViewModel : INotifyPropertyChanged
@@ -124,7 +126,7 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 PasswordError = "הסיסמה לא תקינה ";
                 ShowPasswordError = true;
-                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+              //  this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
             }
 
         }
@@ -147,7 +149,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public Command LoginButton => new Command(LoginAsync);
+        public ICommand LoginButton { get; }
         public async void LoginAsync()
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
@@ -168,7 +170,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public Command MoveToSignUpPage => new Command(SignUpUserPage);
+        public ICommand MoveToSignUpPage { get; }
         public async void SignUpUserPage()
         {
             App app = (App)App.Current;
@@ -176,7 +178,7 @@ namespace GuitarsAndMoreApp.ViewModels
             await app.MainPage.Navigation.PushModalAsync(new SignUp());           
         }
 
-        public Command BackToHomePageButton => new Command(BackToHomePage);
+        public ICommand BackToHomePageButton { get; }
         public async void BackToHomePage()
         {
             App app = (App)App.Current;
@@ -187,7 +189,21 @@ namespace GuitarsAndMoreApp.ViewModels
             await app.MainPage.Navigation.PopModalAsync();
         }
        
+        public LoginViewModel()
+        {
+            this.Email = string.Empty;
+            this.EmailError = string.Empty;
+            this.Message = string.Empty;
+            this.Password = string.Empty;
+            this.ShowEmailError = false;
+            this.ShowPasswordError = false;
+            this.PasswordError = string.Empty;
+            MoveToSignUpPage = new Command(SignUpUserPage);
+            BackToHomePageButton= new Command(BackToHomePage);
+            LoginButton = new Command(LoginAsync);
 
+
+        }
 
 
     }

@@ -19,9 +19,11 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             FullPostsList = new List<Post>();
             PostsList = new ObservableCollection<Post>();
+            SearchTerm = string.Empty;
             InitPosts();
             AddToFavButton = new Command<Post>(AddPostToFavorites);
             SelectionChanged= new Command(PostView);
+            SearchCommand = new Command<string>(OnTextChanged);
             
             
         }
@@ -46,7 +48,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
 
                     this.searchTerm = value;
-                    OnTextChanged(value);
+                   // OnTextChanged(value);
                     OnPropertyChanged("SearchTerm");
                 }
             }
@@ -177,6 +179,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        public ICommand SearchCommand { get; }
         #region Search
         public void OnTextChanged(string search)
         {
@@ -194,9 +197,11 @@ namespace GuitarsAndMoreApp.ViewModels
 
             else
             {
+                this.postsList.Clear();
                 foreach (Post p in this.fullPostsList)
                 {
-                    string postString = $"{p.Category}|{p.Model}|{p.Price}|{p.Town}";
+                    
+                    string postString = $"{p.Category.Category1}|{p.Model.ModelName}|{p.Price}|{p.Town.Town1}";
                     if (!this.PostsList.Contains(p) && postString.Contains(search))
                         this.PostsList.Add(p);
 
@@ -205,7 +210,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
 
-            this.PostsList = new ObservableCollection<Post>(this.PostsList.OrderBy(po => po.Town));
+            this.PostsList = new ObservableCollection<Post>(this.PostsList.OrderBy(po => po.Town.Town1));
         }
         #endregion
 
@@ -293,7 +298,7 @@ namespace GuitarsAndMoreApp.ViewModels
             if (app.CurrentUser == null)
             {
                 await app.MainPage.Navigation.PushModalAsync(new Login());
-                return;
+               // return;
             }
 
             else

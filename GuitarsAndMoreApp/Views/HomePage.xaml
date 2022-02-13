@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GuitarsAndMoreApp.ViewModels"
+             xmlns:models="clr-namespace:GuitarsAndMoreApp.Models"
              x:Class="GuitarsAndMoreApp.Views.HomePage"
              BackgroundColor="#b392ac"
-             FlowDirection="RightToLeft">
+             
+             FlowDirection="RightToLeft" x:DataType="local:HomePageViewModels">
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar Placeholder="חיפוש..."  SearchCommand="{Binding Search}"/>
-          
-                <Image Source="newlogo.png" BackgroundColor="Transparent" />
+            <SearchBar x:Name="searchbar" Text="{Binding SearchTerm}" Placeholder="חיפוש..."  SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference searchbar}}"/>
+
+            <Image Source="newlogo.png" BackgroundColor="Transparent" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -27,7 +30,7 @@
                             SelectionChangedCommand="{Binding SelectionChanged}"
                             SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:Post">
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
