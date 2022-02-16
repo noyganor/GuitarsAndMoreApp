@@ -17,5 +17,12 @@ namespace GuitarsAndMoreApp.Views
             this.BindingContext = new HomePageViewModels();
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            HomePageViewModels vm = (HomePageViewModels)this.BindingContext;
+            vm.RefreshPosts();
+        }
     }
 }

@@ -10,16 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace GuitarsAndMoreApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CategoryPage : ContentPage
+    public partial class FavoritesPage : ContentPage
     {
-        public CategoryPage(int index)
+        public FavoritesPage()
         {
-            this.BindingContext = new HomePage();
+            this.BindingContext = new FavoritesPageViewModels();
             InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
 
         }
     }

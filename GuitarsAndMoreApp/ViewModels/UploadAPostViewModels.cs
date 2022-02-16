@@ -73,8 +73,8 @@ namespace GuitarsAndMoreApp.ViewModels
             //{
             this.ShowPriceError = SliderValue.Equals(0);
             this.PriceError = "שים לב! הפריט מיועד לתרומה";
-                
-            
+
+
             //else
             //    this.showPriceError = false;        
         }
@@ -247,7 +247,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         private void ValidateDescription()
         {
-           
+
             this.ShowDescriptionError = string.IsNullOrEmpty(Pdescription);
             this.DescriptionError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
@@ -387,42 +387,44 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        //public Command SaveDataCommand => new Command(SaveData);
-        //public void SaveData()
-        //{
-        //    GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+//        public Command SaveDataCommand => new Command(SaveData);
+//        public void SaveData()
+//        {
+//            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+
+//            Post p = new Post
+//            {
+//                Price = this.SliderValue,
+//                Pdescription = this.Pdescription,
+//                PhoneNum = this.PhoneNum,
+                
+//                Model = this.Model,
+//                TownId = this.Town.TownId,
+
+
+//                if (this.Link != null)
+//                Link = this.Link;
         
-        //    Post p = new Post
-        //    {
-              
-           
-           
-        //   ( = p.UserId;
-        //    this.ModelId = p.ModelId;
-        //    this.TownId = p.TownId;
-        //    this.Price = p.Price;
-        //    this.Pdescription = p.Pdescription;
-        //    this.Link = p.Link;
-        //    this.Producer = p.Producer;
-        //    this.PhoneNum = p.PhoneNum;
-        //};
-        //    User u = await proxy.RegisterUser(uu);
 
-        //    if (u == null)
-        //    {
-        //        Message = "ההרשמה לא בוצעה כראוי";
-        //    }
+//        };
 
-        //    else
-        //    {
-        //        App app = (App)App.Current;
-        //        app.CurrentUser = uu;
-        //        Message = "ההרשמה בוצעה כראוי";
-        //        Page p = new HomePage();
-        //        app.MainPage = new NavigationPage(p);
+//        Post p = await proxy.AddPost();
 
-        //    }
+//            if (p == null)
+//            {
+//                Message = "ההרשמה לא בוצעה כראוי";
+//            }
 
-        //}
+//            else
+//            {
+//                App app = (App)App.Current;
+//    app.CurrentUser = uu;
+//                Message = "ההרשמה בוצעה כראוי";
+//                Page p = new HomePage();
+//    app.MainPage = new NavigationPage(p);
+
+//}
+
+        
     }
 }

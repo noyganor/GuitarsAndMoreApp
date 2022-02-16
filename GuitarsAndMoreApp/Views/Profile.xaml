@@ -19,8 +19,8 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Label Text=" Welcome" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"/>
-                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}"  HeightRequest="100" WidthRequest="100" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                <Label Text=" Welcome" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"/>
+                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}"  HeightRequest="100" WidthRequest="100" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
                     <ImageButton.Source>
                         <FontImageSource
                     FontFamily="MySolidFonts"
@@ -37,15 +37,14 @@
                     </ImageButton.Source>
                 </ImageButton>-->
 
-                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" HeightRequest="80" WidthRequest="80" HorizontalOptions="Center" Grid.Column="1" Grid.Row="2">
+                <!--<ImageButton BackgroundColor="Black" Command="{Binding NavigateToFavoritesPageCommand}" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" Grid.Column="1" Grid.Row="2">
                     <ImageButton.Source>
                         <FontImageSource
                     FontFamily="MyRegularFonts"
-                    Glyph="{x:Static fontAwesome:IconRegularFonts.Bookmark}"
-                    
+                    Glyph="{x:Static fontAwesome:IconRegularFonts.Bookmark}"                 
                     Color="#d8f3dc"/>
                     </ImageButton.Source>
-                </ImageButton>
+                </ImageButton>-->
 
                 <!--<ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" CommandParameter="RegisterBuyer" HorizontalOptions="Center" Grid.Column="0" Grid.Row="1">
                     <ImageButton.Source>
@@ -56,16 +55,16 @@
                     Color="#d8f3dc"/>
                     </ImageButton.Source>
                 </ImageButton>-->
-
-                <!--<ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" CommandParameter="RegisterBuyer" HorizontalOptions="Center" Grid.Column="1" Grid.Row="1">
+                <Button FontFamily="MySolidFonts" Text="{x:Static fontAwesome:IconSolidFonts.Baby}" FontSize="Large" BackgroundColor="Transparent"></Button>
+                <ImageButton BackgroundColor="Blue" Command="{Binding NavigateToPageCommand}" HorizontalOptions="StartAndExpand"  Grid.Column="0" Grid.Row="2">
                     <ImageButton.Source>
                         <FontImageSource
                     FontFamily="MySolidFonts"
-                    Glyph="{x:Static fontAwesome:IconSolidFonts.Cogs}"
+                    Glyph="{x:Static fontAwesome:IconSolidFonts.Code}"
                     Size="Medium"
-                    Color="#d8f3dc"/>
+                    Color="Red"/>
                     </ImageButton.Source>
-                </ImageButton>-->
+                </ImageButton>
             </Grid>
         </StackLayout>
 

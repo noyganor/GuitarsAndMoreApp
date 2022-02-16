@@ -16,18 +16,8 @@ namespace GuitarsAndMoreApp.Models
         public double Price { get; set; }
         public string Pdescription { get; set; }
         public string Link { get; set; }
-
-        //additional
-        public string ImageUrl 
-        { 
-            get
-            {
-                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                return proxy.GetPhotoUri() + this.PostId + ".jpg";
-            }
- 
-        }
-
+        public virtual ICollection<UserFavoritePost> UserFavoritePosts { get; set; }
+        
         public string Producer { get; set; }
         public string PhoneNum { get; set; }
 
@@ -38,7 +28,10 @@ namespace GuitarsAndMoreApp.Models
         public virtual User User { get; set; }
 
         //additional 
-        public Post() { }
+        public Post() 
+        {
+            UserFavoritePosts = new List<UserFavoritePost>();
+        }
         public Post(Post p)
         {
             this.PostId = p.PostId;
@@ -52,8 +45,15 @@ namespace GuitarsAndMoreApp.Models
             this.Link = p.Link;
             this.Producer = p.Producer;
             this.PhoneNum = p.PhoneNum;
+        }
+        public string ImageUrl
+        {
+            get
+            {
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                return proxy.GetPhotoUri() + this.PostId + ".jpg";
+            }
 
-            
         }
 
         private const string FAV_OFF_URL = "outline_favorite_border_black_24dp.png";
@@ -78,9 +78,9 @@ namespace GuitarsAndMoreApp.Models
             get
             {
                 if (IsFavByUser())
-                    return FAV_ACTION_ON_URL;
-                else
                     return FAV_ACTION_OFF_URL;
+                else
+                    return FAV_ACTION_ON_URL;
             }
         }
 
@@ -90,7 +90,7 @@ namespace GuitarsAndMoreApp.Models
             User user = app.CurrentUser;
             if (user == null)
                 return false;
-            foreach (UserFavoritePost uf in user.UserFavoritesPosts)
+            foreach (UserFavoritePost uf in user.UserFavoritePosts)
             {
                 if (this.PostId == uf.PostId)
                     return true;

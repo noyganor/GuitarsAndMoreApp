@@ -128,7 +128,10 @@ namespace GuitarsAndMoreApp.ViewModels
                 ShowPasswordError = true;
               //  this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
             }
-
+            if (string.IsNullOrEmpty(Password))
+                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+            else
+                ShowPasswordError = false;
         }
         #endregion
 

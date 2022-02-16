@@ -19,7 +19,7 @@ namespace GuitarsAndMoreApp.Models
 
         public virtual Gender Gender { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<UserFavoritePost> UserFavoritesPosts { get; set; }
+        public virtual ICollection<UserFavoritePost> UserFavoritePosts { get; set; }
 
     }
 }

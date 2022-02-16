@@ -68,10 +68,14 @@ namespace GuitarsAndMoreApp.ViewModels
             await nv.PopToRootAsync();
             MainTab mt = (MainTab)nv.CurrentPage;
             mt.SwitchToHomeTab();
-         
-
         }
 
-        
+        public Command NavigateToFavoritesPageCommand => new Command(FavoritesPage);
+        public async void FavoritesPage()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new FavoritesPage());
+        }
+
     }
 }

@@ -238,17 +238,21 @@ namespace GuitarsAndMoreApp.ViewModels
                     {
                         User user = app.CurrentUser;
                         bool found = false;
-                        foreach (UserFavoritePost uf in user.UserFavoritesPosts)
+                        UserFavoritePost foundedFavorite = null;
+                        foreach (UserFavoritePost uf in user.UserFavoritePosts)
                         {
                             if (post.PostId == uf.PostId)
                             {
-                                user.UserFavoritesPosts.Remove(uf);
+                                //user.UserFavoritePosts.Remove(uf);
+                                foundedFavorite = uf;
                                 found = true;
                             }
                         }
-                        if (!found)
+                        if (found)
+                            user.UserFavoritePosts.Remove(foundedFavorite);
+                        else
                         {
-                            user.UserFavoritesPosts.Add(new UserFavoritePost()
+                            user.UserFavoritePosts.Add(new UserFavoritePost()
                             {
                                 PostId = post.PostId,
                                 UserId = user.UserId,
@@ -256,7 +260,8 @@ namespace GuitarsAndMoreApp.ViewModels
                                 User = user
                             });
                         }
-                        OnPropertyChanged("PostsList");
+                        RefreshPosts();
+                        
 
                     }
 
@@ -308,7 +313,21 @@ namespace GuitarsAndMoreApp.ViewModels
         }
 
 
-
+        public async void RefreshPosts()
+        {
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            List<Post> pList = await proxy.GetListOfPostsAsync();
+            if (pList != null)
+            {
+                FullPostsList.Clear();
+                PostsList.Clear();
+                foreach (Post p in pList)
+                {
+                    FullPostsList.Add(p);
+                    PostsList.Add(p);
+                }
+            }
+        }
 
     }
 }

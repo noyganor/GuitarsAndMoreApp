@@ -258,13 +258,7 @@ namespace GuitarsAndMoreApp.Services
                     ReferenceHandler = ReferenceHandler.Preserve,
                     PropertyNameCaseInsensitive = true
                 };
-                Post p = new Post
-                {
-                    PostId = postID
-                };
-                string json = JsonSerializer.Serialize(p, options);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddPostToFavorites", content);
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/AddPostToFavorites?postID={postID}");
                 if (response.IsSuccessStatusCode)
                 {
 
