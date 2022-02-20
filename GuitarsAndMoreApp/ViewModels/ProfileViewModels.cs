@@ -26,25 +26,31 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #region Is Visible
-        private bool isVisible;
-        public bool IsVisible
+        public Command NavigateToFavoritesPage => new Command(MoveToFavoritesPage);
+        public async void MoveToFavoritesPage()
         {
-            get
-            {
-                return this.isVisible;
-            }
-
-            set
-            {
-                if (this.isVisible != value)
-                {
-                    this.isVisible = value;
-                    OnPropertyChanged("IsVisible");
-                }
-            }
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new Favorites());
         }
-        #endregion
+
+        public Command NavigateToUpdatePage => new Command(UpdatePage);
+        public async void UpdatePage()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new Update());
+        }
+        public Command NavigateToEditMyPostsPage => new Command(EditMyPostsPage);
+        public async void EditMyPostsPage()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new EditMyPosts());
+        }
+        public Command NavigateToUploadAPostPage => new Command(UploadAPostPage);
+        public async void UploadAPostPage()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new UploadAPost());
+        }
 
         public async void ShowProfilePage()
         {
@@ -63,19 +69,23 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             App app = (App)App.Current;
             app.CurrentUser = null;
+          
             await app.MainPage.Navigation.PopToRootAsync();
             NavigationPage nv = (NavigationPage)app.MainPage;
             await nv.PopToRootAsync();
             MainTab mt = (MainTab)nv.CurrentPage;
+            HomePage home = (HomePage)mt.Children[0];
+            HomePageViewModels vm = (HomePageViewModels)home.BindingContext;
+            vm.IsVisible = false;
             mt.SwitchToHomeTab();
         }
 
-        public Command NavigateToFavoritesPageCommand => new Command(FavoritesPage);
-        public async void FavoritesPage()
-        {
-            App app = (App)App.Current;
-            await app.MainPage.Navigation.PushAsync(new FavoritesPage());
-        }
+        //public Command NavigateToFavoritesPageCommand => new Command(FavoritesPage);
+        //public async void FavoritesPage()
+        //{
+        //    App app = (App)App.Current;
+        //    await app.MainPage.Navigation.PushAsync(new FavoritesPage());
+        //}
 
     }
 }

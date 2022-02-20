@@ -9,18 +9,17 @@
             <Button Text="התנתקות" Command="{Binding LogOutButton}" HorizontalOptions="Start" CornerRadius="7" BackgroundColor="Transparent" TextColor="#c9ada7"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
+                  
+                   
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
 
-                <Label Text=" Welcome" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"/>
-                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}"  HeightRequest="100" WidthRequest="100" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                <!--<Label Text=" Welcome" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"/>-->
+                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}"  HeightRequest="300" WidthRequest="200" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
                     <ImageButton.Source>
                         <FontImageSource
                     FontFamily="MySolidFonts"
@@ -28,44 +27,44 @@
                     Color="#3d405b" />
                     </ImageButton.Source>
                 </ImageButton>
-                
-                <!--<ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" CommandParameter="RegisterBuyer" HorizontalOptions="Center" Grid.Column="0" Grid.Row="0">
-                    <ImageButton.Source>
-                        <FontImageSource
-                    FontFamily="MyRegularFonts"
-                    Glyph="{x:Static fontAwesome:IconRegularFonts.#f044}" />
-                    </ImageButton.Source>
-                </ImageButton>-->
 
-                <!--<ImageButton BackgroundColor="Black" Command="{Binding NavigateToFavoritesPageCommand}" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" Grid.Column="1" Grid.Row="2">
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="200" />
+                    
+                </Grid.RowDefinitions>
+                <ImageButton Source="postFavoriteIcon.png" Command="{Binding NavigateToFavoritesPage}" BackgroundColor="Transparent"  Grid.Row="1" Grid.Column="0" HeightRequest="300" WidthRequest="200"></ImageButton>
+                <ImageButton Source="UpdateLastChance.png" Command="{Binding NavigateToUpdatePage}" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="2" HeightRequest="300" WidthRequest="200"></ImageButton>
+
+                <ImageButton Source="otherEditPostIcon.png" Command="{Binding NavigateToEditMyPostsPage}" BackgroundColor="Transparent" Grid.Row="3" Grid.Column="0" HeightRequest="400" WidthRequest="500"></ImageButton>
+                <ImageButton Source="AddPost.png" Command="{Binding NavigateToUploadAPostPage}" BackgroundColor="Transparent" Grid.Row="3" Grid.Column="2" HeightRequest="5" WidthRequest="5"></ImageButton>
+            </Grid>
+            <!--<ImageButton BackgroundColor="Red" Command="{Binding NavigateToFavoritesPageCommand}" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" Grid.Column="1" Grid.Row="2">
                     <ImageButton.Source>
                         <FontImageSource
                     FontFamily="MyRegularFonts"
                     Glyph="{x:Static fontAwesome:IconRegularFonts.Bookmark}"                 
-                    Color="#d8f3dc"/>
+                    Color="blue"/>
                     </ImageButton.Source>
                 </ImageButton>-->
 
-                <!--<ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}" CommandParameter="RegisterBuyer" HorizontalOptions="Center" Grid.Column="0" Grid.Row="1">
-                    <ImageButton.Source>
-                        <FontImageSource
-                    FontFamily="MyRegularFonts"
-                    Glyph="{x:Static fontAwesome:IconRegularFonts.#f044}"
-                    Size="Medium"
-                    Color="#d8f3dc"/>
-                    </ImageButton.Source>
-                </ImageButton>-->
-                <Button FontFamily="MySolidFonts" Text="{x:Static fontAwesome:IconSolidFonts.Baby}" FontSize="Large" BackgroundColor="Transparent"></Button>
-                <ImageButton BackgroundColor="Blue" Command="{Binding NavigateToPageCommand}" HorizontalOptions="StartAndExpand"  Grid.Column="0" Grid.Row="2">
-                    <ImageButton.Source>
-                        <FontImageSource
-                    FontFamily="MySolidFonts"
-                    Glyph="{x:Static fontAwesome:IconSolidFonts.Code}"
-                    Size="Medium"
-                    Color="Red"/>
-                    </ImageButton.Source>
-                </ImageButton>
-            </Grid>
+                <!--<Button FontFamily="MyRegularFonts" Text="{x:Static fontAwesome:IconRegularFonts.Star}" FontSize="Large" BackgroundColor="Transparent"></Button>-->
+                <!--<Button FontFamily="MyRegularFonts" Text="{x:Static fontAwesome:IconRegularFonts.SquarePlus}" FontSize="Large" BackgroundColor="Transparent"  Grid.Column="0" Grid.Row="2"></Button>-->
+              
+                <!--<ImageButton Source="NewUpdateIcon.png"  BackgroundColor="Transparent"></ImageButton>-->
+                <!--<Button FontFamily="MyRegularFonts" Text="{x:Static fontAwesome:IconRegularFonts.PenToSquare}" FontSize="Large" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="2"></Button>-->
+               
+          
         </StackLayout>
 
 
