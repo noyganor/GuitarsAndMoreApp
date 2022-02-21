@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.UploadAPost"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <StackLayout>
@@ -35,8 +36,8 @@
 
                             <Label Text="הכנס יישוב" Grid.Column="0" Grid.Row="1"/>
                             <Picker ItemsSource="{Binding Towns}" ItemDisplayBinding="{Binding Town1}" SelectedItem="{Binding Town}" Grid.Column="1" Grid.Row="1"/>
-                            <!--<Label Text="{Binding TownError}" IsVisible="{Binding ShowTownError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Column="1" Grid.Row="1"/>-->
-
+                            <Label Text="{Binding TownError}" IsVisible="{Binding ShowTownError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Column="1" Grid.Row="1"/>
+                            
                             <Label Text="הכנס יצרן" Grid.Column="0" Grid.Row="2"/>
                             <Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer1}" SelectedItem="{Binding Producer}" Grid.Column="1" Grid.Row="2"/>
 
@@ -54,6 +55,11 @@
                             <Label Text="טלפון ליצירת קשר" Grid.Column="0" Grid.Row="6"/>
                             <Entry Text="{Binding PhoneNum}" Placeholder="טלפון ליצירת קשר" Grid.Column="1" Grid.Row="6"/>
                             <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+
+                            <Button Text="Pick image" Command="{Binding PickImageCommand}"></Button>
+                            <Button Text="Open camera" Command="{Binding CameraImageCommand}"/>
+                            <Image x:Name="PostImage"></Image>
+                            
                         </StackLayout>
                     </Frame>
                     
@@ -61,6 +67,7 @@
                 </StackLayout>
             </ScrollView>
             <Button Text="העלה מודעה" Command="{Binding SaveDataCommand}"></Button>
+            <Label Text="{Binding Message}"/>
         </StackLayout>
 
     </ContentPage.Content>

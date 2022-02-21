@@ -14,13 +14,20 @@ namespace GuitarsAndMoreApp.Views
     {
         public UploadAPost()
         {
-            this.BindingContext = new UploadAPostViewModels();
+            UploadAPostViewModels vm = new UploadAPostViewModels();
+            vm.SetImageSourceEvent += SetImageSource;
+            this.BindingContext = vm;
             InitializeComponent();
         }
         protected override void OnAppearing()
         {
             UploadAPostViewModels vm = (UploadAPostViewModels)this.BindingContext;
             vm.ShowUploadAPostPage();
+        }
+
+        private void SetImageSource(ImageSource source)
+        {
+            PostImage.Source = source;
         }
     }
 }

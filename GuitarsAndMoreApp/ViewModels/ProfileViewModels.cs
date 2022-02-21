@@ -30,7 +30,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public async void MoveToFavoritesPage()
         {
             App app = (App)App.Current;
-            await app.MainPage.Navigation.PushAsync(new Favorites());
+            await app.MainPage.Navigation.PushAsync(new TabbedPageFavoritesAndEdit());
         }
 
         public Command NavigateToUpdatePage => new Command(UpdatePage);
@@ -43,7 +43,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public async void EditMyPostsPage()
         {
             App app = (App)App.Current;
-            await app.MainPage.Navigation.PushAsync(new EditMyPosts());
+            await app.MainPage.Navigation.PushAsync(new TabbedPageFavoritesAndEdit(1));
         }
         public Command NavigateToUploadAPostPage => new Command(UploadAPostPage);
         public async void UploadAPostPage()

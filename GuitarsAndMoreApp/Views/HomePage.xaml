@@ -9,7 +9,7 @@
              FlowDirection="RightToLeft" x:DataType="local:HomePageViewModels">
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar x:Name="searchbar" Text="{Binding SearchTerm}" Placeholder="חיפוש..."  SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference searchbar}}"/>
+            <SearchBar x:Name="searchbar" Text="{Binding SearchTerm}" Placeholder="חיפוש..."  />
 
             <Image Source="newlogo.png" BackgroundColor="Transparent" />
 

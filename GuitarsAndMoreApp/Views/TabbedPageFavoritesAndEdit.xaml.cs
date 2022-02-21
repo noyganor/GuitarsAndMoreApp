@@ -12,9 +12,11 @@ namespace GuitarsAndMoreApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabbedPageFavoritesAndEdit : TabbedPage
     {
-        public TabbedPageFavoritesAndEdit()
+        public TabbedPageFavoritesAndEdit(int chosenTab = 0)
         {
             InitializeComponent();
+
+            this.CurrentPage = this.Children[chosenTab];
         }
     }
 }
