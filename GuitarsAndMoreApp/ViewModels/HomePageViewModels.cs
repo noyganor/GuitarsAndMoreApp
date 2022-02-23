@@ -178,8 +178,8 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public ICommand SearchCommand { get; }
         #region Search
+        public ICommand SearchCommand { get; }
         public void OnTextChanged(string search)
         {
             //Filter the list of posts based on the search term

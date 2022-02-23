@@ -18,12 +18,16 @@ namespace GuitarsAndMoreApp.ViewModels
     {
         public PostViewViewModels(Post p)
         {
+            
             Price = p.Price;
+            //Is Needed?
             if (p.Town != null)
                 Town = p.Town.Town1;
             else
                 Town = "Town is null!";
-            Producer = p.Producer;
+
+           
+            Producer = p.Producer.Producer1;
             Model = p.Model.ModelName;
             Pdescription = p.Pdescription;
             Link = p.Link;

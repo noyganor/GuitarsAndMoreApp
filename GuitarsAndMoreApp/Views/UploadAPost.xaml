@@ -59,7 +59,12 @@
                             <Button Text="Pick image" Command="{Binding PickImageCommand}"></Button>
                             <Button Text="Open camera" Command="{Binding CameraImageCommand}"/>
                             <Image x:Name="PostImage"></Image>
-                            
+
+                            <Label Text=" לאיזו קטוגריה משתייך המוצר?" />
+                            <Picker ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Category1}" SelectedItem="{Binding Category}" />
+                            <Label Text="{Binding CategoryError}" IsVisible="{Binding ShowCategoryError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+
+
                         </StackLayout>
                     </Frame>
                     

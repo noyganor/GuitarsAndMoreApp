@@ -204,6 +204,8 @@ namespace GuitarsAndMoreApp.Services
                         p.Town = app.Lookup.Towns.Where(t => t.TownId == p.TownId).FirstOrDefault();
                         p.Model = app.Lookup.Models.Where(t => t.ModelId == p.ModelId).FirstOrDefault();
                         p.Category = app.Lookup.Categories.Where(t => t.CategoryId == p.CategoryId).FirstOrDefault();
+                        p.Producer = app.Lookup.Producers.Where(t => t.ProducerId == p.ProducerId).FirstOrDefault();
+                        p.UserFavoritePosts = app.Lookup.
                     }
                     return posts;
                 }

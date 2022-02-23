@@ -333,6 +333,64 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Category
+        public Category category;
+        public Category Category
+        {
+            get
+            {
+                return this.category;
+            }
+            set
+            {
+                if (this.category != value)
+                {
+                    this.category = value;
+                    ValidateCategory();
+                    OnPropertyChanged("Category");
+                }
+            }
+        }
+
+        public List<Category> Categories
+        {
+            get
+            {
+                App app = (App)Application.Current;
+                return app.Lookup.Categories;
+            }
+        }
+
+        private string categoryError;
+        public string CategoryError
+        {
+            get => categoryError;
+            set
+            {
+                categoryError = value;
+                OnPropertyChanged("CategoryError");
+            }
+        }
+
+        private bool showCategoryError;
+        public bool ShowCategoryError
+        {
+            get => showCategoryError;
+            set
+            {
+                showCategoryError = value;
+                OnPropertyChanged("ShowCategoryError");
+            }
+        }
+        private void ValidateCategory()
+        {
+
+            this.ShowCategoryError = Category == null;
+            this.CategoryError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+
+        #endregion
+
         private async void ProducerChanged()
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
@@ -397,9 +455,10 @@ namespace GuitarsAndMoreApp.ViewModels
             ValidateTown();
             ValidatePhoneNumber();
             ValidateDescription();
+            ValidateCategory();
 
             //Include validate town
-            if (ShowDescriptionError || ShowPhoneNumberError || ShowTownError)
+            if (ShowCategoryError || ShowDescriptionError || ShowPhoneNumberError || ShowTownError)
                 return false;
             else
                 return true;
@@ -433,10 +492,11 @@ namespace GuitarsAndMoreApp.ViewModels
                     Price = this.SliderValue,
                     Pdescription = this.Pdescription,
                     PhoneNum = this.PhoneNum,
-                    ModelId = 1, //*
-                    TownId = 1, //*
-                    Producer = "Fender", //*
-                    Link = "עכל",
+                    ModelId = this.Model.ModelId, 
+                    TownId = this.Town.TownId, 
+                    ProducerId =this.Producer.ProducerId, 
+                    CategoryId = this.Category.CategoryId,
+                    Link = this.Link ,
                 };
 
                 bool ok = await proxy.AddPost(p);

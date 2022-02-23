@@ -17,13 +17,13 @@ namespace GuitarsAndMoreApp.Models
         public string Pdescription { get; set; }
         public string Link { get; set; }
         public virtual ICollection<UserFavoritePost> UserFavoritePosts { get; set; }
+        public int? ProducerId { get; set; }
         
-        public string Producer { get; set; }
         public string PhoneNum { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Model Model { get; set; }
-
+        public Producer Producer { get; set; }
         public virtual Town Town { get; set; }
         public virtual User User { get; set; }
 
@@ -43,7 +43,7 @@ namespace GuitarsAndMoreApp.Models
             this.Price = p.Price;
             this.Pdescription = p.Pdescription;
             this.Link = p.Link;
-            this.Producer = p.Producer;
+            this.ProducerId = p.ProducerId;
             this.PhoneNum = p.PhoneNum;
         }
         public string ImageUrl
