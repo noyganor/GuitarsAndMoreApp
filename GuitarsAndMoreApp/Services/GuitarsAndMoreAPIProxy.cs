@@ -105,6 +105,8 @@ namespace GuitarsAndMoreApp.Services
                     };
                     string content = await response.Content.ReadAsStringAsync();
                     User u = JsonSerializer.Deserialize<User>(content, options);
+                    App app = (App)App.Current;               
+                    u.UserFavoritePosts = app.Lookup.UserFavoritePosts;
                     return u;
                 }
                 else
@@ -205,7 +207,7 @@ namespace GuitarsAndMoreApp.Services
                         p.Model = app.Lookup.Models.Where(t => t.ModelId == p.ModelId).FirstOrDefault();
                         p.Category = app.Lookup.Categories.Where(t => t.CategoryId == p.CategoryId).FirstOrDefault();
                         p.Producer = app.Lookup.Producers.Where(t => t.ProducerId == p.ProducerId).FirstOrDefault();
-                        p.UserFavoritePosts = app.Lookup.
+                      
                     }
                     return posts;
                 }

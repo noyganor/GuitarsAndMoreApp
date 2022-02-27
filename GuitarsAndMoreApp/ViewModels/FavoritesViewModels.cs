@@ -15,12 +15,13 @@ using System.Windows.Input;
 namespace GuitarsAndMoreApp.ViewModels
 {
     class FavoritesViewModels : INotifyPropertyChanged
-    {      
+    {
         public FavoritesViewModels()
         {
             FullPostsList = new List<Post>();
             FavoritePostsList = new ObservableCollection<Post>();
             InitPosts();
+            GetFavoritePosts();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -49,7 +50,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        #region Posts List
+        #region Favorite Posts List
         private ObservableCollection<Post> favoritePostsList;
         public ObservableCollection<Post> FavoritePostsList
         {
@@ -85,6 +86,21 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Delete Button
+        public Command DeleteButton => new Command<int>(DeleteFromFavorites);
+        public async void DeleteFromFavorites(int selected)
+        {
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            bool b = await proxy.AddPostToUserFavorites(selected);
+            if (b)
+            {
+                FavoritePostsList.Remove(SelectedPost);
+                
+            }
+        }
+
+        #endregion
+
         private async void InitPosts()
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
@@ -98,24 +114,23 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
-     
-        private async void GetFavoritePosts()
+
+        private void GetFavoritePosts()
         {
             App app = (App)App.Current;
-            app.Lookup.
             User u = app.CurrentUser;
-            List<UserFavoritePost> favoritesList = new List<UserFavoritePost>();
-
-            foreach(UserFavoritePost ufp in UserFavoritePost)
+            ICollection<UserFavoritePost> checkList = u.UserFavoritePosts;
+            FavoritePostsList.Clear();
+            if (checkList != null)
             {
-
+                foreach (Post p in FullPostsList)
+                {
+                    foreach (UserFavoritePost ufp in checkList)
+                        if (ufp.PostId == p.PostId)
+                            FavoritePostsList.Add(p);
+                }
             }
 
-            foreach(Post p in FullPostsList)
-            {
-                foreach(UserFavoritePost ufp in )
-                if(p.PostId == u.UserFavoritePosts.)
-            }
         }
 
     }

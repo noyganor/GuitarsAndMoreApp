@@ -6,6 +6,8 @@
              xmlns:models="clr-namespace:GuitarsAndMoreApp.Models">
     <ContentPage.Content>
         <StackLayout>
+            <Image Source="newlogo.png" BackgroundColor="Transparent" />
+
             <CollectionView x:Name="favoritesCollection"  SelectedItem="{Binding SelectedPost}"
                             ItemsSource="{Binding FavoritePostsList}" SelectionMode="Single"
                             SelectionChangedCommand="{Binding SelectionChanged}"
@@ -19,7 +21,8 @@
                                            
                                            IconImageSource="DeleteIcon.png"
                                            BackgroundColor="Red"
-                                           Command="{Binding Source={x:Reference favoritesCollection}, Path=BindingContext.DeleteButton}"/>
+                                           Command="{Binding Source={x:Reference favoritesCollection}, Path=BindingContext.DeleteButton}"
+                                           CommandParameter="{Binding .}"/>
                                 </SwipeItems>
                             </SwipeView.LeftItems>
 
@@ -45,7 +48,7 @@
                                     <Label Text="{Binding Town.Town1}" Grid.Column="2" Grid.Row="2" HorizontalTextAlignment="End" FontSize="12"/>
                                     <Image Source="{Binding FavoriteImageUrl}" Grid.Column="2" Grid.Row="0"  WidthRequest="10">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddToFavButton}" />
+                                            <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={x:Reference favoritesCollection}, Path=BindingContext.AddToFavButton}" />
                                         </Image.GestureRecognizers>
                                     </Image>
 
