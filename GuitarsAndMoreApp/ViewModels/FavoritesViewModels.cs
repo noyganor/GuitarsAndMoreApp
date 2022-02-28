@@ -20,8 +20,8 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             FullPostsList = new List<Post>();
             FavoritePostsList = new ObservableCollection<Post>();
-            InitPosts();
-            GetFavoritePosts();
+            SelectionChanged = new Command(PostView);
+            Operate();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -86,22 +86,36 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+     
         #region Delete Button
-        public Command DeleteButton => new Command<int>(DeleteFromFavorites);
-        public async void DeleteFromFavorites(int selected)
+        public Command DeleteButton => new Command<Post>(DeleteFromFavorites);
+        public async void DeleteFromFavorites(Post selected)
         {
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            bool b = await proxy.AddPostToUserFavorites(selected);
-            if (b)
+            
+            bool result = await App.Current.MainPage.DisplayAlert("אתה בטוח?", "  ", "אישור", "ביטול", FlowDirection.RightToLeft);
+            if (result)
             {
-                FavoritePostsList.Remove(SelectedPost);
-                
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                bool b = await proxy.AddPostToUserFavorites(selected.PostId);
+                if (b)
+                {
+                    FavoritePostsList.Remove(selected);
+                }
+                else
+                {
+                    b = false;
+                }
             }
         }
 
         #endregion
 
-        private async void InitPosts()
+        private async void Operate()
+        {
+            await InitPosts();
+            await GetFavoritePosts();
+        }
+        private async Task InitPosts()
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
             List<Post> pList = await proxy.GetListOfPostsAsync();
@@ -115,7 +129,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        private void GetFavoritePosts()
+        private async Task GetFavoritePosts()
         {
             App app = (App)App.Current;
             User u = app.CurrentUser;
@@ -131,6 +145,17 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
 
+        }
+
+        public ICommand SelectionChanged { get; set; }
+        public void PostView()
+        {
+            if (SelectedPost != null)
+            {
+                App app = (App)App.Current;
+                app.MainPage.Navigation.PushAsync(new PostView(SelectedPost));
+                SelectedPost = null;
+            }
         }
 
     }

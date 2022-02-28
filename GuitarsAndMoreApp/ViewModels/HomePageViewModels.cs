@@ -24,7 +24,7 @@ namespace GuitarsAndMoreApp.ViewModels
             AddToFavButton = new Command<Post>(AddPostToFavorites);
             SelectionChanged= new Command(PostView);
             SearchCommand = new Command<string>(OnTextChanged);
-                   
+                  
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

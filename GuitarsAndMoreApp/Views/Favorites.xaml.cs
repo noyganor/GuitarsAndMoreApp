@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,11 @@ namespace GuitarsAndMoreApp.Views
     {
         public Favorites()
         {
-            InitializeComponent();
             this.BindingContext = new FavoritesViewModels();
+            InitializeComponent();
+           
         }
+
+       
     }
 }

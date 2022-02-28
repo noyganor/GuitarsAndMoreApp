@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.Favorites"
              xmlns:local="clr-namespace:GuitarsAndMoreApp.ViewModels"
-             xmlns:models="clr-namespace:GuitarsAndMoreApp.Models">
+             xmlns:models="clr-namespace:GuitarsAndMoreApp.Models" xmlns:views="clr-namespace:GuitarsAndMoreApp.Views" x:DataType="local:FavoritesViewModels"
+             FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
             <Image Source="newlogo.png" BackgroundColor="Transparent" />
@@ -22,7 +23,7 @@
                                            IconImageSource="DeleteIcon.png"
                                            BackgroundColor="Red"
                                            Command="{Binding Source={x:Reference favoritesCollection}, Path=BindingContext.DeleteButton}"
-                                           CommandParameter="{Binding .}"/>
+                                           CommandParameter="{Binding}"/>
                                 </SwipeItems>
                             </SwipeView.LeftItems>
 
