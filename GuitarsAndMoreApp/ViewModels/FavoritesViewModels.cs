@@ -100,6 +100,11 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (b)
                 {
                     FavoritePostsList.Remove(selected);
+                    App app = (App)App.Current;
+                    User u = app.CurrentUser;
+                    UserFavoritePost ufp = u.UserFavoritePosts.Where(t => t.PostId == selected.PostId).FirstOrDefault();
+                    if (ufp != null)
+                        u.UserFavoritePosts.Remove(ufp);
                 }
                 else
                 {
