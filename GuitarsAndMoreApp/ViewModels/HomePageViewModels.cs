@@ -213,6 +213,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Favorite Button
         public ICommand AddToFavButton { get; set; }
         public async void AddPostToFavorites(Post post)
         {
@@ -274,7 +275,22 @@ namespace GuitarsAndMoreApp.ViewModels
                     throw new Exception("הפוסט לא נמצא במאגר! נסו לרענן את העמוד");
             }
         }
+        #endregion
 
+        #region Logo Command
+        public Command LogoCommand => new Command(Logo);
+        public async void Logo()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PopToRootAsync();
+            NavigationPage nv = (NavigationPage)app.MainPage;
+            await nv.PopToRootAsync();
+            MainTab mt = (MainTab)nv.CurrentPage;
+            mt.SwitchToHomeTab();
+        }
+        #endregion
+
+        #region Go To Upload A Post Page
         public Command MoveToUploadPostPage => new Command(UploadAPostPage);
         public void UploadAPostPage()
         {
@@ -282,6 +298,39 @@ namespace GuitarsAndMoreApp.ViewModels
             app.MainPage.Navigation.PushAsync(new UploadAPost());
 
         }
+        #endregion
+
+        #region Go To Login Page
+        public Command MoveToLoginPage => new Command(GoToLogin);
+        public async void GoToLogin()
+        {
+            App app = (App)App.Current;
+
+            if (app.CurrentUser == null)
+            {
+                await app.MainPage.Navigation.PushModalAsync(new Login());
+                // return;
+            }
+
+            else
+            {
+                bool result = await App.Current.MainPage.DisplayAlert("הינך מחובר", " האם ברצונך להתנתק?", "אישור", "ביטול", FlowDirection.RightToLeft);
+                if (result)
+                {
+                    app.CurrentUser = null;
+                    await app.MainPage.Navigation.PopToRootAsync();
+                    NavigationPage nv = (NavigationPage)app.MainPage;
+                    await nv.PopToRootAsync();
+                    MainTab mt = (MainTab)nv.CurrentPage;
+                    HomePage home = (HomePage)mt.Children[0];
+                    HomePageViewModels vm = (HomePageViewModels)home.BindingContext;
+                    vm.IsVisible = false;
+                    mt.SwitchToHomeTab();
+                    RefreshPosts();
+                }
+            }
+        }
+        #endregion
 
         public ICommand SelectionChanged { get; set; }
         public void PostView()
@@ -294,24 +343,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public Command MoveToLoginPage => new Command(GoToLogin);
-        public async void GoToLogin()
-        {
-            App app = (App)App.Current;
-
-            if (app.CurrentUser == null)
-            {
-                await app.MainPage.Navigation.PushModalAsync(new Login());
-               // return;
-            }
-
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("הינך מחובר", "הינך מחובר...", "אישור", FlowDirection.RightToLeft);
-            }
-        }
-
-
+    
         public async void RefreshPosts()
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();

@@ -19,7 +19,8 @@ namespace GuitarsAndMoreApp.ViewModels
         public EditMyPostsViewModels()
         {
             FullPostsList = new List<Post>();
-            FavoritePostsList = new ObservableCollection<Post>();
+            MyPostsList = new ObservableCollection<Post>();
+            SelectionChanged = new Command(PostView);
             Operate();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -49,21 +50,21 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        #region Favorite Posts List
-        private ObservableCollection<Post> favoritePostsList;
-        public ObservableCollection<Post> FavoritePostsList
+        #region My Posts List
+        private ObservableCollection<Post> myPostsList;
+        public ObservableCollection<Post> MyPostsList
         {
             get
             {
-                return this.favoritePostsList;
+                return this.myPostsList;
             }
 
             set
             {
-                if (this.favoritePostsList != value)
+                if (this.myPostsList != value)
                 {
-                    this.favoritePostsList = value;
-                    OnPropertyChanged("FavoritePostsList");
+                    this.myPostsList = value;
+                    OnPropertyChanged("MyPostsList");
                 }
             }
         }
@@ -86,18 +87,23 @@ namespace GuitarsAndMoreApp.ViewModels
         #endregion
 
         #region Delete Button
-        public Command DeleteButton => new Command<int>(DeleteFromFavorites);
-        public async void DeleteFromFavorites(int selected)
+        public Command DeleteButton => new Command<Post>(DeleteFromMyPosts);
+        public async void DeleteFromMyPosts(Post selected)
         {
 
-            bool result = await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", "ביטול", FlowDirection.RightToLeft);
+            bool result = await App.Current.MainPage.DisplayAlert("אתה בטוח?", "  ", "אישור", "ביטול", FlowDirection.RightToLeft);
             if (result)
             {
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                bool b = await proxy.AddPostToUserFavorites(selected);
+                bool b = await proxy.DeletePost(selected.PostId);
                 if (b)
                 {
-                    FavoritePostsList.Remove(SelectedPost);
+                    MyPostsList.Remove(selected);
+                    App app = (App)App.Current;
+                    User u = app.CurrentUser;
+                    Post p = u.Posts.Where(t => t.PostId == selected.PostId).FirstOrDefault();
+                    if (p != null)
+                        u.Posts.Remove(p);
                 }
                 else
                 {
@@ -108,10 +114,30 @@ namespace GuitarsAndMoreApp.ViewModels
 
         #endregion
 
+        #region Edit Button
+        public Command EditButton => new Command<Post>(EditPost);
+        public async void EditPost(Post selected)
+        {
+
+        }
+        #endregion
+
+        #region Logo Command
+        public Command LogoCommand => new Command(Logo);
+        public async void Logo()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PopToRootAsync();
+            NavigationPage nv = (NavigationPage)app.MainPage;
+            await nv.PopToRootAsync();
+            MainTab mt = (MainTab)nv.CurrentPage;
+            mt.SwitchToHomeTab();
+        }
+        #endregion
         private async void Operate()
         {
             await InitPosts();
-            await GetFavoritePosts();
+            await GetMyPosts();
         }
         private async Task InitPosts()
         {
@@ -122,27 +148,32 @@ namespace GuitarsAndMoreApp.ViewModels
                 foreach (Post p in pList)
                 {
                     FullPostsList.Add(p);
-                    FavoritePostsList.Add(p);
+                    MyPostsList.Add(p);
                 }
             }
         }
 
-        private async Task GetFavoritePosts()
+        private async Task GetMyPosts()
         {
             App app = (App)App.Current;
             User u = app.CurrentUser;
-            ICollection<UserFavoritePost> checkList = u.UserFavoritePosts;
-            FavoritePostsList.Clear();
-            if (checkList != null)
-            {
-                foreach (Post p in FullPostsList)
-                {
-                    foreach (UserFavoritePost ufp in checkList)
-                        if (ufp.PostId == p.PostId)
-                            FavoritePostsList.Add(p);
-                }
-            }
 
+            MyPostsList.Clear();
+            foreach (Post p in FullPostsList)
+            {
+                if (u.UserId == p.UserId)
+                    MyPostsList.Add(p);
+            }
+        }
+        public ICommand SelectionChanged { get; set; }
+        public void PostView()
+        {
+            if (SelectedPost != null)
+            {
+                App app = (App)App.Current;
+                app.MainPage.Navigation.PushAsync(new PostView(SelectedPost));
+                SelectedPost = null;
+            }
         }
 
     }

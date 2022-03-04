@@ -10,7 +10,7 @@
 
     <ContentPage.Content>
         <StackLayout >
-            <Image Source="newlogo.png" BackgroundColor="Transparent" />
+            <ImageButton Source="newlogo.png" Command="{Binding BackToHomePageButton}" BackgroundColor="Transparent" />
             <Label Text="התחברות" TextColor="#1b3a4b" HorizontalOptions="Center" FontAttributes="Bold"/>
 
             <!--<Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None"/>-->

@@ -480,15 +480,16 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             if (ValidateForm())
             {
-                if(ShowPriceError)
-                {
-                    App app = (App)App.Current;
+                App app = (App)App.Current;
+                if (ShowPriceError)
+                {                
                     await App.Current.MainPage.DisplayAlert("שים לב!", "  המוצר שהינך עומד לפרסם מיועד לתרומה", "אישור", FlowDirection.RightToLeft);
                 }
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
 
                 Post p = new Post
                 {
+                    UserId = app.CurrentUser.UserId,
                     Price = this.SliderValue,
                     Pdescription = this.Pdescription,
                     PhoneNum = this.PhoneNum,
@@ -508,9 +509,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 else
                 {
                     Message = "המודעה הועלתה בהצלחה!";
-                    App app = (App)App.Current;
+                    
                     Page page = new HomePage();
-                    app.MainPage = new NavigationPage(page);
+                    await app.MainPage.Navigation.PopToRootAsync();
                 }
             }
 

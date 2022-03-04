@@ -86,7 +86,6 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-     
         #region Delete Button
         public Command DeleteButton => new Command<Post>(DeleteFromFavorites);
         public async void DeleteFromFavorites(Post selected)
@@ -113,6 +112,19 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        #endregion
+
+        #region Logo Command
+        public Command LogoCommand => new Command(Logo);
+        public async void Logo()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PopToRootAsync();
+            NavigationPage nv = (NavigationPage)app.MainPage;
+            await nv.PopToRootAsync();
+            MainTab mt = (MainTab)nv.CurrentPage;
+            mt.SwitchToHomeTab();
+        }
         #endregion
 
         private async void Operate()

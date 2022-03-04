@@ -7,7 +7,7 @@
              FlowDirection="RightToLeft">
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="newlogo.png" BackgroundColor="Transparent" />
+            <ImageButton Source="newlogo.png" Command="{Binding LogoCommand}" BackgroundColor="Transparent" />
 
             <CollectionView x:Name="favoritesCollection"  SelectedItem="{Binding SelectedPost}"
                             ItemsSource="{Binding FavoritePostsList}" SelectionMode="Single"
@@ -47,11 +47,7 @@
                                     <Label Text="{Binding Pdescription}" Grid.Column="1" Grid.Row="0"   Grid.RowSpan="2" LineBreakMode="WordWrap" FontSize="14" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                     <!--<ImageButton Source="https://static.thenounproject.com/png/2469910-200.png" Command="{Binding AddToFavButton}" Grid.Column="0" Grid.Row="0"/>-->
                                     <Label Text="{Binding Town.Town1}" Grid.Column="2" Grid.Row="2" HorizontalTextAlignment="End" FontSize="12"/>
-                                    <Image Source="{Binding FavoriteImageUrl}" Grid.Column="2" Grid.Row="0"  WidthRequest="10">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={x:Reference favoritesCollection}, Path=BindingContext.AddToFavButton}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
+                                   
 
                                     <Label Text="{Binding Price, StringFormat='₪ {0:N0}'}" Grid.Column="2" Grid.Row="1"/>
 

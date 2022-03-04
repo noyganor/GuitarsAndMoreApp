@@ -11,7 +11,7 @@
         <StackLayout>
             <SearchBar x:Name="searchbar" Text="{Binding SearchTerm}" Placeholder="חיפוש..."  />
 
-            <Image Source="newlogo.png" BackgroundColor="Transparent" />
+            <ImageButton Source="newlogo.png" Command="{Binding LogoCommand}" BackgroundColor="Transparent" />
 
             <Grid>
                 <Grid.ColumnDefinitions>

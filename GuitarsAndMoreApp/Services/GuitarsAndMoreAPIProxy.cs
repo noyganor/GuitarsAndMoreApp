@@ -315,6 +315,36 @@ namespace GuitarsAndMoreApp.Services
             }
         }
 
+        public async Task<bool> DeletePost(int pId)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    PropertyNameCaseInsensitive = true
+                };
+                HttpResponseMessage response = await this.client.DeleteAsync($"{this.baseUri}/DeletePost?postId={pId}");
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return b;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
 
     }
 
