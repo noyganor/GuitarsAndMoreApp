@@ -1,12 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GuitarsAndMoreApp.Views.Update">
+             x:Class="GuitarsAndMoreApp.Views.Update"
+             FlowDirection="RightToLeft">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout >
+            <!--<RefreshView x:Name="refreshView" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">-->
+            <ScrollView>
+                <StackLayout>
+
+                    <!-- Photo -->
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="150" />
+                        </Grid.RowDefinitions>
+                        <Frame Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" >
+                            <Image Source="{Binding UserImgSrc}" />
+                        </Frame>
+                        <ImageButton Padding="0" Margin="0" Source="galleryIcon.png" HorizontalOptions="End" BackgroundColor="Transparent" Grid.Column="1" Grid.Row="0" Command="{Binding PickImageCommand}"/>
+                        <ImageButton Padding="0" Margin="0" Source="cameraIcon.png" HorizontalOptions="Start" Grid.Column="2" Grid.Row="0" BackgroundColor="Transparent" Command="{Binding CameraImageCommand}"/>
+                    </Grid>-->
+
+                    <Frame>
+                        <StackLayout>
+                            <!-- Email-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="אימייל" Grid.Column="0" />
+                                <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" />
+                            </Grid>
+                            <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email}" />
+
+                            <!-- User Name-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שם משתמש" Grid.Column="0" />
+                                <Label Text="{Binding NicknameError}" IsVisible="{Binding ShowNicknameError}" Grid.Column="1" />
+                            </Grid>
+                            <Entry Placeholder="שם משתמש" MaxLength="30" Text="{Binding Nickname}" />
+
+                            <!-- Password-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="סיסמה" Grid.Column="0" />
+                                <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" />
+                            </Grid>
+                            <Entry Placeholder="סיסמה" MaxLength="30" IsPassword="True" Text="{Binding Password}"/>
+
+                          
+                         
+                            <!-- Phone Number -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="מספר טלפון" Grid.Column="0" />
+                                <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" Grid.Column="1" />
+                            </Grid>
+                            <Entry Placeholder="טלפון" MaxLength="30" Text="{Binding PhoneNumber}" />
+
+                            <!-- Gender -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="מגדר" Grid.Column="0"/>
+                               
+                            </Grid>
+                            <Picker  ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}"/>
+
+                            <!-- User Name-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="להקה אהובה " Grid.Column="0" />
+                                <!--<Label Text="{Binding NicknameError}" IsVisible="{Binding ShowNicknameError}" Grid.Column="1" />-->
+                            </Grid>
+                            <Entry Placeholder="להקה אהובה" MaxLength="30" Text="{Binding FavoriteBand}" />
+
+
+                        </StackLayout>
+                    </Frame>
+
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ImageButton Padding="0" Margin="0" Source="clearIcon.png" HorizontalOptions="End" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="0" Command="{Binding ClearCommand}"/>
+                        <ImageButton Padding="0" Margin="0" Source="tickIcon.png" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="Transparent" Command="{Binding SaveDataCommand}"/>
+                    </Grid>-->
+                </StackLayout>
+            </ScrollView>
+            <!--</RefreshView>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

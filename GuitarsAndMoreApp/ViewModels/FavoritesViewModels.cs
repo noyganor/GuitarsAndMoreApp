@@ -20,7 +20,7 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             FullPostsList = new List<Post>();
             FavoritePostsList = new ObservableCollection<Post>();
-            SelectionChanged = new Command(PostView);
+            SelectionChanged = new Command(PostView);         
             Operate();
         }
 
@@ -90,8 +90,8 @@ namespace GuitarsAndMoreApp.ViewModels
         public Command DeleteButton => new Command<Post>(DeleteFromFavorites);
         public async void DeleteFromFavorites(Post selected)
         {
-            
-            bool result = await App.Current.MainPage.DisplayAlert("אתה בטוח?", "  ", "אישור", "ביטול", FlowDirection.RightToLeft);
+
+            bool result = await App.Current.MainPage.DisplayAlert("אתה בטוח?", null, "אישור", "ביטול", FlowDirection.RightToLeft);
             if (result)
             {
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
@@ -103,7 +103,10 @@ namespace GuitarsAndMoreApp.ViewModels
                     User u = app.CurrentUser;
                     UserFavoritePost ufp = u.UserFavoritePosts.Where(t => t.PostId == selected.PostId).FirstOrDefault();
                     if (ufp != null)
+                    {
                         u.UserFavoritePosts.Remove(ufp);
+                        Message = "אין לך מודעות במועדפים";
+                    }
                 }
                 else
                 {
@@ -124,6 +127,25 @@ namespace GuitarsAndMoreApp.ViewModels
             await nv.PopToRootAsync();
             MainTab mt = (MainTab)nv.CurrentPage;
             mt.SwitchToHomeTab();
+        }
+        #endregion
+
+        #region Message
+        private string message;
+        public string Message
+        {
+            get
+            {
+                return this.message;
+            }
+            set
+            {
+                if (this.message != value)
+                {
+                    this.message = value;
+                    OnPropertyChanged("Message");
+                }
+            }
         }
         #endregion
 
@@ -152,7 +174,7 @@ namespace GuitarsAndMoreApp.ViewModels
             User u = app.CurrentUser;
             ICollection<UserFavoritePost> checkList = u.UserFavoritePosts;
             FavoritePostsList.Clear();
-            if (checkList != null)
+            if (checkList.Count() > 0)
             {
                 foreach (Post p in FullPostsList)
                 {
@@ -161,6 +183,9 @@ namespace GuitarsAndMoreApp.ViewModels
                             FavoritePostsList.Add(p);
                 }
             }
+            if(checkList.Count() == 0)
+                Message = "אין לך מודעות במועדפים";
+
 
         }
 

@@ -91,7 +91,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public async void DeleteFromMyPosts(Post selected)
         {
 
-            bool result = await App.Current.MainPage.DisplayAlert("אתה בטוח?", "  ", "אישור", "ביטול", FlowDirection.RightToLeft);
+            bool result = await App.Current.MainPage.DisplayAlert("אתה בטוח?", null, "אישור", "ביטול", FlowDirection.RightToLeft);
             if (result)
             {
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();

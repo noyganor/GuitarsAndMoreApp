@@ -19,7 +19,7 @@
                     <Entry Text="{Binding Email}" Placeholder="הכנס דואר אלקטרוני"/>
                     <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption" />
 
-                    <Entry Text="{Binding Password}" Placeholder="הכנס סיסמה"/>
+                    <Entry Text="{Binding Password}" Placeholder="הכנס סיסמה" IsPassword="True"/>
                     <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption" />
 
                     <Grid>

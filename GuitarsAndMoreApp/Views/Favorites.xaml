@@ -8,25 +8,26 @@
     <ContentPage.Content>
         <StackLayout>
             <ImageButton Source="newlogo.png" Command="{Binding LogoCommand}" BackgroundColor="Transparent" />
-
+            <Label Text="{Binding Message}" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <CollectionView x:Name="favoritesCollection"  SelectedItem="{Binding SelectedPost}"
                             ItemsSource="{Binding FavoritePostsList}" SelectionMode="Single"
                             SelectionChangedCommand="{Binding SelectionChanged}"
                             SelectionChangedCommandParameter="{Binding Source={x:Reference favoritesCollection}, Path=SelectedItem}">
                 <CollectionView.ItemTemplate>
+                    
                     <DataTemplate x:DataType="models:Post">
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem
                                            
-                                           IconImageSource="DeleteIcon.png"
-                                           BackgroundColor="Red"
+                                           IconImageSource="deleteFromFavorites.png"
+                                           BackgroundColor="LightPink"
                                            Command="{Binding Source={x:Reference favoritesCollection}, Path=BindingContext.DeleteButton}"
                                            CommandParameter="{Binding}"/>
                                 </SwipeItems>
                             </SwipeView.LeftItems>
-
+                           
                             <Frame BorderColor="#5c374c" HeightRequest="100" >
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -57,6 +58,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+         
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -26,32 +26,43 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Favorites
         public Command NavigateToFavoritesPage => new Command(MoveToFavoritesPage);
         public async void MoveToFavoritesPage()
         {
             App app = (App)App.Current;
             await app.MainPage.Navigation.PushAsync(new TabbedPageFavoritesAndEdit());
         }
+        #endregion
 
+        #region Update 
         public Command NavigateToUpdatePage => new Command(UpdatePage);
         public async void UpdatePage()
         {
             App app = (App)App.Current;
             await app.MainPage.Navigation.PushAsync(new Update());
         }
+        #endregion
+
+        #region Edit Posts
         public Command NavigateToEditMyPostsPage => new Command(EditMyPostsPage);
         public async void EditMyPostsPage()
         {
             App app = (App)App.Current;
             await app.MainPage.Navigation.PushAsync(new TabbedPageFavoritesAndEdit(1));
         }
+        #endregion
+
+        #region Upload A Post
         public Command NavigateToUploadAPostPage => new Command(UploadAPostPage);
         public async void UploadAPostPage()
         {
             App app = (App)App.Current;
             await app.MainPage.Navigation.PushAsync(new UploadAPost());
         }
+        #endregion
 
+        #region Profile Page
         public async void ShowProfilePage()
         {
             App app = (App)App.Current;
@@ -63,7 +74,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 return;
             }
         }
+        #endregion
 
+        #region Log Out Button
         public Command LogOutButton => new Command(LogOut);
         public async void LogOut()
         {
@@ -79,13 +92,9 @@ namespace GuitarsAndMoreApp.ViewModels
             vm.IsVisible = false;
             mt.SwitchToHomeTab();
         }
+        #endregion
 
-        //public Command NavigateToFavoritesPageCommand => new Command(FavoritesPage);
-        //public async void FavoritesPage()
-        //{
-        //    App app = (App)App.Current;
-        //    await app.MainPage.Navigation.PushAsync(new FavoritesPage());
-        //}
+      
 
     }
 }

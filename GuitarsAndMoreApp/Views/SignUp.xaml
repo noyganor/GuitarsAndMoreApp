@@ -6,25 +6,45 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="#f2e9e4">
 
-            <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding Email}"/>
-            <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            <Grid>
+                <Grid.RowDefinitions>
 
-            <Label Text="שם משתמש" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding Nickname}"/>
-            <Label Text="{Binding NicknameError}" IsVisible="{Binding ShowNicknameError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
 
-            <Label Text="סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding Password}"/>
-            <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Frame CornerRadius="7" WidthRequest="100"  HorizontalOptions="CenterAndExpand">
 
-            <Label Text="אימות סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding VerPassword}"/>
-            <Label Text="{Binding VerPasswordError}" IsVisible="{Binding ShowVerPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                <StackLayout>
+                    <Label Text="דואר אלקטרוני" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                    <Entry Text="{Binding Email}"/>
+                    <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                </StackLayout>
+            </Frame>
+            
+            
+            <StackLayout>
+                <Label Text="שם משתמש" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                <Entry Text="{Binding Nickname}"/>
+                <Label Text="{Binding NicknameError}" IsVisible="{Binding ShowNicknameError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            </StackLayout>
 
+            <StackLayout>
+                <Label Text="סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                <Entry Text="{Binding Password}" IsPassword="True"/>
+                <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            </StackLayout>
+            
+            <StackLayout>
+                <Label Text="אימות סיסמה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+                <Entry Text="{Binding VerPassword}" IsPassword="True"/>
+                <Label Text="{Binding VerPasswordError}" IsVisible="{Binding ShowVerPasswordError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+            </StackLayout>
+            
             <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" HorizontalOptions="Center" FontSize="Caption"/>
             <Label Text="{Binding Message}" TextColor="Red" />
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
