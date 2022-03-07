@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.Update"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             NavigationPage.HasNavigationBar="False">
     
     <ContentPage.Content>
         <StackLayout >
@@ -43,7 +44,7 @@
                                 <Label Text="אימייל" Grid.Column="0" />
                                 <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" />
                             </Grid>
-                            <Entry Placeholder="אימייל" MaxLength="30" Text="{Binding Email}" />
+                            <Label Text="{Binding Email}" />
 
                             <!-- User Name-->
                             <Grid>
@@ -115,7 +116,7 @@
                                 <Label Text="להקה אהובה " Grid.Column="0" />
                                 <!--<Label Text="{Binding NicknameError}" IsVisible="{Binding ShowNicknameError}" Grid.Column="1" />-->
                             </Grid>
-                            <Entry Placeholder="להקה אהובה" MaxLength="30" Text="{Binding FavoriteBand}" />
+                            <Entry Placeholder="להקה אהובה" MaxLength="30" Text="{Binding FavBand}" />
 
 
                         </StackLayout>
@@ -134,6 +135,8 @@
                     </Grid>-->
                 </StackLayout>
             </ScrollView>
+            <Button Text="עדכן" Command="{Binding UpdateButton}"/>
+            <Label Text="{Binding Message}"/>
             <!--</RefreshView>-->
         </StackLayout>
     </ContentPage.Content>

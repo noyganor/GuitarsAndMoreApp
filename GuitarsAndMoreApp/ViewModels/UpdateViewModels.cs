@@ -17,6 +17,20 @@ namespace GuitarsAndMoreApp.ViewModels
 {
     class UpdateViewModels : INotifyPropertyChanged
     {
+        public UpdateViewModels()
+        {
+            App app = (App)App.Current;
+            if (app.CurrentUser != null)
+            {
+                Email = app.CurrentUser.Email;
+                Nickname = app.CurrentUser.Nickname;
+                Password = app.CurrentUser.Pass;
+                PhoneNumber = app.CurrentUser.PhoneNum;
+                //fix gender
+                Gender = app.CurrentUser.Gender;
+                FavBand = app.CurrentUser.FavBand;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
@@ -38,7 +52,6 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.email = value;
                     ValidateEmail();
-                    ValidateForm();
                     OnPropertyChanged("Email");
                 }
             }
@@ -98,7 +111,6 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.nickname = value;
                     ValidateNickname();
-                    ValidateForm();
                     OnPropertyChanged("Nickname");
                 }
             }
@@ -146,7 +158,6 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.password = value;
                     ValidatePassword();
-                    ValidateForm();
                     OnPropertyChanged("Password");
                 }
             }
@@ -189,66 +200,6 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        #region verPassword
-        private string verPassword;
-        public string VerPassword
-        {
-            get
-            {
-                return this.verPassword;
-            }
-            set
-            {
-                if (this.verPassword != value)
-                {
-                    this.verPassword = value;
-                    ValidateVerPassword();
-                    ValidateForm();
-                    OnPropertyChanged("VerPassword");
-                }
-            }
-        }
-
-        private bool showVerPasswordError;
-        public bool ShowVerPasswordError
-        {
-            get => showVerPasswordError;
-            set
-            {
-                showVerPasswordError = value;
-                OnPropertyChanged("ShowVerPasswordError");
-            }
-        }
-
-        private string verPasswordError;
-        public string VerPasswordError
-        {
-            get => verPasswordError;
-            set
-            {
-                verPasswordError = value;
-                OnPropertyChanged("VerPasswordError");
-            }
-        }
-
-
-        private void ValidateVerPassword()
-        {
-            if (VerPassword != Password)
-            {
-                VerPasswordError = "הסיסמאות חייבות להיות תואמות";
-                ShowVerPasswordError = true;
-            }
-            else if (string.IsNullOrEmpty(VerPassword))
-                this.VerPasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
-            else
-                ShowVerPasswordError = false;
-
-
-        }
-        #endregion
-
-
         #region Phone number
         private string phoneNumber;
         public string PhoneNumber
@@ -263,7 +214,6 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.phoneNumber = value;
                     ValidatePhoneNumber();
-
                     OnPropertyChanged("PhoneNumber");
                 }
             }
@@ -329,52 +279,90 @@ namespace GuitarsAndMoreApp.ViewModels
         #endregion
 
         #region favorite Band
-        private string favoriteBand;
-        public string FavoriteBand
+        private string favBand;
+        public string FavBand
         {
             get
             {
-                return this.favoriteBand;
+                return this.favBand;
             }
             set
             {
-                if (this.favoriteBand != value)
+                if (this.favBand != value)
                 {
-                    this.favoriteBand = value;
-                    OnPropertyChanged("FavoriteBand");
+                    this.favBand = value;
+                    OnPropertyChanged("FavBand");
                 }
             }
         }
         #endregion
 
-        private bool isEnable;
-        public bool IsEnable
+
+
+        public bool ValidateForm()
+        {
+            ValidateEmail();
+            ValidateNickname();
+            ValidatePassword();
+            ValidatePhoneNumber();
+
+            if (ShowEmailError || ShowNicknameError || ShowPasswordError)
+                return false;
+
+            return true;
+        }
+
+        private string message;
+        public string Message
         {
             get
             {
-                return this.isEnable;
+                return this.message;
             }
             set
             {
-                if (this.isEnable != value)
+                if (this.message != value)
                 {
-                    this.isEnable = value;
-                    OnPropertyChanged("IsEnable");
+                    this.message = value;
+                    OnPropertyChanged("Message");
                 }
             }
         }
 
-        public void ValidateForm()
+        public Command UpdateButton => new Command(UpdateUserDetails);
+        public async void UpdateUserDetails()
         {
-            if (ShowEmailError || ShowNicknameError || ShowPasswordError || ShowVerPasswordError)
+            if (ValidateForm())
             {
-                this.IsEnable = false;
-            }
+                App theApp = (App)App.Current;
+                User newUser = new User()
+                {
+                    UserId = theApp.CurrentUser.UserId,
+                    //Email = theApp.CurrentUser.Email,
+                    Nickname = this.Nickname,
+                    GenderId = this.Gender.GenderId,
+                    PhoneNum = this.PhoneNumber,
+                    FavBand = this.FavBand,
+                    Pass = this.Password,
 
-            else
-            {
-                this.IsEnable = true;
+                };
+
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                User user = await proxy.UpdateUserDetails(newUser);
+
+                if (user == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "העדכון נכשל", "אישור", FlowDirection.RightToLeft);
+                }
+                else
+                {
+                    theApp.CurrentUser = user;
+                    await App.Current.MainPage.DisplayAlert("עדכון", "העדכון בוצע בהצלחה", "אישור", FlowDirection.RightToLeft);
+                }
             }
         }
+
+
     }
+
 }

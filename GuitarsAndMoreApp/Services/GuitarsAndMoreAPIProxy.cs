@@ -345,7 +345,37 @@ namespace GuitarsAndMoreApp.Services
                 return false;
             }
         }
+        public async Task<User> UpdateUserDetails(User u)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<User>(u, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/UpdateUserDetails", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    User ret = JsonSerializer.Deserialize<User>(jsonObject, options);
+                    return ret;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 
 }
