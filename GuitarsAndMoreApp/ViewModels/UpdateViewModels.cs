@@ -26,8 +26,8 @@ namespace GuitarsAndMoreApp.ViewModels
                 Nickname = app.CurrentUser.Nickname;
                 Password = app.CurrentUser.Pass;
                 PhoneNumber = app.CurrentUser.PhoneNum;
-                //fix gender
-                Gender = app.CurrentUser.Gender;
+                int genderId = app.CurrentUser.GenderId;
+                FindGender(genderId);
                 FavBand = app.CurrentUser.FavBand;
             }
         }
@@ -297,6 +297,12 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        
+        public async void FindGender(int genderId)
+        {
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            Gender.Gender1 = await proxy.FindGender(genderId); 
+        }
 
 
         public bool ValidateForm()
@@ -338,7 +344,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 User newUser = new User()
                 {
                     UserId = theApp.CurrentUser.UserId,
-                    //Email = theApp.CurrentUser.Email,
+                    Email = theApp.CurrentUser.Email,
                     Nickname = this.Nickname,
                     GenderId = this.Gender.GenderId,
                     PhoneNum = this.PhoneNumber,

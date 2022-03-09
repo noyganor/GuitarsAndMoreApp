@@ -102,7 +102,7 @@
                                 <Label Text="מגדר" Grid.Column="0"/>
                                
                             </Grid>
-                            <Picker  ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}"/>
+                            <Picker Title="{Binding Gender}" ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}"/>
 
                             <!-- User Name-->
                             <Grid>

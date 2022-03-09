@@ -207,7 +207,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
             //On debug only!
             this.Email = "noiganor12@gmail.com";
-            this.Password = "nganor";
+            this.Password = "12345678";
 
 
         }

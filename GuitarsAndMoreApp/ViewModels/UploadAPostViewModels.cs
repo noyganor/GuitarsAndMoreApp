@@ -493,21 +493,30 @@ namespace GuitarsAndMoreApp.ViewModels
                     Price = this.SliderValue,
                     Pdescription = this.Pdescription,
                     PhoneNum = this.PhoneNum,
-                    ModelId = this.Model.ModelId, 
+                    ModelId = this.Model?.ModelId, 
                     TownId = this.Town.TownId, 
-                    ProducerId =this.Producer.ProducerId, 
+                    ProducerId = this.Producer?.ProducerId, 
                     CategoryId = this.Category.CategoryId,
                     Link = this.Link ,
                 };
 
-                bool ok = await proxy.AddPost(p);
-                if (!ok)
+                Post newPost = await proxy.AddPost(p);
+                if (newPost == null)
                 {
                     Message = "המודעה לא עלתה";
                 }
 
                 else
                 {
+                    //Upload image to server
+                    if (this.imageFileResult != null)
+                    {
+                        
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{newPost.PostId}.jpg");
+                    }
                     Message = "המודעה הועלתה בהצלחה!";
                     
                     Page page = new HomePage();

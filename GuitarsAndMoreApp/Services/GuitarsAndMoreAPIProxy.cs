@@ -284,12 +284,13 @@ namespace GuitarsAndMoreApp.Services
             }
         }
 
-        public async Task<bool> AddPost(Post p)
+        public async Task<Post> AddPost(Post p)
         {
             try
             {
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
+                    ReferenceHandler = ReferenceHandler.Preserve,
                     PropertyNameCaseInsensitive = true
                 };
                 string json = JsonSerializer.Serialize<Post>(p, options);
@@ -299,19 +300,19 @@ namespace GuitarsAndMoreApp.Services
                 {
 
                     string jsonContent = await response.Content.ReadAsStringAsync();
-                    bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    Post b = JsonSerializer.Deserialize<Post>(jsonContent, options);
                     return b;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
 
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return null;
             }
         }
 
@@ -363,6 +364,61 @@ namespace GuitarsAndMoreApp.Services
                 {
                     jsonObject = await response.Content.ReadAsStringAsync();
                     User ret = JsonSerializer.Deserialize<User>(jsonObject, options);
+                    return ret;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        //Upload file to server (only images!)
+        public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
+        {
+            try
+            {
+                var multipartFormDataContent = new MultipartFormDataContent();
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(fileInfo.Name));
+                multipartFormDataContent.Add(fileContent, "file", targetFileName);
+                HttpResponseMessage response = await client.PostAsync($"{this.baseUri}/UploadImage", multipartFormDataContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public async Task<string> FindGender(int genderId)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<int>(genderId, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/FindGender", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    string ret = JsonSerializer.Deserialize<string>(jsonObject, options);
                     return ret;
                 }
                 else
