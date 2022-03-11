@@ -102,7 +102,7 @@
                                 <Label Text="מגדר" Grid.Column="0"/>
                                
                             </Grid>
-                            <Picker Title="{Binding Gender}" ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}"/>
+                            <Picker Title="{Binding Gender.Gender1}" ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}"/>
 
                             <!-- User Name-->
                             <Grid>
@@ -136,7 +136,7 @@
                 </StackLayout>
             </ScrollView>
             <Button Text="עדכן" Command="{Binding UpdateButton}"/>
-            <Label Text="{Binding Message}"/>
+            <Label Text="{Binding Message}" TextColor="Red"/>
             <!--</RefreshView>-->
         </StackLayout>
     </ContentPage.Content>

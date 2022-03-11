@@ -200,7 +200,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 foreach (Post p in this.fullPostsList)
                 {
                     
-                    string postString = $"{p.Category.Category1}|{p.Model.ModelName}|{p.Price}|{p.Town.Town1}";
+                    string postString = $"{p.Category.Category1}|{p.Model.ModelName}|{p.Price}|{p.Town.Town1}|{p.Pdescription}|{p.Producer}";
                     if (!this.PostsList.Contains(p) && postString.Contains(search))
                         this.PostsList.Add(p);
 

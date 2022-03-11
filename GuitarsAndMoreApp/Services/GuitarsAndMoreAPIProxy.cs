@@ -405,21 +405,17 @@ namespace GuitarsAndMoreApp.Services
         {
             try
             {
-                JsonSerializerOptions options = new JsonSerializerOptions
-                {
-                    ReferenceHandler = ReferenceHandler.Preserve,
-                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
-                    PropertyNameCaseInsensitive = true
-                };
-                string jsonObject = JsonSerializer.Serialize<int>(genderId, options);
-                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/FindGender", content);
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/FindGender?genderId={genderId}");
                 if (response.IsSuccessStatusCode)
                 {
-                    jsonObject = await response.Content.ReadAsStringAsync();
-                    string ret = JsonSerializer.Deserialize<string>(jsonObject, options);
-                    return ret;
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    string genderName = JsonSerializer.Deserialize<string>(content, options);
+                    return genderName;
                 }
                 else
                 {

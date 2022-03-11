@@ -27,8 +27,8 @@ namespace GuitarsAndMoreApp.ViewModels
                 Town = "Town is null!";
 
            
-            Producer = p.Producer.Producer1;
-            Model = p.Model.ModelName;
+            Producer = p.Producer?.Producer1;
+            Model = p.Model?.ModelName;
             Pdescription = p.Pdescription;
             Link = p.Link;
             PhoneNumber = p.PhoneNum;

@@ -26,8 +26,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 Nickname = app.CurrentUser.Nickname;
                 Password = app.CurrentUser.Pass;
                 PhoneNumber = app.CurrentUser.PhoneNum;
-                int genderId = app.CurrentUser.GenderId;
-                FindGender(genderId);
+                Gender = app.CurrentUser.Gender;
+                //int genderId = app.CurrentUser.GenderId;
+                //FindGender(genderId);
                 FavBand = app.CurrentUser.FavBand;
             }
         }
@@ -300,8 +301,17 @@ namespace GuitarsAndMoreApp.ViewModels
         
         public async void FindGender(int genderId)
         {
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            Gender.Gender1 = await proxy.FindGender(genderId); 
+            try
+            {
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                Gender.Gender1 = await proxy.FindGender(genderId);
+            }
+
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+          
         }
 
 
@@ -347,6 +357,7 @@ namespace GuitarsAndMoreApp.ViewModels
                     Email = theApp.CurrentUser.Email,
                     Nickname = this.Nickname,
                     GenderId = this.Gender.GenderId,
+                    Gender = this.Gender,
                     PhoneNum = this.PhoneNumber,
                     FavBand = this.FavBand,
                     Pass = this.Password,
@@ -366,6 +377,9 @@ namespace GuitarsAndMoreApp.ViewModels
                     await App.Current.MainPage.DisplayAlert("עדכון", "העדכון בוצע בהצלחה", "אישור", FlowDirection.RightToLeft);
                 }
             }
+
+            else
+                Message = "אחד או יותר מהנתונים שהזנת לא תקין";
         }
 
 
