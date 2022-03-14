@@ -25,7 +25,7 @@
                                            Command="{Binding Source={x:Reference myPostsCollection}, Path=BindingContext.DeleteButton}"
                                            CommandParameter="{Binding}"/>
                                     <SwipeItem                                          
-                                           IconImageSource="otherEditPostIcon.png"
+                                           IconImageSource="othereditposticon.png" 
                                            BackgroundColor="Coral"
                                            Command="{Binding Source={x:Reference myPostsCollection}, Path=BindingContext.EditButton}"
                                            CommandParameter="{Binding}"/>

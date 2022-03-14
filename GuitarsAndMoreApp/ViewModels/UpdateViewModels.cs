@@ -375,6 +375,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     theApp.CurrentUser = user;
                     await App.Current.MainPage.DisplayAlert("עדכון", "העדכון בוצע בהצלחה", "אישור", FlowDirection.RightToLeft);
+                    await theApp.MainPage.Navigation.PopToRootAsync();
                 }
             }
 

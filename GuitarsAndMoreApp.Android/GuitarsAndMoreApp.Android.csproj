@@ -154,10 +154,10 @@
     <AndroidResource Include="Resources\drawable\postFavoriteIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\otherEditPostIcon.png" />
+    <AndroidResource Include="Resources\drawable\DeleteIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\DeleteIcon.png" />
+    <AndroidResource Include="Resources\drawable\othereditposticon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

@@ -118,7 +118,8 @@ namespace GuitarsAndMoreApp.ViewModels
         public Command EditButton => new Command<Post>(EditPost);
         public async void EditPost(Post selected)
         {
-
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new Edit);
         }
         #endregion
 

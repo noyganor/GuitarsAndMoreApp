@@ -413,38 +413,53 @@ namespace GuitarsAndMoreApp.ViewModels
         public Command PickImageCommand => new Command(OnPickImage);
         public async void OnPickImage()
         {
-            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            try
             {
-                Title = "בחר תמונה"
-            });
+                FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+                {
+                    Title = "בחר תמונה"
+                });
 
-            if (result != null)
-            {
-                this.imageFileResult = result;
+                if (result != null)
+                {
+                    this.imageFileResult = result;
 
-                var stream = await result.OpenReadAsync();
-                ImageSource imgSource = ImageSource.FromStream(() => stream);
-                if (SetImageSourceEvent != null)
-                    SetImageSourceEvent(imgSource);
+                    var stream = await result.OpenReadAsync();
+                    ImageSource imgSource = ImageSource.FromStream(() => stream);
+                    if (SetImageSourceEvent != null)
+                        SetImageSourceEvent(imgSource);
+                }
             }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", " לא ניתן לפתוח את הגלריה ...", "אישור", FlowDirection.RightToLeft);
+            }
+
         }
 
         ///The following command handle the take photo button
         public ICommand CameraImageCommand => new Command(OnCameraImage);
         public async void OnCameraImage()
         {
-            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+            try
             {
-                Title = "צלם תמונה"
-            });
+                var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+                {
+                    Title = "צלם תמונה"
+                });
 
-            if (result != null)
+                if (result != null)
+                {
+                    this.imageFileResult = result;
+                    var stream = await result.OpenReadAsync();
+                    ImageSource imgSource = ImageSource.FromStream(() => stream);
+                    if (SetImageSourceEvent != null)
+                        SetImageSourceEvent(imgSource);
+                }
+            }
+            catch (Exception e)
             {
-                this.imageFileResult = result;
-                var stream = await result.OpenReadAsync();
-                ImageSource imgSource = ImageSource.FromStream(() => stream);
-                if (SetImageSourceEvent != null)
-                    SetImageSourceEvent(imgSource);
+                await App.Current.MainPage.DisplayAlert("שגיאה", " לא ניתן לפתוח את המצלמה ...", "אישור", FlowDirection.RightToLeft);
             }
         }
         #endregion
