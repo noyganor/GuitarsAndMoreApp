@@ -22,7 +22,7 @@
                     <RowDefinition Height="45" />
                 </Grid.RowDefinitions>
                 <Button Text="פרסום מודעה" HorizontalOptions="Center" Command="{Binding MoveToUploadPostPage}" CornerRadius="10" BackgroundColor="White" Grid.Column="0" Grid.Row="0"/>
-                <Button Text="התחברות" HorizontalOptions="Center" Command="{Binding MoveToLoginPage}" CornerRadius="10" BackgroundColor="White" Grid.Column="1" Grid.Row="0"/>
+                <Button Text="{Binding IsLoggedIn}" HorizontalOptions="Center" Command="{Binding MoveToLoginPage}" CornerRadius="10" BackgroundColor="White" Grid.Column="1" Grid.Row="0"/>
             </Grid>
           
             <CollectionView FlowDirection="RightToLeft" x:Name="collectionName"  SelectedItem="{Binding SelectedPost}"

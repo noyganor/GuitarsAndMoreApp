@@ -24,7 +24,13 @@ namespace GuitarsAndMoreApp.ViewModels
             AddToFavButton = new Command<Post>(AddPostToFavorites);
             SelectionChanged= new Command(PostView);
             SearchCommand = new Command<string>(OnTextChanged);
-                  
+            App app = (App)App.Current;
+            if (app.CurrentUser == null)
+                IsLoggedIn = "התחברות";
+            else
+                IsLoggedIn = "התנתקות";
+
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -148,6 +154,23 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
         #endregion
+
+        #region Is Logged In
+            private string isLoggedIn;
+            public string IsLoggedIn
+            {
+                get => isLoggedIn;
+                set
+                {
+                    if (this.isLoggedIn != value)
+                    {
+                        this.isLoggedIn = value;
+                        OnPropertyChanged("IsLoggedIn");
+                    }
+
+                }
+            }
+            #endregion
 
         private async void InitPosts()
         {
@@ -309,6 +332,7 @@ namespace GuitarsAndMoreApp.ViewModels
             if (app.CurrentUser == null)
             {
                 await app.MainPage.Navigation.PushModalAsync(new Login());
+                IsLoggedIn = "התנתקות";
                 // return;
             }
 
@@ -325,6 +349,7 @@ namespace GuitarsAndMoreApp.ViewModels
                     HomePage home = (HomePage)mt.Children[0];
                     HomePageViewModels vm = (HomePageViewModels)home.BindingContext;
                     vm.IsVisible = false;
+                    vm.IsLoggedIn = "התחברות";
                     mt.SwitchToHomeTab();
                     RefreshPosts();
                 }

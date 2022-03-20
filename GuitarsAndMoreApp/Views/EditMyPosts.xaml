@@ -8,7 +8,8 @@
     <ContentPage.Content>
         <StackLayout>
             <ImageButton Source="newlogo.png" Command="{Binding LogoCommand}" BackgroundColor="Transparent" />
-
+            <Label Text="{Binding Message}" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Button Text="פרסום מודעה" Command="{Binding NavigateToUploadAPostPage}" IsVisible="{Binding IsVisible}"/>
             <CollectionView x:Name="myPostsCollection"  SelectedItem="{Binding SelectedPost}"
                             ItemsSource="{Binding MyPostsList}" SelectionMode="Single"
                             SelectionChangedCommand="{Binding SelectionChanged}"

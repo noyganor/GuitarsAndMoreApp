@@ -7,7 +7,12 @@
         <ScrollView>
             <StackLayout>
 
+                <Frame HasShadow="True">
                 <Image Source="{Binding ImageUrl}"/>
+                        </Frame>
+                
+                <Frame>
+                    <StackLayout>
                 <Label Text="{Binding Price}"/>
                 <Label Text="{Binding Town}"/>
                 <Label Text="{Binding Producer}"/>
@@ -15,7 +20,8 @@
                 <Label Text="{Binding Pdescription}"/>
                 <Label Text="{Binding Link}"/>
                 <Label Text="{Binding PhoneNum}"/>
-
+                    </StackLayout>
+                </Frame>
 
 
 

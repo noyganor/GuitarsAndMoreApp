@@ -21,6 +21,7 @@ namespace GuitarsAndMoreApp.ViewModels
             FullPostsList = new List<Post>();
             MyPostsList = new ObservableCollection<Post>();
             SelectionChanged = new Command(PostView);
+            IsVisible = false;
             Operate();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,6 +30,18 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Logo Command
+        public Command LogoCommand => new Command(Logo);
+        public async void Logo()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PopToRootAsync();
+            NavigationPage nv = (NavigationPage)app.MainPage;
+            await nv.PopToRootAsync();
+            MainTab mt = (MainTab)nv.CurrentPage;
+            mt.SwitchToHomeTab();
+        }
+        #endregion
 
         #region Full Posts List
         private List<Post> fullPostsList;
@@ -86,6 +99,42 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Message
+        private string message;
+        public string Message
+        {
+            get
+            {
+                return this.message;
+            }
+            set
+            {
+                if (this.message != value)
+                {
+                    this.message = value;
+                    OnPropertyChanged("Message");
+                }
+            }
+        }
+        #endregion
+
+        #region Is Visible
+        private bool isVisible;
+        public bool IsVisible
+        {
+            get => isVisible;
+            set
+            {
+                if (this.isVisible != value)
+                {
+                    this.isVisible = value;
+                    OnPropertyChanged("IsVisible");
+                }
+
+            }
+        }
+        #endregion
+
         #region Delete Button
         public Command DeleteButton => new Command<Post>(DeleteFromMyPosts);
         public async void DeleteFromMyPosts(Post selected)
@@ -95,46 +144,57 @@ namespace GuitarsAndMoreApp.ViewModels
             if (result)
             {
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                bool b = await proxy.DeletePost(selected.PostId);
-                if (b)
+                bool worked = await OperateFavoriteMethod(selected);
+                if (worked)
                 {
-                    MyPostsList.Remove(selected);
-                    App app = (App)App.Current;
-                    User u = app.CurrentUser;
-                    Post p = u.Posts.Where(t => t.PostId == selected.PostId).FirstOrDefault();
-                    if (p != null)
-                        u.Posts.Remove(p);
+                    bool b = await proxy.DeletePost(selected.PostId);
+                    if (b)
+                    {
+                        MyPostsList.Remove(selected);
+                        App app = (App)App.Current;
+                        User u = app.CurrentUser;
+                        Post p = u.Posts.Where(t => t.PostId == selected.PostId).FirstOrDefault();
+                        if (p != null)
+                            u.Posts.Remove(p);
+                    }
+                    else
+                    {
+                        b = false;
+                    }
                 }
-                else
-                {
-                    b = false;
-                }
+                
             }
         }
-
         #endregion
+
+        private async Task<bool> OperateFavoriteMethod(Post selected)
+        {
+            try
+            {
+                HomePageViewModels hp = new HomePageViewModels();
+                hp.AddPostToFavorites(selected);
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+           
+        }
 
         #region Edit Button
         public Command EditButton => new Command<Post>(EditPost);
         public async void EditPost(Post selected)
         {
             App app = (App)App.Current;
-            await app.MainPage.Navigation.PushAsync(new Edit);
+
+            Edit page = new Edit();
+            await app.MainPage.Navigation.PushAsync(page);
         }
         #endregion
 
-        #region Logo Command
-        public Command LogoCommand => new Command(Logo);
-        public async void Logo()
-        {
-            App app = (App)App.Current;
-            await app.MainPage.Navigation.PopToRootAsync();
-            NavigationPage nv = (NavigationPage)app.MainPage;
-            await nv.PopToRootAsync();
-            MainTab mt = (MainTab)nv.CurrentPage;
-            mt.SwitchToHomeTab();
-        }
-        #endregion
+        
         private async void Operate()
         {
             await InitPosts();
@@ -165,7 +225,22 @@ namespace GuitarsAndMoreApp.ViewModels
                 if (u.UserId == p.UserId)
                     MyPostsList.Add(p);
             }
+            if (MyPostsList.Count() == 0)
+            {
+                Message = "אין לך מודעות משלך";
+                IsVisible = true;
+            }
         }
+
+        #region Upload A Post
+        public Command NavigateToUploadAPostPage => new Command(UploadAPostPage);
+        public async void UploadAPostPage()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new UploadAPost());
+        }
+        #endregion
+
         public ICommand SelectionChanged { get; set; }
         public void PostView()
         {

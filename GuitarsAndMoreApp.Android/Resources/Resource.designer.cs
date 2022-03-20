@@ -11815,7 +11815,7 @@ namespace GuitarsAndMoreApp.Droid
 			public const int notify_panel_notification_icon_bg = 2131165336;
 			
 			// aapt resource value: 0x7F070099
-			public const int otherEditPostIcon = 2131165337;
+			public const int othereditposticon = 2131165337;
 			
 			// aapt resource value: 0x7F07009A
 			public const int outline_favorite_border_black_24dp = 2131165338;

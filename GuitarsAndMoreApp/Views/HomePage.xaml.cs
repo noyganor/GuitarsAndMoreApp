@@ -23,6 +23,11 @@ namespace GuitarsAndMoreApp.Views
             base.OnAppearing();
             HomePageViewModels vm = (HomePageViewModels)this.BindingContext;
             vm.RefreshPosts();
+            App app = (App)App.Current;
+            if (app.CurrentUser == null)
+                vm.IsLoggedIn = "התחברות";
+            else
+                vm.IsLoggedIn = "התנתקות";
         }
     }
 }

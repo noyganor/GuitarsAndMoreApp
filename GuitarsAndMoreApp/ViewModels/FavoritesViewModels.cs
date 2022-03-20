@@ -94,6 +94,9 @@ namespace GuitarsAndMoreApp.ViewModels
             bool result = await App.Current.MainPage.DisplayAlert("אתה בטוח?", null, "אישור", "ביטול", FlowDirection.RightToLeft);
             if (result)
             {
+                
+                HomePageViewModels hp = new HomePageViewModels();
+                hp.AddPostToFavorites(selected);
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
                 bool b = await proxy.AddPostToUserFavorites(selected.PostId);
                 if (b)
