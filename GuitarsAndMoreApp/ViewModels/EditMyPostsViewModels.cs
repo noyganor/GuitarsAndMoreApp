@@ -144,7 +144,7 @@ namespace GuitarsAndMoreApp.ViewModels
             if (result)
             {
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                bool worked = await OperateFavoriteMethod(selected);
+                bool worked = OperateFavoriteMethod(selected);
                 if (worked)
                 {
                     bool b = await proxy.DeletePost(selected.PostId);
@@ -167,7 +167,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        private async Task<bool> OperateFavoriteMethod(Post selected)
+        private bool OperateFavoriteMethod(Post selected)
         {
             try
             {

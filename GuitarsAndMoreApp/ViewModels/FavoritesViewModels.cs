@@ -21,7 +21,7 @@ namespace GuitarsAndMoreApp.ViewModels
             FullPostsList = new List<Post>();
             FavoritePostsList = new ObservableCollection<Post>();
             SelectionChanged = new Command(PostView);         
-            Operate();
+            //Operate(); => we dropped this call because it is being fired from the OnAppearing of the page
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -152,7 +152,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        private async void Operate()
+        public  async void Operate()
         {
             await InitPosts();
             await GetFavoritePosts();
@@ -163,10 +163,10 @@ namespace GuitarsAndMoreApp.ViewModels
             List<Post> pList = await proxy.GetListOfPostsAsync();
             if (pList != null)
             {
+                FullPostsList.Clear();
                 foreach (Post p in pList)
                 {
                     FullPostsList.Add(p);
-                    FavoritePostsList.Add(p);
                 }
             }
         }

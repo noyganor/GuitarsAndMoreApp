@@ -20,6 +20,13 @@ namespace GuitarsAndMoreApp.Views
            
         }
 
-       
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            FavoritesViewModels vm = (FavoritesViewModels)this.BindingContext;
+            vm.Operate();
+
+        }
+
     }
 }

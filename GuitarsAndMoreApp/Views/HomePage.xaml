@@ -8,7 +8,7 @@
              
              FlowDirection="RightToLeft" x:DataType="local:HomePageViewModels">
     <ContentPage.Content>
-        <StackLayout Background="PlusIcon.png">
+        <StackLayout Background="bricksbackground.png">
             <SearchBar x:Name="searchbar" Text="{Binding SearchTerm}" Placeholder="חיפוש..."  />
 
             <ImageButton Source="newlogo.png" Command="{Binding LogoCommand}" BackgroundColor="Transparent" />
