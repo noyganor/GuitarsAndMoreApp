@@ -13,13 +13,51 @@
                 
                 <Frame>
                     <StackLayout>
-                <Label Text="{Binding Price}"/>
-                <Label Text="{Binding Town}"/>
-                <Label Text="{Binding Producer}"/>
-                <Label Text="{Binding Model}"/>
-                <Label Text="{Binding Pdescription}"/>
-                <Label Text="{Binding Link}"/>
-                <Label Text="{Binding PhoneNum}"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                              
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="מחיר" Grid.Column="0" Grid.Row="0" TextColor="Black" />
+                            <Label Text="{Binding Price}"  Grid.Column="1" Grid.Row="0" TextColor="Black" FontSize="Small"/>
+                            <!--<Label Text=" " Grid.Column="1" Grid.Row="1"/>-->
+
+                            <Label Text=" יישוב" Grid.Column="0"  Grid.Row="1" TextColor="Black"/>
+                            <Label Text="{Binding Town}" HorizontalOptions="End" Grid.Column="1"  Grid.Row="1" TextColor="Black"/>
+
+                            <Label Text="תיאור" Grid.Column="0" Grid.Row="2" TextColor="Black"/>
+                            <Label Text="{Binding Pdescription}"  Grid.Column="1" Grid.Row="2" TextColor="Black" />
+
+                            <Label Text="יצרן" Grid.Column="0" Grid.Row="3" TextColor="Black" Margin="30"/>
+                            <Label Text="{Binding Producer}"  Grid.Column="1" Grid.Row="3" TextColor="Black" Margin="30"/>
+
+                            <Label Text="דגם" Grid.Column="0" Grid.Row="4" TextColor="Black" Margin="30"/>
+                            <Label Text="{Binding Model}"  Grid.Column="1" Grid.Row="4" TextColor="Black" Margin="30"/>
+
+                            
+                            <Label Text="ליצירת קשר" Grid.Column="0" Grid.Row="6" TextColor="Black" />
+                            <Label Text="{Binding PhoneNum}"  Grid.Column="1" Grid.Row="6" TextColor="Black" />
+
+
+
+
+                   
+                        
+                         
+                            <!--<Label Text="{Binding Link}"/>-->
+                         
+                        </Grid>
                     </StackLayout>
                 </Frame>
 

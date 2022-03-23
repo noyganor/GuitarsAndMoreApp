@@ -50,8 +50,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="אימייל" Grid.Column="0" Grid.Row="0" TextColor="Black"/>
-                                <Label Text="{Binding Email}"  Grid.Column="1" Grid.Row="0" TextColor="Black"/>
+                                <Label Text="אימייל" Grid.Column="0" Grid.Row="0" TextColor="Black" />
+                                <Label Text="{Binding Email}"  Grid.Column="1" Grid.Row="0" TextColor="Black" FontSize="Small"/>
                                 <!--<Label Text=" " Grid.Column="1" Grid.Row="1"/>-->
 
                                 <Label Text="שם משתמש" Grid.Column="0"  Grid.Row="1" TextColor="Black"/>

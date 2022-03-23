@@ -253,6 +253,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Message
         private string message;
         public string Message
         {
@@ -269,7 +270,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region Is Enable
         private bool isEnable;
         public bool IsEnable
         {
@@ -286,6 +289,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
+        #endregion
 
         public Command SignUpNextButton => new Command(SignUpNextPage);
 
@@ -307,5 +311,17 @@ namespace GuitarsAndMoreApp.ViewModels
             App app = (App)App.Current;
             app.MainPage = new SignUpSecondPage(Email, Nickname, Password, VerPassword);
         }
+
+        public Command BackToHomePageButton => new Command(BackToHomePage);
+        public async void BackToHomePage()
+        {
+            App app = (App)App.Current;
+            NavigationPage nv = (NavigationPage)app.MainPage;
+            await nv.PopToRootAsync();
+            MainTab mt = (MainTab)nv.CurrentPage;
+            mt.SwitchToHomeTab();
+            await app.MainPage.Navigation.PopModalAsync();
+        }
+
     }
 }
