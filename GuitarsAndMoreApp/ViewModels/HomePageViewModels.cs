@@ -22,7 +22,7 @@ namespace GuitarsAndMoreApp.ViewModels
             SearchTerm = string.Empty;
             InitPosts();
             AddToFavButton = new Command<Post>(AddPostToFavorites);
-            SelectionChanged= new Command(PostView);
+            SelectionChanged = new Command(PostView);
             SearchCommand = new Command<string>(OnTextChanged);
             App app = (App)App.Current;
             if (app.CurrentUser == null)
@@ -53,7 +53,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
 
                     this.searchTerm = value;
-                   OnTextChanged(value);
+                    OnTextChanged(value);
                     OnPropertyChanged("SearchTerm");
                 }
             }
@@ -156,21 +156,21 @@ namespace GuitarsAndMoreApp.ViewModels
         #endregion
 
         #region Is Logged In
-            private string isLoggedIn;
-            public string IsLoggedIn
+        private string isLoggedIn;
+        public string IsLoggedIn
+        {
+            get => isLoggedIn;
+            set
             {
-                get => isLoggedIn;
-                set
+                if (this.isLoggedIn != value)
                 {
-                    if (this.isLoggedIn != value)
-                    {
-                        this.isLoggedIn = value;
-                        OnPropertyChanged("IsLoggedIn");
-                    }
-
+                    this.isLoggedIn = value;
+                    OnPropertyChanged("IsLoggedIn");
                 }
+
             }
-            #endregion
+        }
+        #endregion
 
         private async void InitPosts()
         {
@@ -222,8 +222,8 @@ namespace GuitarsAndMoreApp.ViewModels
                 this.postsList.Clear();
                 foreach (Post p in this.fullPostsList)
                 {
-                    
-                    string postString = $"{p.Category.Category1}|{p.Model.ModelName}|{p.Price}|{p.Town.Town1}|{p.Pdescription}|{p.Producer}";
+
+                    string postString = $"{p.Category.Category1}|{p.Model?.ModelName}|{p.Price}|{p.Town.Town1}|{p.Pdescription}|{p.Producer?.Producer1}";
                     if (!this.PostsList.Contains(p) && postString.Contains(search))
                         this.PostsList.Add(p);
 
@@ -240,8 +240,11 @@ namespace GuitarsAndMoreApp.ViewModels
         public ICommand AddToFavButton { get; set; }
         public async void AddPostToFavorites(Post post)
         {
+            bool fromDelete = true;
             App app = (App)App.Current;
-
+            Page current = ((TabbedPage)app.MainPage.Navigation.NavigationStack.Last()).CurrentPage;
+            if (current != null && current is HomePage || current is Favorites)
+                fromDelete = false;
             if (app.CurrentUser == null)
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", FlowDirection.RightToLeft);
@@ -284,11 +287,11 @@ namespace GuitarsAndMoreApp.ViewModels
                             });
                         }
                         RefreshPosts();
-                        
+
 
                     }
 
-                    else
+                    else if (!fromDelete)
                     {
                         await App.Current.MainPage.DisplayAlert("שגיאה", " הפוסט לא נוסף לרשימת המועדפים שלך", "ביטול", FlowDirection.RightToLeft);
                     }
@@ -368,7 +371,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-    
+
         public async void RefreshPosts()
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();

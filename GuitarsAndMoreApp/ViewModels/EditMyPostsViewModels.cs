@@ -144,7 +144,7 @@ namespace GuitarsAndMoreApp.ViewModels
             if (result)
             {
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                bool worked = OperateFavoriteMethod(selected);
+                bool worked = await OperateFavoriteMethod(selected);
                 if (worked)
                 {
                     bool b = await proxy.DeletePost(selected.PostId);
@@ -167,12 +167,24 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        private bool OperateFavoriteMethod(Post selected)
+        private async Task<bool> OperateFavoriteMethod(Post selected)
         {
             try
             {
                 HomePageViewModels hp = new HomePageViewModels();
                 hp.AddPostToFavorites(selected);
+                
+                App app = (App)App.Current;
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                
+                User u = await proxy.LoginAsync(app.CurrentUser.Email, app.CurrentUser.Pass);
+                app.CurrentUser = u;
+                foreach(UserFavoritePost p in app.CurrentUser.UserFavoritePosts)
+                {
+                    if(p.PostId == selected.PostId)
+                        hp.AddPostToFavorites(selected);
+                }
+
                 return true;
             }
             catch(Exception e)

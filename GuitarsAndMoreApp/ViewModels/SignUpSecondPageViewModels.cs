@@ -106,7 +106,6 @@ namespace GuitarsAndMoreApp.ViewModels
             get
             {
                 App app = (App)Application.Current;
-
                 return app.Lookup.Genders;
             }
         }
