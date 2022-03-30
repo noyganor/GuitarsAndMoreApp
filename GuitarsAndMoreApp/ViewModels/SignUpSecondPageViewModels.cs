@@ -177,9 +177,9 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 App app = (App)App.Current;
                 app.CurrentUser = uu;
-                Message = "ההרשמה בוצעה כראוי";
-                Page p = new HomePage();
-                app.MainPage = new NavigationPage(p);
+                Message = "ההרשמה בוצעה cvmk";
+                NavigationPage p = new NavigationPage(new MainTab());
+                app.MainPage = p;
 
             }
 

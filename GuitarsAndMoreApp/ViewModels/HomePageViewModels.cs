@@ -267,9 +267,8 @@ namespace GuitarsAndMoreApp.ViewModels
                         UserFavoritePost foundedFavorite = null;
                         foreach (UserFavoritePost uf in user.UserFavoritePosts)
                         {
-                            if (post.PostId == uf.PostId)
+                            if (post.PostId == uf.PostId && uf.UserId == user.UserId)
                             {
-                                //user.UserFavoritePosts.Remove(uf);
                                 foundedFavorite = uf;
                                 found = true;
                             }

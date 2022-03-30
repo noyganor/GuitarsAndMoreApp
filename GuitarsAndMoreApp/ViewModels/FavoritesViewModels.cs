@@ -182,7 +182,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 foreach (Post p in FullPostsList)
                 {
                     foreach (UserFavoritePost ufp in checkList)
-                        if (ufp.PostId == p.PostId)
+                        if (ufp.PostId == p.PostId && ufp.UserId == u.UserId)
                             FavoritePostsList.Add(p);
                 }
             }
