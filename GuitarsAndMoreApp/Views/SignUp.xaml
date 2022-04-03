@@ -66,12 +66,12 @@
                 </StackLayout>
             </Frame>
 
-           
 
 
 
 
-            <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" HorizontalOptions="Center" FontSize="Caption"/>
+
+            <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" BackgroundColor="#3d405b" HorizontalOptions="Center" FontSize="Caption"/>
             <Label Text="{Binding Message}" TextColor="Red" />
 
         </StackLayout>

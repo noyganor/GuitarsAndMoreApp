@@ -303,6 +303,7 @@ namespace GuitarsAndMoreApp.ViewModels
             else
             {
                 this.IsEnable = true;
+               
             }
         }
 

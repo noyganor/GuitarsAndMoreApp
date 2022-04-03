@@ -17,9 +17,10 @@ namespace GuitarsAndMoreApp.ViewModels
     {
         public ProfileViewModels()
         {
-            //ShowProfilePage();
-
+            
+                
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
         {
@@ -73,6 +74,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 await app.MainPage.Navigation.PushModalAsync(new Login());
                 return;
             }
+            else
+                Nickname = app.CurrentUser.Nickname;
+
         }
         #endregion
 
@@ -82,7 +86,7 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             App app = (App)App.Current;
             app.CurrentUser = null;
-          
+
             await app.MainPage.Navigation.PopToRootAsync();
             NavigationPage nv = (NavigationPage)app.MainPage;
             await nv.PopToRootAsync();
@@ -94,7 +98,22 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-      
+        private string nickname;
+        public string Nickname
+        {
+            get => this.nickname;
+            set
+            {
+                if (this.nickname != value)
+                {
+
+                    this.nickname = value;
+                    OnPropertyChanged("Nickname");
+                }
+            }
+        }
+
+
 
     }
 }

@@ -14,7 +14,10 @@ namespace GuitarsAndMoreApp.Views
     {
         public SignUp()
         {
+            //SignUp su = new SignUp();
+            //su.S
             this.BindingContext = new SignUpViewModels();
+
             InitializeComponent();
         }
     }
