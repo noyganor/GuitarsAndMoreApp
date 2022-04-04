@@ -14,11 +14,16 @@ namespace GuitarsAndMoreApp.Views
     {
         public SignUp()
         {
-            //SignUp su = new SignUp();
-            //su.S
-            this.BindingContext = new SignUpViewModels();
-
+            SignUpViewModels vm = new SignUpViewModels();
+            vm.SetImageSourceEvent += SetImageSource;
+            this.BindingContext = vm;
             InitializeComponent();
+       
+        }
+
+        private void SetImageSource(ImageSource source)
+        {
+            UserImage.Source = source;
         }
     }
 }

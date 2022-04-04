@@ -310,7 +310,7 @@ namespace GuitarsAndMoreApp.ViewModels
         #region Upload Image
         FileResult imageFileResult;
         public event Action<ImageSource> SetImageSourceEvent;
-        public Command PickImageCommand => new Command(OnPickImage);
+        public ICommand PickImageCommand => new Command(OnPickImage);
         public async void OnPickImage()
         {
             try
@@ -367,7 +367,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public void SignUpNextPage()
         {
             App app = (App)App.Current;
-            app.MainPage = new SignUpSecondPage(Email, Nickname, Password, VerPassword);
+            app.MainPage = new SignUpSecondPage(Email, Nickname, Password, VerPassword, this.imageFileResult);
         }
 
         public Command BackToHomePageButton => new Command(BackToHomePage);

@@ -152,11 +152,12 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        public  async void Operate()
+        public async void Operate()
         {
             await InitPosts();
-            await GetFavoritePosts();
+            GetFavoritePosts();
         }
+
         private async Task InitPosts()
         {
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
@@ -171,7 +172,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        private async Task GetFavoritePosts()
+        private void GetFavoritePosts()
         {
             App app = (App)App.Current;
             User u = app.CurrentUser;
@@ -188,8 +189,6 @@ namespace GuitarsAndMoreApp.ViewModels
             }
             if(checkList.Count() == 0)
                 Message = "אין לך מודעות במועדפים";
-
-
         }
 
         public ICommand SelectionChanged { get; set; }

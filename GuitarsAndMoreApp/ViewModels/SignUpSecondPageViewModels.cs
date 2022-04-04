@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using GuitarsAndMoreApp.Models;
 using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
+using Xamarin.Essentials;
 
 namespace GuitarsAndMoreApp.ViewModels
 {
@@ -20,12 +21,14 @@ namespace GuitarsAndMoreApp.ViewModels
         private string nickname;
         private string password;
         private string verPassword;
-        public SignUpSecondPageViewModels(string email, string nickname, string password, string verPassword)
+        private FileResult userImg;
+        public SignUpSecondPageViewModels(string email, string nickname, string password, string verPassword, FileResult userImg)
         {
             this.email = email;
             this.nickname = nickname;
             this.password = password;
             this.verPassword = verPassword;
+            this.userImg = userImg;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -170,14 +173,22 @@ namespace GuitarsAndMoreApp.ViewModels
 
             if (u == null)
             {
-                Message = "ההרשמה לא בוצעה כראוי";
+                Message = "ההרשמה לא בוצעה כראוי ";
             }
 
             else
             {
                 App app = (App)App.Current;
-                app.CurrentUser = uu;
-                Message = "ההרשמה בוצעה cvmk";
+                app.CurrentUser = u;
+                if (this.userImg != null)
+                {
+
+                    bool success = await proxy.UploadImage(new FileInfo()
+                    {
+                        Name = this.userImg.FullPath
+                    }, $"U{u.UserId}.jpg");
+                }
+                Message = "ההרשמה בוצעה בהצלחה!";
                 NavigationPage p = new NavigationPage(new MainTab());
                 app.MainPage = p;
 
