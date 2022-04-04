@@ -17,7 +17,9 @@ namespace GuitarsAndMoreApp.ViewModels
     {
         public ProfileViewModels()
         {
-            
+            //Set default image url for non connected users
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            this.ImgUrl = $"{proxy.GetPhotoUri()}stam.jpg";
                 
         }
 
@@ -75,7 +77,11 @@ namespace GuitarsAndMoreApp.ViewModels
                 return;
             }
             else
+            {
                 Nickname = app.CurrentUser.Nickname;
+                ImgUrl = app.CurrentUser.ImageUrl;
+            }
+                
 
         }
         #endregion
@@ -109,6 +115,24 @@ namespace GuitarsAndMoreApp.ViewModels
 
                     this.nickname = value;
                     OnPropertyChanged("Nickname");
+                }
+            }
+        }
+
+        private string imgUrl;
+        public string ImgUrl
+        {
+            get
+            {
+                return this.imgUrl;
+            }
+            set
+            {
+                if (this.imgUrl != value)
+                {
+
+                    this.imgUrl = value;
+                    OnPropertyChanged("ImgUrl");
                 }
             }
         }

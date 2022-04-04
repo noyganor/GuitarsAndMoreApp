@@ -464,6 +464,22 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+       
+
+        public async void ShowUploadAPostPage()
+        {
+            App app = (App)App.Current;
+
+            if (app.CurrentUser == null)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", FlowDirection.RightToLeft);
+                await app.MainPage.Navigation.PushModalAsync(new Login());
+                return;
+            }
+        }
+
+
+        #region Save Data Button + Validation
         private bool ValidateForm()
         {
             ValidatePrice(); //make it possible
@@ -477,17 +493,6 @@ namespace GuitarsAndMoreApp.ViewModels
                 return false;
             else
                 return true;
-        }
-        public async void ShowUploadAPostPage()
-        {
-            App app = (App)App.Current;
-
-            if (app.CurrentUser == null)
-            {
-                await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", FlowDirection.RightToLeft);
-                await app.MainPage.Navigation.PushModalAsync(new Login());
-                return;
-            }
         }
 
         public Command SaveDataCommand => new Command(SaveData);
@@ -539,7 +544,8 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
 
-        }     
+        }
+        #endregion
     }
 }
 

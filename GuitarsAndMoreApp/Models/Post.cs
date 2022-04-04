@@ -92,7 +92,7 @@ namespace GuitarsAndMoreApp.Models
                 return false;
             foreach (UserFavoritePost uf in user.UserFavoritePosts)
             {
-                if (this.PostId == uf.PostId)
+                if (this.PostId == uf.PostId    )
                     return true;
             }
             return false;

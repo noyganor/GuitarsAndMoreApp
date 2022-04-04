@@ -69,6 +69,9 @@
 
 
 
+            <Button Text="Pick image" Command="{Binding PickImageCommand}"></Button>
+            <Button Text="Open camera" Command="{Binding CameraImageCommand}"/>
+            <Image x:Name="PostImage"></Image>
 
 
             <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" BackgroundColor="#3d405b" HorizontalOptions="Center" FontSize="Caption"/>

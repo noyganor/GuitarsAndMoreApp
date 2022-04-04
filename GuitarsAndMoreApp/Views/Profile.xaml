@@ -28,15 +28,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
-
-                <ImageButton BackgroundColor="Transparent" Command="{Binding NavigateToPageCommand}"  HeightRequest="300" WidthRequest="200" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
-                    <ImageButton.Source>
-                        <FontImageSource
-                    FontFamily="MySolidFonts"
-                    Glyph="{x:Static fontAwesome:IconSolidFonts.CircleUser}"
-                    Color="Black" />
-                    </ImageButton.Source>
-                </ImageButton>
+                
+                <Image Source="{Binding ImgUrl}" BackgroundColor="Transparent"  HeightRequest="300" WidthRequest="200" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                    
+                </Image>
             </Grid>
             
             <Grid>

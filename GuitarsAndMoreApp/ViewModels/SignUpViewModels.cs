@@ -307,6 +307,63 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        #region Upload Image
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+        public Command PickImageCommand => new Command(OnPickImage);
+        public async void OnPickImage()
+        {
+            try
+            {
+                FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+                {
+                    Title = "בחר תמונה"
+                });
+
+                if (result != null)
+                {
+                    this.imageFileResult = result;
+
+                    var stream = await result.OpenReadAsync();
+                    ImageSource imgSource = ImageSource.FromStream(() => stream);
+                    if (SetImageSourceEvent != null)
+                        SetImageSourceEvent(imgSource);
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", " לא ניתן לפתוח את הגלריה ...", "אישור", FlowDirection.RightToLeft);
+            }
+
+        }
+
+        ///The following command handle the take photo button
+        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public async void OnCameraImage()
+        {
+            try
+            {
+                var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+                {
+                    Title = "צלם תמונה"
+                });
+
+                if (result != null)
+                {
+                    this.imageFileResult = result;
+                    var stream = await result.OpenReadAsync();
+                    ImageSource imgSource = ImageSource.FromStream(() => stream);
+                    if (SetImageSourceEvent != null)
+                        SetImageSourceEvent(imgSource);
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", " לא ניתן לפתוח את המצלמה ...", "אישור", FlowDirection.RightToLeft);
+            }
+        }
+        #endregion
+
         public void SignUpNextPage()
         {
             App app = (App)App.Current;

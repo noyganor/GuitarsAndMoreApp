@@ -105,8 +105,8 @@ namespace GuitarsAndMoreApp.Services
                     };
                     string content = await response.Content.ReadAsStringAsync();
                     User u = JsonSerializer.Deserialize<User>(content, options);
-                    App app = (App)App.Current;               
-                    u.UserFavoritePosts = app.Lookup.UserFavoritePosts;
+                    //App app = (App)App.Current;               
+                    //u.UserFavoritePosts = app.Lookup.UserFavoritePosts;
                     return u;
                 }
                 else
