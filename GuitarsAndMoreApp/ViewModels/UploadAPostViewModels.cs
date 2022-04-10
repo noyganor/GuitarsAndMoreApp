@@ -125,7 +125,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         private void ValidateTown()
         {
-            
+
             this.ShowTownError = Town == null;
             this.TownError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
@@ -310,7 +310,29 @@ namespace GuitarsAndMoreApp.ViewModels
         private void ValidatePhoneNumber()
         {
             this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNum);
-            this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
+            if (!this.ShowPhoneNumberError)
+            {
+
+                int num;
+                bool ok = int.TryParse(PhoneNum, out num);
+
+                if (!ok)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE;
+                }
+
+
+                else if (this.PhoneNum.Length != 10)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE_NUMBER;
+                }
+            }
+
+            else
+                this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
+
         }
         #endregion
 
@@ -464,7 +486,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-       
+
 
         public async void ShowUploadAPostPage()
         {
@@ -502,7 +524,7 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 App app = (App)App.Current;
                 if (ShowPriceError)
-                {                
+                {
                     await App.Current.MainPage.DisplayAlert("שים לב!", "  המוצר שהינך עומד לפרסם מיועד לתרומה", "אישור", FlowDirection.RightToLeft);
                 }
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
@@ -513,11 +535,11 @@ namespace GuitarsAndMoreApp.ViewModels
                     Price = this.SliderValue,
                     Pdescription = this.Pdescription,
                     PhoneNum = this.PhoneNum,
-                    ModelId = this.Model?.ModelId, 
-                    TownId = this.Town.TownId, 
-                    ProducerId = this.Producer?.ProducerId, 
+                    ModelId = this.Model?.ModelId,
+                    TownId = this.Town.TownId,
+                    ProducerId = this.Producer?.ProducerId,
                     CategoryId = this.Category.CategoryId,
-                    Link = this.Link ,
+                    Link = this.Link,
                 };
 
                 Post newPost = await proxy.AddPost(p);
@@ -531,14 +553,14 @@ namespace GuitarsAndMoreApp.ViewModels
                     //Upload image to server
                     if (this.imageFileResult != null)
                     {
-                        
+
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
                         }, $"{newPost.PostId}.jpg");
                     }
                     Message = "המודעה הועלתה בהצלחה!";
-                    
+
                     Page page = new HomePage();
                     await app.MainPage.Navigation.PopToRootAsync();
                 }

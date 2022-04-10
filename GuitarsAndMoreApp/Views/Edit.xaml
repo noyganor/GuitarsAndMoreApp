@@ -21,46 +21,51 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Text="הכנס מחיר מוצר"/>
-                        <Label Text="{Binding SliderValue}"/>
-                        <Slider Minimum="0" Maximum="100000" Value="{Binding SliderValue}" MaximumTrackColor="LightGray" MinimumTrackColor="#c9ada7"/>
-                        <Label Text="{Binding PriceError}" IsVisible="{Binding ShowPriceError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+                        <Label Text="הכנס מחיר מוצר" Grid.Column="0" Grid.Row="0"/>
+                        <Label Text="{Binding SliderValue}" Grid.Column="1" Grid.Row="0"/>
+                        <Slider Minimum="0" Maximum="100000" Value="{Binding SliderValue}" MaximumTrackColor="LightGray" MinimumTrackColor="#c9ada7" Grid.Column="1" Grid.Row="1"/>
+                        <Label Text="{Binding PriceError}" IsVisible="{Binding ShowPriceError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"/>
 
-                        <Label Text="הכנס יישוב" Grid.Column="0" Grid.Row="1"/>
-                        <Picker ItemsSource="{Binding Towns}" ItemDisplayBinding="{Binding Town1}" SelectedItem="{Binding Town}" Grid.Column="1" Grid.Row="1"/>
-                        <Label Text="{Binding TownError}" IsVisible="{Binding ShowTownError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Column="1" Grid.Row="1"/>
+                        <Label Text="הכנס יישוב" Grid.Column="0" Grid.Row="3"/>
+                        <Picker ItemsSource="{Binding Towns}" ItemDisplayBinding="{Binding Town1}" SelectedItem="{Binding Town}" Grid.Column="1" Grid.Row="3"/>
+                        <Label Text="{Binding TownError}" IsVisible="{Binding ShowTownError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Column="1" Grid.Row="4"/>
 
-                        <Label Text="הכנס יצרן" Grid.Column="0" Grid.Row="2"/>
-                        <Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer1}" SelectedItem="{Binding Producer}" Grid.Column="1" Grid.Row="2"/>
+                        <Label Text="הכנס יצרן" Grid.Column="0" Grid.Row="5"/>
+                        <Picker ItemsSource="{Binding Producers}" ItemDisplayBinding="{Binding Producer1}" SelectedItem="{Binding Producer}" Grid.Column="1" Grid.Row="5"/>
 
-                        <Label Text="הכנס דגם" Grid.Column="0" Grid.Row="3"/>
-                        <Picker ItemsSource="{Binding Models}" ItemDisplayBinding="{Binding ModelName}" SelectedItem="{Binding Model}" Grid.Column="1" Grid.Row="3"/>
+                        <Label Text="הכנס דגם" Grid.Column="0" Grid.Row="6"/>
+                        <Picker ItemsSource="{Binding Models}" ItemDisplayBinding="{Binding ModelName}" SelectedItem="{Binding Model}" Grid.Column="1" Grid.Row="6"/>
                         <!---בהתאם ליצרן-->
 
-                        <Label Text="תאר את המוצר" Grid.Column="0" Grid.Row="4"/>
-                        <Entry Text="{Binding Pdescription}" Placeholder="תאר את המוצר" Grid.Column="1" Grid.Row="4"/>
-                        <Label Text="{Binding DescriptionError}" IsVisible="{Binding ShowDescriptionError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+                        <Label Text="תאר את המוצר" Grid.Column="0" Grid.Row="7"/>
+                        <Entry Text="{Binding Pdescription}" Placeholder="תאר את המוצר" Grid.Column="1" Grid.Row="7"/>
+                        <Label Text="{Binding DescriptionError}" IsVisible="{Binding ShowDescriptionError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8"/>
 
-                        <Label Text="קישור לסרטון על המוצר" Grid.Column="0" Grid.Row="5"/>
-                        <Entry Text="{Binding Link}" Placeholder="קישור לסרטון על המוצר"  Grid.Column="1" Grid.Row="5"/>
+                        <Label Text="קישור לסרטון על המוצר" Grid.Column="0" Grid.Row="9"/>
+                        <Entry Text="{Binding Link}" Placeholder="קישור לסרטון על המוצר"  Grid.Column="1" Grid.Row="9"/>
 
-                        <Label Text="טלפון ליצירת קשר" Grid.Column="0" Grid.Row="6"/>
-                        <Entry Text="{Binding PhoneNum}" Placeholder="טלפון ליצירת קשר" Grid.Column="1" Grid.Row="6"/>
-                        <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+                        <Label Text="טלפון ליצירת קשר" Grid.Column="0" Grid.Row="10"/>
+                        <Entry Text="{Binding PhoneNum}" Placeholder="טלפון ליצירת קשר" Grid.Column="1" Grid.Row="10"/>
+                        <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11"/>
 
-                        <Button Text="Pick image" Command="{Binding PickImageCommand}"></Button>
-                        <Button Text="Open camera" Command="{Binding CameraImageCommand}"/>
-                        <Image x:Name="PostImage"></Image>
+                        <Button Text="Pick image" Command="{Binding PickImageCommand}" Grid.Column="0" Grid.Row="12"></Button>
+                        <Button Text="Open camera" Command="{Binding CameraImageCommand}" Grid.Column="1" Grid.Row="12"/>
+                        <Image x:Name="PostImage" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13"></Image>
 
-                        <Label Text=" לאיזו קטוגריה משתייך המוצר?" />
-                        <Picker ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Category1}" SelectedItem="{Binding Category}" />
-                        <Label Text="{Binding CategoryError}" IsVisible="{Binding ShowCategoryError}" TextColor="Red" FontAttributes="None" FontSize="Caption"/>
+                        <Label Text=" לאיזו קטוגריה משתייך המוצר?" Grid.Column="0" Grid.Row="14"/>
+                        <Picker ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Category1}" SelectedItem="{Binding Category}" Grid.Column="1" Grid.Row="14"/>
+                        <Label Text="{Binding CategoryError}" IsVisible="{Binding ShowCategoryError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15"/>
 
 
                         <!-- Photo -->

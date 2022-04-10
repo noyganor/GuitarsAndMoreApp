@@ -351,7 +351,7 @@ namespace GuitarsAndMoreApp.ViewModels
             if (ValidateForm())
             {
                 App theApp = (App)App.Current;
-                User newUser = new User()
+                    User newUser = new User()
                 {
                     UserId = theApp.CurrentUser.UserId,
                     Email = theApp.CurrentUser.Email,

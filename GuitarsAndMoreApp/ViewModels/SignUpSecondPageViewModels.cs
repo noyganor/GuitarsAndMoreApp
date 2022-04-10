@@ -51,7 +51,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.phoneNumber = value;
                     ValidatePhoneNumber();
-                  
+
                     OnPropertyChanged("PhoneNumber");
                 }
             }
@@ -82,7 +82,28 @@ namespace GuitarsAndMoreApp.ViewModels
         private void ValidatePhoneNumber()
         {
             this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNumber);
-            this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
+            if (!this.ShowPhoneNumberError)
+            {
+
+                int num;
+                bool ok = int.TryParse(PhoneNumber, out num);
+
+                if (!ok)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE;
+                }
+
+
+                else if (this.PhoneNumber.Length != 10)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE_NUMBER;
+                }
+            }
+
+            else
+                this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -151,49 +172,67 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-
+        public bool ValidateForm()
+        {
+            ValidatePhoneNumber();
+            if (ShowPhoneNumberError)
+                return false;
+            return true;
+        }
         public Command SignUpSumbitButton => new Command(SignUpSubmitButton);
-
         public async void SignUpSubmitButton()
         {
-
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-
-            User uu = new User
+            if (ValidateForm())
             {
-                Nickname = this.nickname,
-                Email = this.email,
-                Pass = this.password,
-                VerPassword = this.verPassword,
-                PhoneNum = this.phoneNumber,
-                GenderId = this.Gender.GenderId,
-                FavBand = this.favoriteBand
-            };
-            User u = await proxy.RegisterUser(uu);
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
 
-            if (u == null)
-            {
-                Message = "ההרשמה לא בוצעה כראוי ";
-            }
-
-            else
-            {
-                App app = (App)App.Current;
-                app.CurrentUser = u;
-                if (this.userImg != null)
+                User uu = new User
                 {
+                    Nickname = this.nickname,
+                    Email = this.email,
+                    Pass = this.password,
+                    VerPassword = this.verPassword,
+                    PhoneNum = this.phoneNumber,
+                    GenderId = this.Gender.GenderId,
+                    FavBand = this.favoriteBand
+                };
+                User u = await proxy.RegisterUser(uu);
 
-                    bool success = await proxy.UploadImage(new FileInfo()
-                    {
-                        Name = this.userImg.FullPath
-                    }, $"U{u.UserId}.jpg");
+                if (u == null)
+                {
+                    Message = "ההרשמה לא בוצעה כראוי ";
                 }
-                Message = "ההרשמה בוצעה בהצלחה!";
-                NavigationPage p = new NavigationPage(new MainTab());
-                app.MainPage = p;
 
+                else
+                {
+                    App app = (App)App.Current;
+                    app.CurrentUser = u;
+                    if (this.userImg != null)
+                    {
+
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.userImg.FullPath
+                        }, $"U{u.UserId}.jpg");
+                    }
+                    Message = "ההרשמה בוצעה בהצלחה!";
+                    NavigationPage p = new NavigationPage(new MainTab());
+                    app.MainPage = p;
+
+                }
             }
-
         }
+
+        public Command BackToHomePageButton => new Command(BackToHomePage);
+        public async void BackToHomePage()
+        {
+            App app = (App)App.Current;
+            NavigationPage nv = (NavigationPage)app.MainPage;
+            await nv.PopToRootAsync();
+            MainTab mt = (MainTab)nv.CurrentPage;
+            mt.SwitchToHomeTab();
+            await app.MainPage.Navigation.PopModalAsync();
+        }
+
     }
 }

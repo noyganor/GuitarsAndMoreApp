@@ -22,23 +22,27 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //public EditViewModels(Post p)
-        //{
-        //    App app = (App)App.Current;
-        //    if (app.CurrentUser != null)
-        //    {
-        //        UserId = app.CurrentUser.UserId,
-        //            Price = app.CurrentUser.Posts.Where(x => x.PostId == p.PostId).Select(SliderValue)
-        //            Pdescription = app.CurrentUser.Pdescription,
-        //            PhoneNum = app.CurrentUser.PhoneNum,
-        //            ModelId = app.CurrentUser.Model?.ModelId, 
-        //            TownId = app.CurrentUser.Town.TownId, 
-        //            ProducerId = app.CurrentUser.Producer?.ProducerId, 
-        //            CategoryId = app.CurrentUser.Category.CategoryId,
-        //            Link = app.CurrentUser.Link ,
-        //    }
-        //}
-            
+        public EditViewModels(Post p)
+        {
+            App app = (App)App.Current;
+            if (app.CurrentUser != null)
+            {
+
+                SliderValue = (int)p.Price;
+                Pdescription = p.Pdescription;
+                PhoneNum = p.PhoneNum;
+                if (p.Model != null)
+                    Model = p.Model;
+                Town = p.Town;
+                if (p.Producer != null)
+                    Producer = p.Producer;
+                Category = p.Category;
+                if (p.Link != null)
+                    Link = p.Link;
+                
+            }
+        }
+
 
         #region Slider Value
         private int sliderValue;

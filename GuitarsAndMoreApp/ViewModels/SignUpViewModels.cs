@@ -19,6 +19,8 @@ namespace GuitarsAndMoreApp.ViewModels
     {
         public const string REQUIRED_FIELD = "זהו שדה חובה";
         public const string BAD_EMAIL = "מייל לא תקין";
+        public const string BAD_PHONE = "טלפון לא תקין";
+        public const string BAD_PHONE_NUMBER = "מספר הטלפון חייב להכיל 10 ספרות";
     }
 
     class SignUpViewModels : INotifyPropertyChanged
@@ -295,7 +297,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
         public void ValidateForm()
         {
-            if (ShowEmailError  || ShowNicknameError || ShowPasswordError || ShowVerPasswordError )
+            if (ShowEmailError || ShowNicknameError || ShowPasswordError || ShowVerPasswordError)
             {
                 this.IsEnable = false;
             }
@@ -303,7 +305,7 @@ namespace GuitarsAndMoreApp.ViewModels
             else
             {
                 this.IsEnable = true;
-               
+
             }
         }
 

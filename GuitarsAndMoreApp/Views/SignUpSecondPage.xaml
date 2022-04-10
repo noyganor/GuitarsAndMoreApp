@@ -2,23 +2,51 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.SignUpSecondPage"
+             FlowDirection="RightToLeft"
              Title="הרשמה">
     <ContentPage.Content>
-        <StackLayout>
-
-            <Label Text="מספר טלפון" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding PhoneNumber}"/>
-            <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
+        <StackLayout BackgroundColor="#eae4e9">
+            <ImageButton Source="newlogo.png" Command="{Binding BackToHomePageButton}" BackgroundColor="Transparent" />
 
 
-            <Label Text="מגדר" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Picker ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}"/>
+            <ScrollView>
+                <Frame CornerRadius="7" Padding="15" Margin="30,2,30,30">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
 
-            <Label Text="זמר או להקה אהובה" TextColor="#3d405b" FontAttributes="None" FontSize="Caption"/>
-            <Entry Text="{Binding FavoriteBand}"/>
+                            <Label Text="מספר טלפון" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.Row="0"/>
+                            <Entry Text="{Binding PhoneNumber}" Grid.Column="1" Grid.Row="0"/>
+                            <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="#3d405b" FontAttributes="None" FontSize="Caption" Grid.Column="0"  Grid.ColumnSpan="2" Grid.Row="1"/>
 
-            <Button Text="שליחה" Command="{Binding SignUpSumbitButton}" HorizontalOptions="Center"/>
-            <Label Text="{Binding Message}" TextColor="Red"/>
+
+                            <Label Text="מגדר" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.Row="2"/>
+                            <Picker ItemsSource="{Binding Genders}" ItemDisplayBinding="{Binding Gender1}" SelectedItem="{Binding Gender}" Grid.Column="1" Grid.Row="2"/>
+                            <Label Text="" Grid.Column="0"  Grid.ColumnSpan="2" Grid.Row="3"/>
+
+                            <Label Text="זמר או להקה אהובה" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.Row="4"/>
+                            <Entry Text="{Binding FavoriteBand}" Grid.Column="1" Grid.Row="4"/>
+                            <Label Text="" Grid.Column="0"  Grid.ColumnSpan="2" Grid.Row="5"/>
+
+                            <Button Text="שליחה" Command="{Binding SignUpSumbitButton}" HorizontalOptions="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" BackgroundColor="#dfe7fd"  CornerRadius="7"/>
+                            <Label Text="{Binding Message}" TextColor="Red" Grid.Column="0"  Grid.Row="7"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

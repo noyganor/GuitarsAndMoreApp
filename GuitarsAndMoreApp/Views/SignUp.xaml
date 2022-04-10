@@ -5,84 +5,69 @@
              FlowDirection="RightToLeft"
              Title="הרשמה">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#f2e9e4">
+        <StackLayout BackgroundColor="#eae4e9">
             <ImageButton Source="newlogo.png" Command="{Binding BackToHomePageButton}" BackgroundColor="Transparent" />
-
-          
-
             <!--<Label Text="הרשמה" TextColor="#1b3a4b" HorizontalOptions="Center" FontAttributes="Bold"/>-->
 
             <ScrollView>
-            <Frame CornerRadius="7" Padding="15" Margin="30" >
-                <StackLayout>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
+                <Frame CornerRadius="7" Padding="15" Margin="30,2,30,30">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
 
-                    <Label Text="דואר אלקטרוני" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="0" Grid.Column="0"/>
-                        <Entry Text="{Binding Email}" Grid.Row="0" Grid.Column="1" PlaceholderColor="Black" />
-                        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+                            <Label Text="דואר אלקטרוני" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="0" Grid.Column="0"/>
+                            <Entry Text="{Binding Email}" Grid.Row="0" Grid.Column="1" PlaceholderColor="Black" />
+                            <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-                        <Label Text="שם משתמש" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="2" Grid.Column="0"/>
-                        <Entry Text="{Binding Nickname}" Grid.Row="2" Grid.Column="1" PlaceholderColor="Black"/>
-                        <Label Text="{Binding NicknameError}" IsVisible="{Binding ShowNicknameError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Row="3" Grid.Column="0"  Grid.ColumnSpan="2"/>
+                            <Label Text="שם משתמש" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="2" Grid.Column="0"/>
+                            <Entry Text="{Binding Nickname}" Grid.Row="2" Grid.Column="1" PlaceholderColor="Black"/>
+                            <Label Text="{Binding NicknameError}" IsVisible="{Binding ShowNicknameError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Row="3" Grid.Column="0"  Grid.ColumnSpan="2"/>
 
-                        <Label Text="סיסמה" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="4" Grid.Column="0"/>
-                        <Entry Text="{Binding Password}" IsPassword="True" Grid.Row="4" Grid.Column="1" PlaceholderColor="Black"/>
-                        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+                            <Label Text="סיסמה" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="4" Grid.Column="0"/>
+                            <Entry Text="{Binding Password}" IsPassword="True" Grid.Row="4" Grid.Column="1" PlaceholderColor="Black"/>
+                            <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-                        <Label Text="אימות סיסמה" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="6" Grid.Column="0"/>
-                    <Entry Text="{Binding VerPassword}" IsPassword="True" Grid.Row="6" Grid.Column="1" PlaceholderColor="Black"/>
-                        <Label Text="{Binding VerPasswordError}" IsVisible="{Binding ShowVerPasswordError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"/>
-                        
-                 </Grid>
-            <!--<Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Button Text="התחברות" Command="{Binding LoginButton}" Grid.Column="0" Grid.Row="0" HorizontalOptions="CenterAndExpand"  CornerRadius="7" BackgroundColor="#c9ada7"/>
-                        <Label Text="{Binding Message}" TextColor="Red" Grid.Column="1" Grid.Row="1"/>
-                        <Button Text=" אין לך חשבון? להרשמה"  Command="{Binding MoveToSignUpPage}" Grid.Column="1" Grid.Row="0" HorizontalOptions="CenterAndExpand" CornerRadius="7" BackgroundColor="Transparent"/>
-                    </Grid>-->
+                            <Label Text="אימות סיסמה" TextColor="Black" FontAttributes="None" FontSize="Caption" Grid.Row="6" Grid.Column="0"/>
+                            <Entry Text="{Binding VerPassword}" IsPassword="True" Grid.Row="6" Grid.Column="1" PlaceholderColor="Black"/>
+                            <Label Text="{Binding VerPasswordError}" IsVisible="{Binding ShowVerPasswordError}" TextColor="Red" FontAttributes="None" FontSize="Caption"  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-                    <!--<Button Text="חזרה למסך הבית" Command="{Binding BackToHomePageButton}" CornerRadius="7" BackgroundColor="#c9ada7" />-->
-                </StackLayout>
-            </Frame>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Button Text=" בחר תמונה מהגלריה" Command="{Binding PickImageCommand}" Grid.Column="0" Grid.Row="0" CornerRadius="7" Padding="0" BackgroundColor="#dfe7fd"></Button>
+                            <Button Text="צלם תמונה" Command="{Binding CameraImageCommand}" Grid.Column="1" Grid.Row="0" CornerRadius="7" Padding="0"  BackgroundColor="#dfe7fd"/>
+                        </Grid>
+
+                        <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Command="{Binding Button1PressedCommand}" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
+                        <StackLayout IsVisible="{Binding Button1}">
+                            <Image x:Name="UserImage" HeightRequest="100" WidthRequest="100"/>
+                        </StackLayout>
+
+                        <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" BackgroundColor="#dfe7fd" CornerRadius="7"  HorizontalOptions="Center" FontSize="Caption"/>
+                        <Label Text="{Binding Message}" TextColor="Red" />
+
+                    </StackLayout>
+                </Frame>
             </ScrollView>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Button Text=" בחר תמונה מהגלריה" Command="{Binding PickImageCommand}" Grid.Column="0" Grid.Row="0" CornerRadius="7" Padding="0"></Button>
-                <Button Text="צלם תמונה" Command="{Binding CameraImageCommand}" Grid.Column="1" Grid.Row="0" CornerRadius="7" Padding="0"/>
-            </Grid>
-            <Image x:Name="UserImage" HeightRequest="70" WidthRequest="70"></Image>
-        
-
-            <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" BackgroundColor="HotPink"  HorizontalOptions="Center" FontSize="Caption"/>
-            <Label Text="{Binding Message}" TextColor="Red" />
-           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

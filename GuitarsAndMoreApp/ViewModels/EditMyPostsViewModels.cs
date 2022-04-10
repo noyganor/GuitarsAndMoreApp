@@ -201,7 +201,7 @@ namespace GuitarsAndMoreApp.ViewModels
         {
             App app = (App)App.Current;
 
-            Edit page = new Edit();
+            Edit page = new Edit(selected);
             await app.MainPage.Navigation.PushAsync(page);
         }
         #endregion

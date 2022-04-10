@@ -19,7 +19,7 @@ namespace GuitarsAndMoreApp.Views
             this.BindingContext = vm;
             InitializeComponent();
        
-        }
+        }     
 
         private void SetImageSource(ImageSource source)
         {
