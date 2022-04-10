@@ -82,7 +82,7 @@
 
                 </StackLayout>
             </ScrollView>
-            <Button Text="העלה מודעה" Command="{Binding SaveDataCommand}"></Button>
+            <Button Text="העלה מודעה" Command="{Binding SaveDataCommand}" BackgroundColor="#dfe7fd" CornerRadius="7" Margin="10,10,10,0" ></Button>
             <Label Text="{Binding Message}"/>
         </StackLayout>
 

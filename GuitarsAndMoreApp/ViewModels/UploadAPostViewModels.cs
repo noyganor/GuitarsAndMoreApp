@@ -494,8 +494,11 @@ namespace GuitarsAndMoreApp.ViewModels
 
             if (app.CurrentUser == null)
             {
-                await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", FlowDirection.RightToLeft);
-                await app.MainPage.Navigation.PushModalAsync(new Login());
+                bool result = await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", "ביטול", FlowDirection.RightToLeft);
+                if (result)
+                    await app.MainPage.Navigation.PushModalAsync(new Login());
+                else
+                    await app.MainPage.Navigation.PopToRootAsync();
                 return;
             }
         }
@@ -525,45 +528,49 @@ namespace GuitarsAndMoreApp.ViewModels
                 App app = (App)App.Current;
                 if (ShowPriceError)
                 {
-                    await App.Current.MainPage.DisplayAlert("שים לב!", "  המוצר שהינך עומד לפרסם מיועד לתרומה", "אישור", FlowDirection.RightToLeft);
-                }
-                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-
-                Post p = new Post
-                {
-                    UserId = app.CurrentUser.UserId,
-                    Price = this.SliderValue,
-                    Pdescription = this.Pdescription,
-                    PhoneNum = this.PhoneNum,
-                    ModelId = this.Model?.ModelId,
-                    TownId = this.Town.TownId,
-                    ProducerId = this.Producer?.ProducerId,
-                    CategoryId = this.Category.CategoryId,
-                    Link = this.Link,
-                };
-
-                Post newPost = await proxy.AddPost(p);
-                if (newPost == null)
-                {
-                    Message = "המודעה לא עלתה";
-                }
-
-                else
-                {
-                    //Upload image to server
-                    if (this.imageFileResult != null)
+                    bool result = await App.Current.MainPage.DisplayAlert("שים לב!", "  המוצר שהינך עומד לפרסם מיועד לתרומה", "אישור", "ביטול", FlowDirection.RightToLeft);
+                    if (result)
                     {
+                        GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
 
-                        bool success = await proxy.UploadImage(new FileInfo()
+                        Post p = new Post
                         {
-                            Name = this.imageFileResult.FullPath
-                        }, $"{newPost.PostId}.jpg");
-                    }
-                    Message = "המודעה הועלתה בהצלחה!";
+                            UserId = app.CurrentUser.UserId,
+                            Price = this.SliderValue,
+                            Pdescription = this.Pdescription,
+                            PhoneNum = this.PhoneNum,
+                            ModelId = this.Model?.ModelId,
+                            TownId = this.Town.TownId,
+                            ProducerId = this.Producer?.ProducerId,
+                            CategoryId = this.Category.CategoryId,
+                            Link = this.Link,
+                        };
 
-                    Page page = new HomePage();
-                    await app.MainPage.Navigation.PopToRootAsync();
+                        Post newPost = await proxy.AddPost(p);
+                        if (newPost == null)
+                        {
+                            Message = "המודעה לא עלתה";
+                        }
+
+                        else
+                        {
+                            //Upload image to server
+                            if (this.imageFileResult != null)
+                            {
+
+                                bool success = await proxy.UploadImage(new FileInfo()
+                                {
+                                    Name = this.imageFileResult.FullPath
+                                }, $"{newPost.PostId}.jpg");
+                            }
+                            Message = "המודעה הועלתה בהצלחה!";
+
+                            Page page = new HomePage();
+                            await app.MainPage.Navigation.PopToRootAsync();
+                        }
+                    }
                 }
+
             }
 
         }

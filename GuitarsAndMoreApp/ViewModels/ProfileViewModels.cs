@@ -20,7 +20,7 @@ namespace GuitarsAndMoreApp.ViewModels
             //Set default image url for non connected users
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
             this.ImgUrl = $"{proxy.GetPhotoUri()}stam.jpg";
-                
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -72,17 +72,25 @@ namespace GuitarsAndMoreApp.ViewModels
 
             if (app.CurrentUser == null)
             {
-                await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", FlowDirection.RightToLeft);
-                await app.MainPage.Navigation.PushModalAsync(new Login());
-                return;
+                bool result = await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", "ביטול", FlowDirection.RightToLeft);
+                if (result)
+                    await app.MainPage.Navigation.PushModalAsync(new Login());
+                else
+                {
+                    
+                    await app.MainPage.Navigation.PopToRootAsync();
+                    NavigationPage nv = (NavigationPage)app.MainPage;
+                    await nv.PopToRootAsync();
+                    MainTab mt = (MainTab)nv.CurrentPage;
+                    mt.SwitchToHomeTab();
+                }
+                    
             }
             else
             {
                 Nickname = app.CurrentUser.Nickname;
                 ImgUrl = app.CurrentUser.ImageUrl;
             }
-                
-
         }
         #endregion
 

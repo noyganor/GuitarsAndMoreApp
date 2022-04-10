@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:GuitarsAndMoreApp.ViewModels"
              xmlns:models="clr-namespace:GuitarsAndMoreApp.Models"
              x:Class="GuitarsAndMoreApp.Views.HomePage"
-             BackgroundColor="#e8e8e4"
+             BackgroundColor="#eae4e9"
              
              FlowDirection="RightToLeft" x:DataType="local:HomePageViewModels">
     <ContentPage.Content>
