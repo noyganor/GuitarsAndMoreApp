@@ -144,69 +144,65 @@ namespace GuitarsAndMoreApp.ViewModels
             if (result)
             {
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                bool worked = await OperateFavoriteMethod(selected);
-                if (worked)
+                bool b = await proxy.DeletePost(selected.PostId);
+                if (b)
                 {
-                    bool b = await proxy.DeletePost(selected.PostId);
-                    if (b)
-                    {
-                        MyPostsList.Remove(selected);
-                        App app = (App)App.Current;
-                        User u = app.CurrentUser;
-                        Post p = u.Posts.Where(t => t.PostId == selected.PostId).FirstOrDefault();
-                        if (p != null)
-                            u.Posts.Remove(p);
-                    }
-                    else
-                    {
-                        b = false;
-                    }
+                    MyPostsList.Remove(selected); //delete from observable collection
+                    App app = (App)App.Current;
+                    User u = app.CurrentUser;
+                    UserFavoritePost up = u.UserFavoritePosts.Where(pp => pp.PostId == selected.PostId).FirstOrDefault(); 
+                    if (up != null)
+                        u.UserFavoritePosts.Remove(up); //delete from user favorite posts so it won't be connected
+                    Post p = u.Posts.Where(t => t.PostId == selected.PostId).FirstOrDefault();
+                    if (p != null)
+                        u.Posts.Remove(p); // delete from posts
                 }
-                
+
+                else
+                    b = false;
             }
         }
         #endregion
 
-        private async Task<bool> OperateFavoriteMethod(Post selected)
-        {
-            try
-            {
-                HomePageViewModels hp = new HomePageViewModels();
-                hp.AddPostToFavorites(selected);
-                
-                App app = (App)App.Current;
-                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                
-                User u = await proxy.LoginAsync(app.CurrentUser.Email, app.CurrentUser.Pass);
-                app.CurrentUser = u;
-                foreach(UserFavoritePost p in app.CurrentUser.UserFavoritePosts)
-                {
-                    if(p.PostId == selected.PostId)
-                        hp.AddPostToFavorites(selected);
-                }
+        //private async Task<bool> OperateFavoriteMethod(Post selected)
+        //{
+        //    try
+        //    {
+        //        HomePageViewModels hp = new HomePageViewModels();
+        //        hp.AddPostToFavorites(selected);
 
-                return true;
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return false;
-            }
-           
-        }
+        //        App app = (App)App.Current;
+        //        GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+
+        //        User u = await proxy.LoginAsync(app.CurrentUser.Email, app.CurrentUser.Pass);
+        //        app.CurrentUser = u;
+        //        foreach (UserFavoritePost p in app.CurrentUser.UserFavoritePosts)
+        //        {
+        //            if (p.PostId == selected.PostId)
+        //                hp.AddPostToFavorites(selected);
+        //        }
+
+        //        return true;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //        return false;
+        //    }
+
+        //}
 
         #region Edit Button
         public Command EditButton => new Command<Post>(EditPost);
         public async void EditPost(Post selected)
         {
             App app = (App)App.Current;
-
             Edit page = new Edit(selected);
             await app.MainPage.Navigation.PushAsync(page);
         }
         #endregion
 
-        
+
         private async void Operate()
         {
             await InitPosts();

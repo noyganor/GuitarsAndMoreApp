@@ -61,24 +61,24 @@
 
                         <Button Text="Pick image" Command="{Binding PickImageCommand}" Grid.Column="0" Grid.Row="12"></Button>
                         <Button Text="Open camera" Command="{Binding CameraImageCommand}" Grid.Column="1" Grid.Row="12"/>
-                        <Image x:Name="PostImage" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13"></Image>
+                        <!--<Image x:Name="PostImage" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13"></Image>-->
 
                         <Label Text=" לאיזו קטוגריה משתייך המוצר?" Grid.Column="0" Grid.Row="14"/>
                         <Picker ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Category1}" SelectedItem="{Binding Category}" Grid.Column="1" Grid.Row="14"/>
                         <Label Text="{Binding CategoryError}" IsVisible="{Binding ShowCategoryError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15"/>
 
 
-                        <!-- Photo -->
+                         <!--Photo 
                       
-                        <!--<Image Source="{Binding UserImgSrc}" />
+                        <Image Source="{Binding UserImgSrc}" />
                     
                         <ImageButton Padding="0" Margin="0" Source="galleryIcon.png" HorizontalOptions="End" BackgroundColor="Transparent" Grid.Column="1" Grid.Row="0" Command="{Binding PickImageCommand}"/>
-                        <ImageButton Padding="0" Margin="0" Source="cameraIcon.png" HorizontalOptions="Start" Grid.Column="2" Grid.Row="0" BackgroundColor="Transparent" Command="{Binding CameraImageCommand}"/>-->
+                        <ImageButton Padding="0" Margin="0" Source="cameraIcon.png" HorizontalOptions="Start" Grid.Column="2" Grid.Row="0" BackgroundColor="Transparent" Command="{Binding CameraImageCommand}"/>
 
 
-                    
+                   
 
-                    <!--<Button Text="עדכן" Command="{Binding UpdateButton}"  CornerRadius="10" BackgroundColor="#c9ada7" HorizontalOptions="Center" Margin="10"/>
+                    <Button Text="עדכן" Command="{Binding UpdateButton}"  CornerRadius="10" BackgroundColor="#c9ada7" HorizontalOptions="Center" Margin="10"/>
                     <Label Text="{Binding Message}" HorizontalOptions="CenterAndExpand" TextColor="Red"/>-->
                         </Grid>
                 </StackLayout>

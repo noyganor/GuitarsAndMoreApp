@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:GuitarsAndMoreApp.Models" xmlns:views="clr-namespace:GuitarsAndMoreApp.Views" x:DataType="local:EditMyPostsViewModels"
              FlowDirection="RightToLeft">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#eae4e9">
             <ImageButton Source="newlogo.png" Command="{Binding LogoCommand}" BackgroundColor="Transparent" />
             <Label Text="{Binding Message}" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Button Text="פרסום מודעה" Command="{Binding NavigateToUploadAPostPage}" IsVisible="{Binding IsVisible}"/>
