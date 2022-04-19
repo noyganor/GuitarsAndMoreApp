@@ -2,16 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.PostView"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout  BackgroundColor="#eae4e9">
 
-                <Frame HasShadow="True">
+                <Frame HasShadow="True" CornerRadius="7" Padding="5" Margin="30,10,30,30">
                 <Image Source="{Binding ImageUrl}"/>
                         </Frame>
-                
-                <Frame>
+
+                <Frame CornerRadius="7" Padding="5" Margin="30,2,30,30"  HasShadow="True">
                     <StackLayout>
                         <Grid>
                             <Grid.RowDefinitions>

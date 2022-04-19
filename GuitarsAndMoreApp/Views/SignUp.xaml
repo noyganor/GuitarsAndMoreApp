@@ -10,7 +10,7 @@
             <!--<Label Text="הרשמה" TextColor="#1b3a4b" HorizontalOptions="Center" FontAttributes="Bold"/>-->
 
             <ScrollView>
-                <Frame CornerRadius="7" Padding="15" Margin="30,2,30,30">
+                <Frame CornerRadius="7" Padding="15" Margin="30,0,30,30">
                     <StackLayout>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -61,13 +61,21 @@
                         <StackLayout IsVisible="{Binding Button1}">
                             <Image x:Name="UserImage" HeightRequest="100" WidthRequest="100"/>
                         </StackLayout>
-
-                        <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" BackgroundColor="#dfe7fd" CornerRadius="7"  HorizontalOptions="Center" FontSize="Caption"/>
+                        <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" BackgroundColor="#dfe7fd" CornerRadius="7" FontSize="Caption" HorizontalOptions="Center"/>
                         <Label Text="{Binding Message}" TextColor="Red" />
-
                     </StackLayout>
                 </Frame>
             </ScrollView>
+
+            <!--<Frame Padding="5" >
+                            <StackLayout >
+                    <Button Text="הבא" Command="{Binding SignUpNextButton}" IsEnabled="{Binding IsEnable}" BackgroundColor="#dfe7fd" CornerRadius="7" FontSize="Caption" Margin="10,10,10,0"/>
+                                <Label Text="{Binding Message}" TextColor="Red" />
+                            </StackLayout>
+                        </Frame>-->
+
+
+              
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

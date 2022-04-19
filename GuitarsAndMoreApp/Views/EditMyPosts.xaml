@@ -22,17 +22,20 @@
                                     <SwipeItem
                                            
                                            IconImageSource="DeleteIcon.png"
-                                           BackgroundColor="Red"
+                                           BackgroundColor="#d62828"
                                            Command="{Binding Source={x:Reference myPostsCollection}, Path=BindingContext.DeleteButton}"
                                            CommandParameter="{Binding}"/>
-                                    <SwipeItem                                          
-                                           IconImageSource="nnn.png" 
-                                           BackgroundColor="Coral"
-                                           Command="{Binding Source={x:Reference myPostsCollection}, Path=BindingContext.EditButton}"
-                                           CommandParameter="{Binding}"/>
+                                   
                                 </SwipeItems>
                                 
                             </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItem                                          
+                                           IconImageSource="nnn.png" 
+                                           BackgroundColor="#c9ada7"
+                                           Command="{Binding Source={x:Reference myPostsCollection}, Path=BindingContext.EditButton}"
+                                           CommandParameter="{Binding}"/>
+                            </SwipeView.RightItems>
 
                             <Frame BorderColor="#5c374c" HeightRequest="100" >
                                 <Grid>

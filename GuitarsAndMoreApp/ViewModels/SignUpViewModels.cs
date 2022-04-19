@@ -31,6 +31,19 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public SignUpViewModels()
+        {
+            Button1 = false;
+            Button2 = false;
+            ImgSource1 = Source1;
+            ImgSource2 = Source1;
+            Button1PressedCommand = new Command(Button1Pressed);
+            Button2PressedCommand = new Command(Button2Pressed);
+        }
+
+        private const string Source1 = "outline_favorite_border_black_24dp.png";
+        private const string Source2 = "fullHeart.png";        
+
         #region email
         private string email;
         public string Email
@@ -383,5 +396,92 @@ namespace GuitarsAndMoreApp.ViewModels
             await app.MainPage.Navigation.PopModalAsync();
         }
 
+
+        #region ButtonPressed
+        private bool button1;
+        public bool Button1
+        {
+            get { return this.button1; }
+
+            set
+            {
+                if (this.button1 != value)
+                {
+                    this.button1 = value;
+                    OnPropertyChanged(nameof(Button1));
+                }
+            }
+        }
+
+        private bool button2;
+        public bool Button2
+        {
+            get { return this.button2; }
+
+            set
+            {
+                if (this.button2 != value)
+                {
+                    this.button2 = value;
+                    OnPropertyChanged(nameof(Button2));
+                }
+            }
+        }
+        #endregion
+
+        #region imgChange
+        private string imgSource1;
+        public string ImgSource1
+        {
+            get { return this.imgSource1; }
+
+            set
+            {
+                if (this.imgSource1 != value)
+                {
+                    this.imgSource1 = value;
+                    OnPropertyChanged(nameof(ImgSource1));
+                }
+            }
+        }
+
+        private string imgSource2;
+        public string ImgSource2
+        {
+            get { return this.imgSource2; }
+
+            set
+            {
+                if (this.imgSource2 != value)
+                {
+                    this.imgSource2 = value;
+                    OnPropertyChanged(nameof(ImgSource2));
+                }
+            }
+        }
+        #endregion
+
+
+        #region
+        public ICommand Button1PressedCommand { protected set; get; }
+        public void Button1Pressed()
+        {
+            if (Button1 == false) { Button1 = true; }
+            else { Button1 = false; }
+
+            if (ImgSource1 == Source1) { ImgSource1 = Source2; }
+            else { ImgSource1 = Source1; }
+        }
+
+        public ICommand Button2PressedCommand { protected set; get; }
+        public void Button2Pressed()
+        {
+            if (Button2 == false) { Button2 = true; }
+            else { Button2 = false; }
+
+            if (ImgSource2 == Source1) { ImgSource2 = Source2; }
+            else { ImgSource2 = Source1; }
+        }
+        #endregion
     }
 }

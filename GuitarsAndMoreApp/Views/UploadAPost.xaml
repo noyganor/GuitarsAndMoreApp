@@ -82,8 +82,8 @@
 
                 </StackLayout>
             </ScrollView>
-            <Frame Padding="15" Margin="30,2,30,30">
-                <StackLayout>
+            <Frame Padding="0" >
+                <StackLayout >
                     <Button Text="העלה מודעה" Command="{Binding SaveDataCommand}" BackgroundColor="#dfe7fd" CornerRadius="7" Margin="10,10,10,0" ></Button>
                     <Label Text="{Binding Message}"/>
                 </StackLayout>

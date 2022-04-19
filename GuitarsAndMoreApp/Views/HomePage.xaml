@@ -37,7 +37,7 @@
                                     <SwipeItem
                                            IsVisible="{Binding Source={x:Reference collectionName}, Path=BindingContext.IsVisible}"
                                            IconImageSource="{Binding FavoriteActionImageUrl}"
-                                           BackgroundColor="LightPink"
+                                           BackgroundColor="#9a8c98"
                                            Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddToFavButton}"
                                            CommandParameter="{Binding .}" />
                                 </SwipeItems>

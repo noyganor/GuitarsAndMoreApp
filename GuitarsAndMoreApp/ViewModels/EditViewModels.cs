@@ -24,22 +24,31 @@ namespace GuitarsAndMoreApp.ViewModels
 
         public EditViewModels(Post p)
         {
+
             App app = (App)App.Current;
+
             if (app.CurrentUser != null)
             {
 
                 SliderValue = (int)p.Price;
                 Pdescription = p.Pdescription;
                 PhoneNum = p.PhoneNum;
-                if (p.Model != null)
-                    Model = p.Model;
-                Town = p.Town;
                 if (p.Producer != null)
+                {
                     Producer = p.Producer;
+                    if (p.Model != null)
+                    {
+                        List<Model> lstModel = app.Lookup.Models.Where(m => m.ProducerId == p.ProducerId).ToList();                      
+                        Models = new ObservableCollection<Model>(lstModel);
+                        Model = p.Model;
+                    }
+                }
+
+                Town = p.Town;      
                 Category = p.Category;
                 if (p.Link != null)
                     Link = p.Link;
-                
+
             }
         }
 
@@ -328,7 +337,28 @@ namespace GuitarsAndMoreApp.ViewModels
         private void ValidatePhoneNumber()
         {
             this.ShowPhoneNumberError = string.IsNullOrEmpty(PhoneNum);
-            this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
+            if (!this.ShowPhoneNumberError)
+            {
+
+                int num;
+                bool ok = int.TryParse(PhoneNum, out num);
+
+                if (!ok)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE;
+                }
+
+
+                else if (this.PhoneNum.Length != 10)
+                {
+                    this.ShowPhoneNumberError = true;
+                    this.PhoneNumberError = ERROR_MESSAGES.BAD_PHONE_NUMBER;
+                }
+            }
+
+            else
+                this.PhoneNumberError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -509,7 +539,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        public Command SaveDataCommand => new Command(SaveData);
+        public Command UpdateButton => new Command(SaveData);
         public async void SaveData()
         {
             if (ValidateForm())
