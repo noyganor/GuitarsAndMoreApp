@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarsAndMoreApp.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarsAndMoreApp.iOS", "GuitarsAndMoreApp.iOS\GuitarsAndMoreApp.iOS.csproj", "{6E259CE5-3027-4AB3-B159-77A587FE2E52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuitarsAndMoreApp", "GuitarsAndMoreApp\GuitarsAndMoreApp.csproj", "{2A11252D-AA97-4567-86FB-8528DEA83E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuitarsAndMoreApp", "GuitarsAndMoreApp\GuitarsAndMoreApp.csproj", "{2A11252D-AA97-4567-86FB-8528DEA83E25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
