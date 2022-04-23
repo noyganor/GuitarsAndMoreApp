@@ -177,7 +177,7 @@ namespace GuitarsAndMoreApp.ViewModels
         public async void SignUpUserPage()
         {
             App app = (App)App.Current;
-            await app.MainPage.Navigation.PopModalAsync();
+            await app.MainPage.Navigation.PopModalAsync(); 
             await app.MainPage.Navigation.PushModalAsync(new SignUp());           
         }
 

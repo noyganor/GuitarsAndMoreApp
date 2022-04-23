@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GuitarsAndMoreApp.ViewModels;
+using GuitarsAndMoreApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,8 +15,15 @@ namespace GuitarsAndMoreApp.Views
     {
         public Update()
         {
-            this.BindingContext = new UpdateViewModels();
+            UpdateViewModels u = new UpdateViewModels();
+            u.SetImageSourceEvent += SetImageSource;
+            this.BindingContext = u;
             InitializeComponent();
+        }
+
+        private void SetImageSource(ImageSource source)
+        {
+            UserImage.Source = source;
         }
     }
 }

@@ -9,7 +9,7 @@
         <StackLayout BackgroundColor="#eae4e9">
             <ImageButton Source="newlogo.png" Command="{Binding LogoCommand}" BackgroundColor="Transparent" />
             <Label Text="{Binding Message}" TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-            <Button Text="פרסום מודעה" Command="{Binding NavigateToUploadAPostPage}" IsVisible="{Binding IsVisible}"/>
+            <Button Text="פרסום מודעה" Command="{Binding NavigateToUploadAPostPage}" IsVisible="{Binding IsVisible}" CornerRadius="10" BorderColor="#8A4966" BorderWidth="3" BackgroundColor="#F5E8EE" HorizontalOptions="Center" Margin="10"/>
             <CollectionView x:Name="myPostsCollection"  SelectedItem="{Binding SelectedPost}"
                             ItemsSource="{Binding MyPostsList}" SelectionMode="Single"
                             SelectionChangedCommand="{Binding SelectionChanged}"

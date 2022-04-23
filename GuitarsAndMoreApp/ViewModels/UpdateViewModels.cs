@@ -30,6 +30,10 @@ namespace GuitarsAndMoreApp.ViewModels
                 //int genderId = app.CurrentUser.GenderId;
                 //FindGender(genderId);
                 FavBand = app.CurrentUser.FavBand;
+                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                //Create a source with cache busting!
+                Random r = new Random();
+                this.UserImgSrc = app.CurrentUser.ImageUrl + $"?{r.Next()}";
             }
         }
 
@@ -298,7 +302,20 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        
+        #region UserImgSrc
+        private string userImgSrc;
+        public string UserImgSrc
+        {
+            get => userImgSrc;
+            set
+            {
+                userImgSrc = value;
+                OnPropertyChanged("UserImgSrc");
+            }
+        }
+        //private const string DEFAULT_PHOTO_SRC = "defaultphoto.jpg";
+        #endregion
+
         public async void FindGender(int genderId)
         {
             try
@@ -314,7 +331,7 @@ namespace GuitarsAndMoreApp.ViewModels
           
         }
 
-
+        #region Validate Form
         public bool ValidateForm()
         {
             ValidateEmail();
@@ -327,6 +344,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
             return true;
         }
+        #endregion
 
         private string message;
         public string Message
@@ -345,6 +363,7 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
+        #region Update save data button
         public Command UpdateButton => new Command(UpdateUserDetails);
         public async void UpdateUserDetails()
         {
@@ -382,7 +401,64 @@ namespace GuitarsAndMoreApp.ViewModels
             else
                 Message = "אחד או יותר מהנתונים שהזנת לא תקין";
         }
+        #endregion
 
+        #region Upload Image
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+        public ICommand PickImageCommand => new Command(OnPickImage);
+        public async void OnPickImage()
+        {
+            try
+            {
+                FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+                {
+                    Title = "בחר תמונה"
+                });
+
+                if (result != null)
+                {
+                    this.imageFileResult = result;
+
+                    var stream = await result.OpenReadAsync();
+                    ImageSource imgSource = ImageSource.FromStream(() => stream);
+                    if (SetImageSourceEvent != null)
+                        SetImageSourceEvent(imgSource);
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", " לא ניתן לפתוח את הגלריה ...", "אישור", FlowDirection.RightToLeft);
+            }
+
+        }
+
+        ///The following command handle the take photo button
+        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public async void OnCameraImage()
+        {
+            try
+            {
+                var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+                {
+                    Title = "צלם תמונה"
+                });
+
+                if (result != null)
+                {
+                    this.imageFileResult = result;
+                    var stream = await result.OpenReadAsync();
+                    ImageSource imgSource = ImageSource.FromStream(() => stream);
+                    if (SetImageSourceEvent != null)
+                        SetImageSourceEvent(imgSource);
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", " לא ניתן לפתוח את המצלמה ...", "אישור", FlowDirection.RightToLeft);
+            }
+        }
+        #endregion
 
     }
 
