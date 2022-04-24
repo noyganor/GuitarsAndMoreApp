@@ -122,7 +122,7 @@
             </ScrollView>
             <Frame  Padding="15">
                 <StackLayout>
-                    <Button Text="עדכן" Command="{Binding UpdateButton}"  CornerRadius="10" BackgroundColor="#dfe7fd" HorizontalOptions="Center" Margin="10,10,10,0" />
+                    <Button Text="עדכן" Command="{Binding UpdateButton}"  CornerRadius="10" BackgroundColor="#dfe7fd"  Margin="10,0,10,0" />
                     <Label Text="{Binding Message}" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
                 </StackLayout>
             </Frame>

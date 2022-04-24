@@ -48,10 +48,10 @@
                             <Label Text="{Binding Model}"  Grid.Column="1" Grid.Row="4" TextColor="Black" Margin="30"/>
 
                             
-                            <Label Text="ליצירת קשר" Grid.Column="0" Grid.Row="6" TextColor="Black" />
-                            <Label Text="{Binding PhoneNum}"  Grid.Column="1" Grid.Row="6" TextColor="Black" />
+                            <Label Text="ליצירת קשר" Grid.Column="0" Grid.Row="5" TextColor="Black" Padding="15"/>
+                            <Label Text="{Binding PhoneNumber}"  Grid.Column="1" Grid.Row="5" TextColor="Black"  Padding="15"/>
 
-
+<!--לינק-->
 
                             <!--<xct:MediaElement Source="https://www.youtube.com/watch?v=yJAKkz17WDo"/>-->
 

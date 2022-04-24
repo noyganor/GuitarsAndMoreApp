@@ -22,14 +22,15 @@ namespace GuitarsAndMoreApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private Post oldPost;
         public EditViewModels(Post p)
         {
 
             App app = (App)App.Current;
-
+            this.oldPost = p;
             if (app.CurrentUser != null)
             {
-
+                Models = new ObservableCollection<Model>();
                 SliderValue = (int)p.Price;
                 Pdescription = p.Pdescription;
                 PhoneNum = p.PhoneNum;
@@ -38,8 +39,6 @@ namespace GuitarsAndMoreApp.ViewModels
                     Producer = p.Producer;
                     if (p.Model != null)
                     {
-                        List<Model> lstModel = app.Lookup.Models.Where(m => m.ProducerId == p.ProducerId).ToList();                      
-                        Models = new ObservableCollection<Model>(lstModel);
                         Model = p.Model;
                     }
                 }
@@ -439,10 +438,13 @@ namespace GuitarsAndMoreApp.ViewModels
 
         #endregion
 
-        private async void ProducerChanged()
+        private void ProducerChanged()
         {
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            List<Model> mList = await proxy.GetListOfModelsAsync();
+            App app = (App)Application.Current;
+            //GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+
+            //List<Model> mList = await proxy.GetListOfModelsAsync();
+            List<Model> mList = app.Lookup.Models;
             if (mList != null)
             {
                 Models.Clear();
@@ -553,6 +555,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
                 Post p = new Post
                 {
+                    PostId = this.oldPost.PostId,
                     UserId = app.CurrentUser.UserId,
                     Price = this.SliderValue,
                     Pdescription = this.Pdescription,
@@ -564,7 +567,7 @@ namespace GuitarsAndMoreApp.ViewModels
                     Link = this.Link,
                 };
 
-                Post newPost = await proxy.AddPost(p);
+                Post newPost = await proxy.EditPost(p);
                 if (newPost == null)
                 {
                     Message = "המודעה לא עלתה";

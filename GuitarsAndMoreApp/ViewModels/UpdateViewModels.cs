@@ -33,7 +33,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
                 //Create a source with cache busting!
                 Random r = new Random();
-                this.UserImgSrc = app.CurrentUser.ImageUrl + $"?{r.Next()}";
+                //Set default image url for non connected users
+               this.UserImgSrc = $"{proxy.GetPhotoUri()}stam.jpg";
+             //   this.UserImgSrc = app.CurrentUser.ImageUrl + $"?{r.Next()}";
             }
         }
 
@@ -328,7 +330,6 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 Console.WriteLine(e.Message);
             }
-          
         }
 
         #region Validate Form
@@ -406,7 +407,7 @@ namespace GuitarsAndMoreApp.ViewModels
         #region Upload Image
         FileResult imageFileResult;
         public event Action<ImageSource> SetImageSourceEvent;
-        public ICommand PickImageCommand => new Command(OnPickImage);
+        public Command PickImageCommand => new Command(OnPickImage);
         public async void OnPickImage()
         {
             try
@@ -434,7 +435,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
 
         ///The following command handle the take photo button
-        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public Command CameraImageCommand => new Command(OnCameraImage);
         public async void OnCameraImage()
         {
             try

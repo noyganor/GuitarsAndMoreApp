@@ -24,11 +24,17 @@ namespace GuitarsAndMoreApp.ViewModels
             if (p.Town != null)
                 Town = p.Town.Town1;
             else
-                Town = "Town is null!";
+                Town = "לא נבחרה עיר";
 
-           
-            Producer = p.Producer?.Producer1;
-            Model = p.Model?.ModelName;
+            if (p.Producer != null)
+                Producer = p.Producer.Producer1;
+            else
+                Producer = "לא נבחר יצרן";
+
+            if (p.Model != null)
+                Model = p.Model.ModelName;
+            else
+                Model = "לא נבחר דגם";
             Pdescription = p.Pdescription;
             Link = p.Link;
             PhoneNumber = p.PhoneNum;

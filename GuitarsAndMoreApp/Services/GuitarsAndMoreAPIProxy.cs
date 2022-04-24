@@ -301,6 +301,15 @@ namespace GuitarsAndMoreApp.Services
 
                     string jsonContent = await response.Content.ReadAsStringAsync();
                     Post b = JsonSerializer.Deserialize<Post>(jsonContent, options);
+                    if (b != null)
+                    {
+                        App app = (App)App.Current;
+                        b.Town = app.Lookup.Towns.Where(t => t.TownId == b.TownId).FirstOrDefault();
+                        b.Model = app.Lookup.Models.Where(t => t.ModelId == b.ModelId).FirstOrDefault();
+                        b.Category = app.Lookup.Categories.Where(t => t.CategoryId == b.CategoryId).FirstOrDefault();
+                        b.Producer = app.Lookup.Producers.Where(t => t.ProducerId == b.ProducerId).FirstOrDefault();
+                    }
+                    
                     return b;
                 }
                 else
@@ -316,6 +325,45 @@ namespace GuitarsAndMoreApp.Services
             }
         }
 
+        public async Task<Post> EditPost(Post p)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<Post>(p, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/EditPost", content);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    Post b = JsonSerializer.Deserialize<Post>(jsonContent, options);
+                    if (b != null)
+                    {
+                        App app = (App)App.Current;
+                        b.Town = app.Lookup.Towns.Where(t => t.TownId == b.TownId).FirstOrDefault();
+                        b.Model = app.Lookup.Models.Where(t => t.ModelId == b.ModelId).FirstOrDefault();
+                        b.Category = app.Lookup.Categories.Where(t => t.CategoryId == b.CategoryId).FirstOrDefault();
+                        b.Producer = app.Lookup.Producers.Where(t => t.ProducerId == b.ProducerId).FirstOrDefault();
+                    }
+                    return b;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
         public async Task<bool> DeletePost(int pId)
         {
             try

@@ -68,8 +68,12 @@
                                 <Button Text="בחר תמונה מהגלריה" Command="{Binding PickImageCommand}" BackgroundColor="#dfe7fd" CornerRadius="7" Grid.Row="0" Grid.Column="0"></Button>
                                 <Button Text="צלם תמונה" Command="{Binding CameraImageCommand}" BackgroundColor="#dfe7fd" CornerRadius="7" Grid.Row="0" Grid.Column="1"/>
                             </Grid>
-                            
-                            <Image x:Name="PostImage"></Image>
+                           
+                            <ImageButton BackgroundColor="Transparent" Source="{Binding ImgSource1}" Command="{Binding Button1PressedCommand}" Grid.Column="0" Grid.Row="7" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25"></ImageButton>
+                            <StackLayout IsVisible="{Binding Button1}">
+                                <Image x:Name="PostImage" HeightRequest="100" WidthRequest="100"/>
+                            </StackLayout>
+                          
 
                             <Label Text=" לאיזו קטוגריה משתייך המוצר?" TextColor="Black" />
                             <Picker ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Category1}" SelectedItem="{Binding Category}" />

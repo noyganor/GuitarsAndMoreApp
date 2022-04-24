@@ -15,10 +15,18 @@ namespace GuitarsAndMoreApp.ViewModels
 {
     class UploadAPostViewModels : INotifyPropertyChanged
     {
+        private const string Source1 = "arrowdown.png";
+        private const string Source2 = "arrowup.png";
         public UploadAPostViewModels()
         {
             this.SliderValue = 0;
             Models = new ObservableCollection<Model>();
+            Button1 = false;
+            Button2 = false;
+            ImgSource1 = Source1;
+            ImgSource2 = Source1;
+            Button1PressedCommand = new Command(Button1Pressed);
+            Button2PressedCommand = new Command(Button2Pressed);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
@@ -413,10 +421,13 @@ namespace GuitarsAndMoreApp.ViewModels
 
         #endregion
 
-        private async void ProducerChanged()
+        private void ProducerChanged()
         {
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            List<Model> mList = await proxy.GetListOfModelsAsync();
+            App app = (App)Application.Current;
+            //GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+
+            //List<Model> mList = await proxy.GetListOfModelsAsync();
+            List<Model> mList = app.Lookup.Models;
             if (mList != null)
             {
                 Models.Clear();
@@ -432,7 +443,7 @@ namespace GuitarsAndMoreApp.ViewModels
         #region Upload Image
         FileResult imageFileResult;
         public event Action<ImageSource> SetImageSourceEvent;
-        public Command PickImageCommand => new Command(OnPickImage);
+        public ICommand PickImageCommand => new Command(OnPickImage);
         public async void OnPickImage()
         {
             try
@@ -486,8 +497,6 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-
-
         public async void ShowUploadAPostPage()
         {
             App app = (App)App.Current;
@@ -520,6 +529,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 return true;
         }
 
+      
         public Command SaveDataCommand => new Command(SaveData);
         public async void SaveData()
         {
@@ -568,11 +578,139 @@ namespace GuitarsAndMoreApp.ViewModels
                             Page page = new HomePage();
                             await app.MainPage.Navigation.PopToRootAsync();
                         }
+                    }              
+                }
+
+                else
+                {
+                    GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+
+                    Post p = new Post
+                    {
+                        UserId = app.CurrentUser.UserId,
+                        Price = this.SliderValue,
+                        Pdescription = this.Pdescription,
+                        PhoneNum = this.PhoneNum,
+                        ModelId = this.Model?.ModelId,
+                        TownId = this.Town.TownId,
+                        ProducerId = this.Producer?.ProducerId,
+                        CategoryId = this.Category.CategoryId,
+                        Link = this.Link,
+                    };
+
+                    Post newPost = await proxy.AddPost(p);
+                    if (newPost == null)
+                    {
+                        Message = "המודעה לא עלתה";
+                    }
+
+                    else
+                    {
+                        //Upload image to server
+                        if (this.imageFileResult != null)
+                        {
+
+                            bool success = await proxy.UploadImage(new FileInfo()
+                            {
+                                Name = this.imageFileResult.FullPath
+                            }, $"{newPost.PostId}.jpg");
+                        }
+                        Message = "המודעה הועלתה בהצלחה!";
+
+                        Page page = new HomePage();
+                        await app.MainPage.Navigation.PopToRootAsync();
                     }
                 }
 
             }
 
+        }
+        #endregion
+
+        #region ButtonPressed
+        private bool button1;
+        public bool Button1
+        {
+            get { return this.button1; }
+
+            set
+            {
+                if (this.button1 != value)
+                {
+                    this.button1 = value;
+                    OnPropertyChanged(nameof(Button1));
+                }
+            }
+        }
+
+        private bool button2;
+        public bool Button2
+        {
+            get { return this.button2; }
+
+            set
+            {
+                if (this.button2 != value)
+                {
+                    this.button2 = value;
+                    OnPropertyChanged(nameof(Button2));
+                }
+            }
+        }
+        #endregion
+
+        #region imgChange
+        private string imgSource1;
+        public string ImgSource1
+        {
+            get { return this.imgSource1; }
+
+            set
+            {
+                if (this.imgSource1 != value)
+                {
+                    this.imgSource1 = value;
+                    OnPropertyChanged(nameof(ImgSource1));
+                }
+            }
+        }
+
+        private string imgSource2;
+        public string ImgSource2
+        {
+            get { return this.imgSource2; }
+
+            set
+            {
+                if (this.imgSource2 != value)
+                {
+                    this.imgSource2 = value;
+                    OnPropertyChanged(nameof(ImgSource2));
+                }
+            }
+        }
+        #endregion
+
+
+        #region
+        public ICommand Button1PressedCommand { protected set; get; }
+        public void Button1Pressed()
+        {
+            if (Button1 == false) { Button1 = true; }
+            else { Button1 = false; }
+
+            if (ImgSource1 == Source1) { ImgSource1 = Source2; }
+            else { ImgSource1 = Source1; }
+        }
+
+        public ICommand Button2PressedCommand { protected set; get; }
+        public void Button2Pressed()
+        {
+            if (Button2 == false) { Button2 = true; }
+            else { Button2 = false; }
+
+            if (ImgSource2 == Source1) { ImgSource2 = Source2; }
+            else { ImgSource2 = Source1; }
         }
         #endregion
     }

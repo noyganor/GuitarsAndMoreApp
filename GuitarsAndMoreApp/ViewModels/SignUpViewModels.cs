@@ -41,8 +41,8 @@ namespace GuitarsAndMoreApp.ViewModels
             Button2PressedCommand = new Command(Button2Pressed);
         }
 
-        private const string Source1 = "outline_favorite_border_black_24dp.png";
-        private const string Source2 = "fullHeart.png";        
+        private const string Source1 = "arrowdown.png";
+        private const string Source2 = "arrowup.png";
 
         #region email
         private string email;
@@ -325,7 +325,7 @@ namespace GuitarsAndMoreApp.ViewModels
         #region Upload Image
         FileResult imageFileResult;
         public event Action<ImageSource> SetImageSourceEvent;
-        public ICommand PickImageCommand => new Command(OnPickImage);
+        public Command PickImageCommand => new Command(OnPickImage);
         public async void OnPickImage()
         {
             try
@@ -353,7 +353,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
 
         ///The following command handle the take photo button
-        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public Command CameraImageCommand => new Command(OnCameraImage);
         public async void OnCameraImage()
         {
             try
