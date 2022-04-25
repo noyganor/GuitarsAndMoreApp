@@ -213,7 +213,7 @@ namespace GuitarsAndMoreApp.ViewModels
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.userImg.FullPath
-                        }, $"U{u.UserId}.jpg");
+                        }, $"U{u.UserId}.jpg", true);
                     }
                     Message = "ההרשמה בוצעה בהצלחה!";
                     NavigationPage p = new NavigationPage(new MainTab());

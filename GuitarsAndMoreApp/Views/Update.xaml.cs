@@ -16,6 +16,10 @@ namespace GuitarsAndMoreApp.Views
         public Update()
         {
             UpdateViewModels u = new UpdateViewModels();
+
+            //fix
+            App app = (App)App.Current;
+            SetImageSource(app.CurrentUser.ImageUrl);
             u.SetImageSourceEvent += SetImageSource;
             this.BindingContext = u;
             InitializeComponent();

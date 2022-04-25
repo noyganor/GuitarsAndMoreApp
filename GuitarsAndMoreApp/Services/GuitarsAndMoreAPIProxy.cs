@@ -427,14 +427,14 @@ namespace GuitarsAndMoreApp.Services
         }
 
         //Upload file to server (only images!)
-        public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
+        public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName, bool isRegistered )
         {
             try
             {
                 var multipartFormDataContent = new MultipartFormDataContent();
                 var fileContent = new ByteArrayContent(File.ReadAllBytes(fileInfo.Name));
                 multipartFormDataContent.Add(fileContent, "file", targetFileName);
-                HttpResponseMessage response = await client.PostAsync($"{this.baseUri}/UploadImage", multipartFormDataContent);
+                HttpResponseMessage response = await client.PostAsync($"{this.baseUri}/UploadImage?isRegistered={isRegistered}", multipartFormDataContent);
                 if (response.IsSuccessStatusCode)
                 {
                     return true;

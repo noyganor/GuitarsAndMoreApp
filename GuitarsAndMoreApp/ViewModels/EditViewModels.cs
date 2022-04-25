@@ -47,7 +47,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 Category = p.Category;
                 if (p.Link != null)
                     Link = p.Link;
-
+                //this.Src = p.ImageUrl;
             }
         }
 
@@ -379,7 +379,24 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
         #endregion
-
+        #region source image
+        private string src;
+        public string Src
+        {
+            get
+            {
+                return this.src;
+            }
+            set
+            {
+                if (this.src != value)
+                {
+                    this.src = value;
+                    OnPropertyChanged("Src");
+                }
+            }
+        }
+        #endregion
         #region Category
         public Category category;
         public Category Category
@@ -582,7 +599,7 @@ namespace GuitarsAndMoreApp.ViewModels
                         bool success = await proxy.UploadImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
-                        }, $"{newPost.PostId}.jpg");
+                        }, $"{newPost.PostId}.jpg", false);
                     }
                     Message = "המודעה הועלתה בהצלחה!";
 

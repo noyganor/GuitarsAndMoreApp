@@ -571,7 +571,7 @@ namespace GuitarsAndMoreApp.ViewModels
                                 bool success = await proxy.UploadImage(new FileInfo()
                                 {
                                     Name = this.imageFileResult.FullPath
-                                }, $"{newPost.PostId}.jpg");
+                                }, $"{newPost.PostId}.jpg", false);
                             }
                             Message = "המודעה הועלתה בהצלחה!";
 
@@ -613,7 +613,7 @@ namespace GuitarsAndMoreApp.ViewModels
                             bool success = await proxy.UploadImage(new FileInfo()
                             {
                                 Name = this.imageFileResult.FullPath
-                            }, $"{newPost.PostId}.jpg");
+                            }, $"{newPost.PostId}.jpg", false);
                         }
                         Message = "המודעה הועלתה בהצלחה!";
 

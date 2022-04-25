@@ -30,11 +30,10 @@ namespace GuitarsAndMoreApp.ViewModels
                 //int genderId = app.CurrentUser.GenderId;
                 //FindGender(genderId);
                 FavBand = app.CurrentUser.FavBand;
-                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                //Create a source with cache busting!
-                Random r = new Random();
+            
                 //Set default image url for non connected users
-               this.UserImgSrc = $"{proxy.GetPhotoUri()}stam.jpg";
+                this.UserImgSrc = app.CurrentUser.ImageUrl;
+                
              //   this.UserImgSrc = app.CurrentUser.ImageUrl + $"?{r.Next()}";
             }
         }
@@ -407,6 +406,14 @@ namespace GuitarsAndMoreApp.ViewModels
         #region Upload Image
         FileResult imageFileResult;
         public event Action<ImageSource> SetImageSourceEvent;
+        //public void SetUmageSource()
+        //{
+     
+        //    var stream =
+        //    ImageSource imgSource = ImageSource.FromStream(() => stream);
+        //    if (SetImageSourceEvent != null)
+        //        SetImageSourceEvent(imgSource);
+        //}
         public Command PickImageCommand => new Command(OnPickImage);
         public async void OnPickImage()
         {

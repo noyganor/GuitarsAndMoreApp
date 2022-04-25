@@ -31,10 +31,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
+                                  
                                 </Grid.RowDefinitions>
                             </Grid>
                             <!--<StackLayout>
@@ -88,10 +85,10 @@
 
                             <Label Text="טלפון ליצירת קשר" Grid.Column="0" Grid.Row="10"/>
                             <Entry Text="{Binding PhoneNum}" Placeholder="טלפון ליצירת קשר" Grid.Column="1" Grid.Row="10"/>
-                            <!--<Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11"/>-->
+                            <Label Text="{Binding PhoneNumberError}" IsVisible="{Binding ShowPhoneNumberError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="11"/>
 
 
-                            <Grid >
+                            <Grid Grid.Row="12" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
@@ -100,22 +97,18 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Button Text=" בחר תמונה מהגלריה" Command="{Binding PickImageCommand}" Grid.Column="0" Grid.Row="12"  CornerRadius="7" BackgroundColor="#dfe7fd"></Button>
-                                <Button Text=" צלם תמונה" Command="{Binding CameraImageCommand}" Grid.Column="1" Grid.Row="12"  CornerRadius="7" BackgroundColor="#dfe7fd"/>
-                                <!--<Image x:Name="PostImage" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="13"></Image>-->
+                                <Button Text=" בחר תמונה מהגלריה" Command="{Binding PickImageCommand}" Grid.Column="0" Grid.Row="0"  CornerRadius="7" BackgroundColor="#dfe7fd" Padding="0" Margin="5,25,5,25" ></Button>
+                                <Button Text=" צלם תמונה" Command="{Binding CameraImageCommand}" Grid.Column="1" Grid.Row="0"  CornerRadius="7" BackgroundColor="#dfe7fd"  Margin="5,25,5,25"/>
+                                <Image x:Name="PostImage" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Source="{Binding Src}" ></Image>
                             </Grid>
 
                             <Label Text=" לאיזו קטוגריה משתייך המוצר?" Grid.Column="0" Grid.Row="14"/>
                             <Picker ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Category1}" SelectedItem="{Binding Category}" Grid.Column="1" Grid.Row="14"/>
-                            <Label Text="{Binding CategoryError}" IsVisible="{Binding ShowCategoryError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15"/>
+                            <Label Text="{Binding CategoryError}" IsVisible="{Binding ShowCategoryError}" TextColor="Red" FontAttributes="None" FontSize="Caption" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="15" />
 
 
-                            <!--Photo 
+                       
                       
-                        <Image Source="{Binding UserImgSrc}" />
-                    
-                        <ImageButton Padding="0" Margin="0" Source="galleryIcon.png" HorizontalOptions="End" BackgroundColor="Transparent" Grid.Column="1" Grid.Row="0" Command="{Binding PickImageCommand}"/>
-                        <ImageButton Padding="0" Margin="0" Source="cameraIcon.png" HorizontalOptions="Start" Grid.Column="2" Grid.Row="0" BackgroundColor="Transparent" Command="{Binding CameraImageCommand}"/>-->
                         </StackLayout>
                     </Frame>
                 </StackLayout>
@@ -127,7 +120,7 @@
                 </StackLayout>
             </Frame>
         </StackLayout>
-        <!--</Grid>-->
+      
 
     </ContentPage.Content>
 </ContentPage>
