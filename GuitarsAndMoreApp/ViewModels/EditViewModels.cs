@@ -43,7 +43,7 @@ namespace GuitarsAndMoreApp.ViewModels
                     }
                 }
 
-                Town = p.Town;      
+                Town = p.Town;
                 Category = p.Category;
                 if (p.Link != null)
                     Link = p.Link;
@@ -566,46 +566,92 @@ namespace GuitarsAndMoreApp.ViewModels
                 App app = (App)App.Current;
                 if (ShowPriceError)
                 {
-                    await App.Current.MainPage.DisplayAlert("שים לב!", "  המוצר שהינך עומד לפרסם מיועד לתרומה", "אישור", FlowDirection.RightToLeft);
-                }
-                GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+                    bool result = await App.Current.MainPage.DisplayAlert("שים לב!", "  המוצר שהינך עומד לפרסם מיועד לתרומה", "אישור", "ביטול", FlowDirection.RightToLeft);
+                    if (result)
+                    {
+                        GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
 
-                Post p = new Post
-                {
-                    PostId = this.oldPost.PostId,
-                    UserId = app.CurrentUser.UserId,
-                    Price = this.SliderValue,
-                    Pdescription = this.Pdescription,
-                    PhoneNum = this.PhoneNum,
-                    ModelId = this.Model?.ModelId,
-                    TownId = this.Town.TownId,
-                    ProducerId = this.Producer?.ProducerId,
-                    CategoryId = this.Category.CategoryId,
-                    Link = this.Link,
-                };
+                        Post p = new Post
+                        {
+                            PostId = this.oldPost.PostId,
+                            UserId = app.CurrentUser.UserId,
+                            Price = this.SliderValue,
+                            Pdescription = this.Pdescription,
+                            PhoneNum = this.PhoneNum,
+                            ModelId = this.Model?.ModelId,
+                            TownId = this.Town.TownId,
+                            ProducerId = this.Producer?.ProducerId,
+                            CategoryId = this.Category.CategoryId,
+                            Link = this.Link,
+                        };
 
-                Post newPost = await proxy.EditPost(p);
-                if (newPost == null)
-                {
-                    Message = "המודעה לא עלתה";
+                        Post newPost = await proxy.EditPost(p);
+                        if (newPost == null)
+                        {
+                            Message = "המודעה לא עלתה";
+                        }
+
+                        else
+                        {
+                            //Upload image to server
+                            if (this.imageFileResult != null)
+                            {
+
+                                bool success = await proxy.UploadImage(new FileInfo()
+                                {
+                                    Name = this.imageFileResult.FullPath
+                                }, $"{newPost.PostId}.jpg", false);
+                            }
+                            Message = "המודעה הועלתה בהצלחה!";
+
+                            Page page = new HomePage();
+                            await app.MainPage.Navigation.PopToRootAsync();
+                        }
+                    }
                 }
 
                 else
                 {
-                    //Upload image to server
-                    if (this.imageFileResult != null)
+                    GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+
+                    Post p = new Post
                     {
+                        PostId = this.oldPost.PostId,
+                        UserId = app.CurrentUser.UserId,
+                        Price = this.SliderValue,
+                        Pdescription = this.Pdescription,
+                        PhoneNum = this.PhoneNum,
+                        ModelId = this.Model?.ModelId,
+                        TownId = this.Town.TownId,
+                        ProducerId = this.Producer?.ProducerId,
+                        CategoryId = this.Category.CategoryId,
+                        Link = this.Link,
+                    };
 
-                        bool success = await proxy.UploadImage(new FileInfo()
-                        {
-                            Name = this.imageFileResult.FullPath
-                        }, $"{newPost.PostId}.jpg", false);
+                    Post newPost = await proxy.EditPost(p);
+                    if (newPost == null)
+                    {
+                        Message = "המודעה לא עלתה";
                     }
-                    Message = "המודעה הועלתה בהצלחה!";
 
-                    Page page = new HomePage();
-                    await app.MainPage.Navigation.PopToRootAsync();
+                    else
+                    {
+                        //Upload image to server
+                        if (this.imageFileResult != null)
+                        {
+
+                            bool success = await proxy.UploadImage(new FileInfo()
+                            {
+                                Name = this.imageFileResult.FullPath
+                            }, $"{newPost.PostId}.jpg", false);
+                        }
+                        Message = "המודעה הועלתה בהצלחה!";
+
+                        Page page = new HomePage();
+                        await app.MainPage.Navigation.PopToRootAsync();
+                    }
                 }
+
             }
         }
     }

@@ -224,7 +224,9 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
 
                     string postString = $"{p.Category.Category1}|{p.Model?.ModelName}|{p.Price}|{p.Town.Town1}|{p.Pdescription}|{p.Producer?.Producer1}";
-                    if (!this.PostsList.Contains(p) && postString.Contains(search))
+                    string lowerPostString = postString.ToLower();
+                    string lowerSearch = search.ToLower();
+                    if (!this.PostsList.Contains(p) && lowerPostString.Contains(lowerSearch))
                         this.PostsList.Add(p);
 
                     else if (this.PostsList.Contains(p) && !postString.Contains(search))

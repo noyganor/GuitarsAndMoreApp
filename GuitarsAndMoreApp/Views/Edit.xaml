@@ -94,7 +94,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="100" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Button Text=" בחר תמונה מהגלריה" Command="{Binding PickImageCommand}" Grid.Column="0" Grid.Row="0"  CornerRadius="7" BackgroundColor="#dfe7fd" Padding="0" Margin="5,25,5,25" ></Button>
@@ -115,7 +115,7 @@
             </ScrollView>
             <Frame  Padding="15">
                 <StackLayout>
-                    <Button Text="עדכן" Command="{Binding UpdateButton}"  CornerRadius="10" BackgroundColor="#dfe7fd"  Margin="10,0,10,0" />
+                    <Button Text="עדכן" Command="{Binding UpdateButton}"  CornerRadius="10" BackgroundColor="#dfe7fd"  Margin="10,0,10,-25" />
                     <Label Text="{Binding Message}" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
                 </StackLayout>
             </Frame>

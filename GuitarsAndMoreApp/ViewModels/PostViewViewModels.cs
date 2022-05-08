@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using GuitarsAndMoreApp.Models;
 using GuitarsAndMoreApp.Services;
 using GuitarsAndMoreApp.Views;
+using Xamarin.Essentials;
 
 namespace GuitarsAndMoreApp.ViewModels
 {
@@ -200,7 +201,6 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-     
-
+      
     }
 }

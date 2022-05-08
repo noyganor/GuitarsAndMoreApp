@@ -19,6 +19,7 @@ namespace GuitarsAndMoreApp.ViewModels
         private const string Source2 = "arrowup.png";
         public UploadAPostViewModels()
         {
+            
             this.SliderValue = 0;
             Models = new ObservableCollection<Model>();
             Button1 = false;
@@ -505,7 +506,12 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 bool result = await App.Current.MainPage.DisplayAlert("שגיאה", " יש להתחבר למערכת...", "אישור", "ביטול", FlowDirection.RightToLeft);
                 if (result)
+                {
+                    
                     await app.MainPage.Navigation.PushModalAsync(new Login());
+                    
+                }
+                   
                 else
                     await app.MainPage.Navigation.PopToRootAsync();
                 return;

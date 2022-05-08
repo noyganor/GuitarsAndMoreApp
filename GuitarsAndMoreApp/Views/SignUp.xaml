@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.SignUp"
              FlowDirection="RightToLeft"
-             Title="הרשמה">
+             Title="הרשמה"
+             NavigationPage.HasNavigationBar="False"
+
+>
     <ContentPage.Content>
         <StackLayout BackgroundColor="#eae4e9">
             <ImageButton Source="newlogo.png" Command="{Binding BackToHomePageButton}" BackgroundColor="Transparent" />

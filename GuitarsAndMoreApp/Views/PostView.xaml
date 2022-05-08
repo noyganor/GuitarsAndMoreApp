@@ -49,10 +49,10 @@
 
                             
                             <Label Text="ליצירת קשר" Grid.Column="0" Grid.Row="5" TextColor="Black" Padding="15"/>
-                            <Label Text="{Binding PhoneNumber}"  Grid.Column="1" Grid.Row="5" TextColor="Black"  Padding="15"/>
+                            <Button Text="{Binding PhoneNumber}" Clicked="Button_Clicked" Grid.Column="1" Grid.Row="5" TextColor="Black"  Padding="15"/>
 
 <!--לינק-->
-
+                            <WebView Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Source="https://www.youtube.com/embed/MOQJGh73wGM" WidthRequest="500"></WebView>
                             <!--<xct:MediaElement Source="https://www.youtube.com/watch?v=yJAKkz17WDo"/>-->
 
 

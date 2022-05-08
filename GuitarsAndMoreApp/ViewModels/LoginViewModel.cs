@@ -177,8 +177,8 @@ namespace GuitarsAndMoreApp.ViewModels
         public async void SignUpUserPage()
         {
             App app = (App)App.Current;
-            await app.MainPage.Navigation.PopModalAsync(); 
-            await app.MainPage.Navigation.PushModalAsync(new SignUp());           
+            await app.MainPage.Navigation.PopAsync(); 
+            await app.MainPage.Navigation.PushAsync(new SignUp());           
         }
 
         public ICommand BackToHomePageButton { get; }
@@ -207,7 +207,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
             //On debug only!
             this.Email = "noiganor12@gmail.com";
-            this.Password = "12345678";
+            this.Password = "nganor";
 
 
         }

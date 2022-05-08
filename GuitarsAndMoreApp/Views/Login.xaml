@@ -4,7 +4,10 @@
              xmlns:local="clr-namespace:GuitarsAndMoreApp.ViewModels"
              x:Class="GuitarsAndMoreApp.Views.Login"
              x:DataType="local:LoginViewModel"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             NavigationPage.HasNavigationBar="False"
+
+>
 
 
 

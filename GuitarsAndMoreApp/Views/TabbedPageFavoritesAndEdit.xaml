@@ -4,7 +4,7 @@
              x:Class="GuitarsAndMoreApp.Views.TabbedPageFavoritesAndEdit"
               BarBackgroundColor="#5c374c"
              BarTextColor="White"
-             SelectedTabColor="#5c374c"
+             SelectedTabColor="#    "
              UnselectedTabColor="White"          
              xmlns:local="clr-namespace:GuitarsAndMoreApp.Views"
             FlowDirection="RightToLeft"

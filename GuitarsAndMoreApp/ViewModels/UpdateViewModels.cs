@@ -331,21 +331,6 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
 
-        #region Validate Form
-        public bool ValidateForm()
-        {
-            ValidateEmail();
-            ValidateNickname();
-            ValidatePassword();
-            ValidatePhoneNumber();
-
-            if (ShowEmailError || ShowNicknameError || ShowPasswordError)
-                return false;
-
-            return true;
-        }
-        #endregion
-
         private string message;
         public string Message
         {
@@ -362,6 +347,21 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
+
+        #region Validate Form
+        public bool ValidateForm()
+        {
+            ValidateEmail();
+            ValidateNickname();
+            ValidatePassword();
+            ValidatePhoneNumber();
+
+            if (ShowEmailError || ShowNicknameError || ShowPasswordError || ShowPhoneNumberError)
+                return false;
+
+            return true;
+        }
+        #endregion
 
         #region Update save data button
         public Command UpdateButton => new Command(UpdateUserDetails);

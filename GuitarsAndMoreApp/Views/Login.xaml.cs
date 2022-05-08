@@ -18,5 +18,9 @@ namespace GuitarsAndMoreApp.Views
             this.BindingContext = new LoginViewModel();
             InitializeComponent();
         }
+        protected override void OnAppearing()
+        {
+            this.BindingContext = BindingContext;
+        }
     }
 }
