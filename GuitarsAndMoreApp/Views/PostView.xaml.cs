@@ -18,20 +18,13 @@ namespace GuitarsAndMoreApp.Views
         {
             this.BindingContext = new PostViewViewModels(p);
             InitializeComponent();
-           
+
         }
 
-        private void Button_Clicked(string phoneNumber)
-        {
-            try
-            {
-                PhoneDialer.Open(phoneNumber);
-            }
-            catch(Exception e)
-            {
-                DisplayAlert("Unable to make call", "Please enter a number", "OK");
-            }
-           
-        }
+        //private void Button_Clicked()
+        //{
+        //   
+
+        //}
     }
 }

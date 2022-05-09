@@ -19,7 +19,7 @@ namespace GuitarsAndMoreApp.ViewModels
     {
         public PostViewViewModels(Post p)
         {
-            
+            Email = p.User?.Email;
             Price = p.Price;
             //Is Needed?
             if (p.Town != null)
@@ -80,7 +80,7 @@ namespace GuitarsAndMoreApp.ViewModels
             {
                 if (this.price != value)
                 {
-                    this.price= value;
+                    this.price = value;
                     OnPropertyChanged("Price");
                 }
             }
@@ -177,7 +177,17 @@ namespace GuitarsAndMoreApp.ViewModels
                 {
                     this.link = value;
                     OnPropertyChanged("Link");
+                    OnPropertyChanged("IsVisible");
                 }
+            }
+        }
+
+
+        public bool IsVisible
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(this.link);
             }
         }
         #endregion
@@ -201,6 +211,39 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-      
+        #region email
+        private string email;
+        public string Email
+        {
+            get
+            {
+                return this.email;
+            }
+            set
+            {
+                if (this.email != value)
+                {
+                    this.email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
+        #endregion
+
+        public Command OnCall => new Command<string>(OnCallButton);
+        public void OnCallButton(string parameter)
+        {
+            try
+            {
+                if (parameter == "phone")
+                    PhoneDialer.Open(this.PhoneNumber);
+                else
+                    Launcher.OpenAsync(new Uri($"mailto:{Email}"));
+            }
+            catch (Exception e)
+            {
+                // DisplayAlert("Unable to make call", "Please enter a number", "OK");
+            }
+        }
     }
 }

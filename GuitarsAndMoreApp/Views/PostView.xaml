@@ -9,9 +9,16 @@
         <ScrollView>
             <StackLayout  BackgroundColor="#eae4e9">
 
-                <Frame HasShadow="True" CornerRadius="7" Padding="5" Margin="30,10,30,30">
-                <Image Source="{Binding ImageUrl}"/>
-                        </Frame>
+                <Frame HasShadow="True" CornerRadius="7" Padding="5" Margin="30,10,30,30" WidthRequest="300" HeightRequest="300">
+                    <Image Source="{Binding ImageUrl}"/>
+                </Frame>
+
+                <Frame  IsVisible="{Binding IsVisible}"  WidthRequest="300" HeightRequest="300"  HasShadow="True" CornerRadius="7" Padding="5" Margin="30,10,30,30">
+                    <ScrollView>
+                        <WebView Source="{Binding Link}" ></WebView>
+                    </ScrollView>
+                    
+                </Frame>
 
                 <Frame CornerRadius="7" Padding="5" Margin="30,2,30,30"  HasShadow="True">
                     <StackLayout>
@@ -24,7 +31,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
-                              
+
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
@@ -33,7 +40,6 @@
 
                             <Label Text="מחיר" Grid.Column="0" Grid.Row="0" TextColor="Black" />
                             <Label Text="{Binding Price}"  Grid.Column="1" Grid.Row="0" TextColor="Black" FontSize="Small"/>
-                            <!--<Label Text=" " Grid.Column="1" Grid.Row="1"/>-->
 
                             <Label Text=" יישוב" Grid.Column="0"  Grid.Row="1" TextColor="Black"/>
                             <Label Text="{Binding Town}" HorizontalOptions="End" Grid.Column="1"  Grid.Row="1" TextColor="Black"/>
@@ -47,26 +53,15 @@
                             <Label Text="דגם" Grid.Column="0" Grid.Row="4" TextColor="Black" Margin="30"/>
                             <Label Text="{Binding Model}"  Grid.Column="1" Grid.Row="4" TextColor="Black" Margin="30"/>
 
-                            
+
                             <Label Text="ליצירת קשר" Grid.Column="0" Grid.Row="5" TextColor="Black" Padding="15"/>
-                            <Button Text="{Binding PhoneNumber}" Clicked="Button_Clicked" Grid.Column="1" Grid.Row="5" TextColor="Black"  Padding="15"/>
-
-<!--לינק-->
-                            <WebView Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Source="https://www.youtube.com/embed/MOQJGh73wGM" WidthRequest="500"></WebView>
-                            <!--<xct:MediaElement Source="https://www.youtube.com/watch?v=yJAKkz17WDo"/>-->
-
-
-
-
-                            <!--<Label Text="{Binding Link}"/>-->
-                         
+                            <StackLayout  Grid.Column="1" Grid.Row="5">
+                                <Button Text="{Binding PhoneNumber}"  Command="{Binding OnCall}" CommandParameter="phone" Margin="0,0,0,0" TextColor="#457b9d" BackgroundColor="Transparent" />
+                                <Button Text="{Binding Email}"  Command="{Binding OnCall}" CommandParameter="email" TextColor="#457b9d"  BackgroundColor="Transparent" />
+                            </StackLayout>
                         </Grid>
                     </StackLayout>
                 </Frame>
-
-
-
-
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -16,13 +16,15 @@ namespace GuitarsAndMoreApp.Views
         public Update()
         {
             UpdateViewModels u = new UpdateViewModels();
+            this.BindingContext = u;
+            InitializeComponent();
 
             //fix
             App app = (App)App.Current;
             SetImageSource(app.CurrentUser.ImageUrl);
             u.SetImageSourceEvent += SetImageSource;
-            this.BindingContext = u;
-            InitializeComponent();
+            
+            
         }
 
         private void SetImageSource(ImageSource source)
