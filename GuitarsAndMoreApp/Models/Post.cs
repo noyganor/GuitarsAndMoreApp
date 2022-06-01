@@ -50,8 +50,10 @@ namespace GuitarsAndMoreApp.Models
         {
             get
             {
+                //We use cache busting to avoid image caching on the phone
+                Random r = new Random();
                 GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-                return proxy.GetPhotoUri() + this.PostId + ".jpg";
+                return proxy.GetPhotoUri() + this.PostId + ".jpg?" + r.Next(10000);
             }
 
         }

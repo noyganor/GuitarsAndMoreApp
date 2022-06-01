@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace GuitarsAndMoreApp.Models
 {
@@ -18,6 +19,8 @@ namespace GuitarsAndMoreApp.Models
         public string FavBand { get; set; }
         public DateTime JoinDate { get; set; }
 
+        public bool? IsManager { get; set; }
+
         public virtual Gender Gender { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<UserFavoritePost> UserFavoritePosts { get; set; }
@@ -33,6 +36,20 @@ namespace GuitarsAndMoreApp.Models
                 return proxy.GetPhotoUri() + "U" + this.UserId + ".jpg?" + r.Next(10000);
             }
 
+        }
+
+        public bool CheckIsManager()
+        {
+            return (IsManager.HasValue && IsManager.Value);
+        }
+
+        [JsonIgnore]
+        public bool IsManagerProp
+        {
+            get
+            {
+                return (IsManager.HasValue && IsManager.Value);
+            }
         }
 
     }

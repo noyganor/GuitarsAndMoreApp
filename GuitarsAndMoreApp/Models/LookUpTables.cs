@@ -12,6 +12,7 @@ namespace GuitarsAndMoreApp.Models
         public List<Producer> Producers { get; set; }
         public List<Model> Models { get; set; }
         public List<Category> Categories { get; set; }
+
         //public List<UserFavoritePost> UserFavoritePosts { get; set; }
     }
 }

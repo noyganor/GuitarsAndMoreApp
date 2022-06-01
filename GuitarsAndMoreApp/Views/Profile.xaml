@@ -16,6 +16,8 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Button Text="התנתקות" Command="{Binding LogOutButton}" HorizontalOptions="Start" VerticalOptions="Start" CornerRadius="7" BackgroundColor="Transparent" TextColor="Black" Grid.Column="0" Grid.Row="0"/>
+                <!--<ImageButton Source="managericon.png" CornerRadius="7" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="0"/>-->
+                <Button Text="פרופיל מנהל" Command="{Binding NavigateToManagerProfile}" HorizontalOptions="Start" CornerRadius="7" BackgroundColor="Transparent" TextColor="#006d77" Grid.Column="1" Grid.Row="0"/>
                 <Label Padding="12" Text="{Binding Nickname, StringFormat='Hello {0:F0}!'}" HorizontalOptions="End" VerticalOptions="Start" Grid.Column="1" Grid.Row="0" TextColor="#457b9d" FontSize="16"/>
             </Grid>
             

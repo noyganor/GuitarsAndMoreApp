@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuitarsAndMoreApp.Views.ManagerProfile"
-               FlowDirection="RightToLeft">
+               FlowDirection="RightToLeft"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
             <Grid>
@@ -32,6 +34,13 @@
 
                 </Image>
             </Grid>
+
+           
+            <Entry Placeholder="הזן אימייל של משתמש קיים" HorizontalTextAlignment="Center" Text="{Binding EnteredEmail}" Margin="50,20,50,0"/>
+            <Button Text="הוסף כמנהל למערכת" Command="{Binding AddManager}" CornerRadius="10" BackgroundColor="#dfe7fd"  Margin="80,0,80,-25"/>
+            <Label Text="{Binding Message}" TextColor="Red"/>
+
+          <microcharts:ChartView   Chart="{Binding PostByCategoryChart}" HeightRequest="250"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

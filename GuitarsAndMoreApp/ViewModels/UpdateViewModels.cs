@@ -393,7 +393,18 @@ namespace GuitarsAndMoreApp.ViewModels
                 else
                 {
                     theApp.CurrentUser = user;
-                    await App.Current.MainPage.DisplayAlert("עדכון", "העדכון בוצע בהצלחה", "אישור", FlowDirection.RightToLeft);
+                    if (this.imageFileResult != null)
+                    {
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"U{user.UserId}.jpg", false);
+
+                        if (success)
+                            await App.Current.MainPage.DisplayAlert("עדכון", "העדכון בוצע בהצלחה", "אישור", FlowDirection.RightToLeft);
+                        else
+                            await App.Current.MainPage.DisplayAlert("עדכון", "עדכון הנתונים בוצע בהצלחה אבל התמונה לא עודכנה נסה שנית", "אישור", FlowDirection.RightToLeft);
+                    }
                     await theApp.MainPage.Navigation.PopToRootAsync();
                 }
             }

@@ -24,10 +24,10 @@ namespace GuitarsAndMoreApp.Services
         private const string CLOUD_URL = "TBD"; //API url when going on the cloud
         private const string CLOUD_PHOTOS_URL = "TBD";
         private const string DEV_ANDROID_EMULATOR_URL = "http://10.0.2.2:30991/GuitarsAndMoreAPI"; //API url when using emulator on android
-        private const string DEV_ANDROID_PHYSICAL_URL = "http://192.168.20.163:30991/GuitarsAndMoreAPI"; //API url when using physucal device on android
+        private const string DEV_ANDROID_PHYSICAL_URL = "http://192.168.20.76:30991/GuitarsAndMoreAPI"; //API url when using physucal device on android
         private const string DEV_WINDOWS_URL = "http://localhost:30991/GuitarsAndMoreAPI"; //API url when using windoes on development
         private const string DEV_ANDROID_EMULATOR_PHOTOS_URL = "http://10.0.2.2:30991/Images/"; //API url when using emulator on android
-        private const string DEV_ANDROID_PHYSICAL_PHOTOS_URL = "http://192.168.20.163:30991/Images/"; //API url when using physucal device on android
+        private const string DEV_ANDROID_PHYSICAL_PHOTOS_URL = "http://192.168.20.76:30991/Images/"; //API url when using physucal device on android
         private const string DEV_WINDOWS_PHOTOS_URL = "https://localhost:44345/Images/"; //API url when using windoes on development
 
         private HttpClient client;
@@ -474,6 +474,34 @@ namespace GuitarsAndMoreApp.Services
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+        }
+
+        public async Task<bool> SetUserAsManager(string email)
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/SetManager?email={email}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    bool ok = JsonSerializer.Deserialize<bool>(content, options);
+                    return ok;
+                }
+
+                else
+                    return false;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
     }

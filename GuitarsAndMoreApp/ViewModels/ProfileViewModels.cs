@@ -47,6 +47,15 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Manager Profile Page
+        public Command NavigateToManagerProfile => new Command(ManagerProfilePage);
+        public async void ManagerProfilePage()
+        {
+            App app = (App)App.Current;
+            await app.MainPage.Navigation.PushAsync(new ManagerProfile());
+        }
+        #endregion 
+
         #region Edit Posts
         public Command NavigateToEditMyPostsPage => new Command(EditMyPostsPage);
         public async void EditMyPostsPage()
@@ -77,15 +86,14 @@ namespace GuitarsAndMoreApp.ViewModels
                     await app.MainPage.Navigation.PushModalAsync(new Login());
                 else
                 {
-                    
                     await app.MainPage.Navigation.PopToRootAsync();
                     NavigationPage nv = (NavigationPage)app.MainPage;
                     await nv.PopToRootAsync();
                     MainTab mt = (MainTab)nv.CurrentPage;
                     mt.SwitchToHomeTab();
                 }
-                    
             }
+
             else
             {
                 Nickname = app.CurrentUser.Nickname;

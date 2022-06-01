@@ -4,6 +4,7 @@
              x:Class="GuitarsAndMoreApp.Views.Edit"
              xmlns:local="clr-namespace:GuitarsAndMoreApp.ViewModels"
              xmlns:models="clr-namespace:GuitarsAndMoreApp.Models" xmlns:views="clr-namespace:GuitarsAndMoreApp.Views" x:DataType="local:EditViewModels"
+            
              FlowDirection="RightToLeft"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
