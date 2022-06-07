@@ -226,13 +226,13 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        #region Previous Button
-        public Command SignUpPreviousButton => new Command(SignUpPrevious);
-        public void SignUpPrevious()
-        {
+        //#region Previous Button
+        //public Command SignUpPreviousButton => new Command(SignUpPrevious);
+        //public void SignUpPrevious()
+        //{
 
-        }
-        #endregion
+        //}
+        //#endregion
 
         public Command BackToHomePageButton => new Command(BackToHomePage);
         public async void BackToHomePage()

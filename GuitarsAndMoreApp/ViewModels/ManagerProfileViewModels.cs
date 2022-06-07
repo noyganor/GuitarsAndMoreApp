@@ -241,6 +241,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
 
             }
+            
 
             ChartEntry categoryone = new ChartEntry(count[0])
             {
@@ -256,7 +257,7 @@ namespace GuitarsAndMoreApp.ViewModels
                 TextColor = SKColor.Parse("#fff3b0"),
                 ValueLabelColor = SKColor.Parse("#fff3b0"),
                 Color = SKColor.Parse("#fff3b0"),
-                Label = $" Sound",
+                Label = $"Sound",
                 ValueLabel = $"{count[1]:N0}"
             };
 
@@ -284,6 +285,7 @@ namespace GuitarsAndMoreApp.ViewModels
             chartEntries.Add(categorythree);
             chartEntries.Add(categoryfour);
             chart.Entries = chartEntries;
+            chart.LabelTextSize = 32;
 
             this.PostByCategoryChart = chart;
 

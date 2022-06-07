@@ -38,8 +38,9 @@
             <Button Text="הוסף כמנהל למערכת" Command="{Binding AddManager}" CornerRadius="10" BackgroundColor="#dfe7fd"  Margin="80,0,80,-25"/>
             <Label Text="{Binding Message}" TextColor="Red"  Margin="100,20,110,-25"/>
 
-          <microcharts:ChartView   Chart="{Binding PostByCategoryChart}" HeightRequest="250" Margin="50" BackgroundColor="Transparent" />
-            <Label Text="{Binding CountPosts, StringFormat='Overall {0:F0} posts'}" TextColor="#457b9d" FontSize="16" HorizontalTextAlignment="Center"/>
+            <Label Text="{Binding CountPosts, StringFormat='Overall {0:F0} posts'}" TextColor="#457b9d" Margin="20" FontSize="16" HorizontalOptions="CenterAndExpand"/>
+            <microcharts:ChartView   Chart="{Binding PostByCategoryChart}" HeightRequest="250" Margin="10" BackgroundColor="Transparent"  />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
