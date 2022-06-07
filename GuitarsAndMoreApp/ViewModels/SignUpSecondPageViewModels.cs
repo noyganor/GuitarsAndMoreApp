@@ -179,6 +179,8 @@ namespace GuitarsAndMoreApp.ViewModels
                 return false;
             return true;
         }
+
+        #region Submit Form Button
         public Command SignUpSumbitButton => new Command(SignUpSubmitButton);
         public async void SignUpSubmitButton()
         {
@@ -222,6 +224,15 @@ namespace GuitarsAndMoreApp.ViewModels
                 }
             }
         }
+        #endregion
+
+        #region Previous Button
+        public Command SignUpPreviousButton => new Command(SignUpPrevious);
+        public void SignUpPrevious()
+        {
+
+        }
+        #endregion
 
         public Command BackToHomePageButton => new Command(BackToHomePage);
         public async void BackToHomePage()

@@ -22,7 +22,7 @@ namespace GuitarsAndMoreApp.Views
           
             ManagerProfileViewModels vm = (ManagerProfileViewModels)this.BindingContext;
             vm.ShowManagerProfilePage();
-            base.OnAppearing();
+            //base.OnAppearing();
         }
     }
 }

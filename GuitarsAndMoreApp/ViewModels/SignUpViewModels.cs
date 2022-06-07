@@ -306,19 +306,30 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        public Command SignUpNextButton => new Command(SignUpNextPage);
 
-        public void ValidateForm()
+
+        public async void ValidateForm()
         {
-            if (ShowEmailError || ShowNicknameError || ShowPasswordError || ShowVerPasswordError)
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            bool isEmailExist = await proxy.IsEmailExistProxy(this.Email);
+            if (isEmailExist)
             {
+                await App.Current.MainPage.DisplayAlert("המייל שהזנת כבר קיים במערכת", " אנא נסה להזין מייל אחר", "אישור", FlowDirection.RightToLeft);
                 this.IsEnable = false;
             }
 
             else
             {
-                this.IsEnable = true;
+                if (ShowEmailError || ShowNicknameError || ShowPasswordError || ShowVerPasswordError)
+                {
+                    this.IsEnable = false;
+                }
 
+                else
+                {
+                    this.IsEnable = true;
+
+                }
             }
         }
 
@@ -379,6 +390,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        public Command SignUpNextButton => new Command(SignUpNextPage);
         public void SignUpNextPage()
         {
             App app = (App)App.Current;
@@ -460,7 +472,6 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
         #endregion
-
 
         #region
         public ICommand Button1PressedCommand { protected set; get; }

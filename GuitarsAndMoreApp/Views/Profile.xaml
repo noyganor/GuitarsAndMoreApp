@@ -17,7 +17,7 @@
                 </Grid.RowDefinitions>
                 <Button Text="התנתקות" Command="{Binding LogOutButton}" HorizontalOptions="Start" VerticalOptions="Start" CornerRadius="7" BackgroundColor="Transparent" TextColor="Black" Grid.Column="0" Grid.Row="0"/>
                 <!--<ImageButton Source="managericon.png" CornerRadius="7" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="0"/>-->
-                <Button Text="פרופיל מנהל" Command="{Binding NavigateToManagerProfile}" HorizontalOptions="Start" CornerRadius="7" BackgroundColor="Transparent" TextColor="#006d77" Grid.Column="1" Grid.Row="0"/>
+                <Button Text="כניסה לפרופיל מנהל" Command="{Binding NavigateToManagerProfile}" HorizontalOptions="Start" CornerRadius="7" BackgroundColor="Transparent" TextColor="#006d77" Grid.Column="1" Grid.Row="0"/>
                 <Label Padding="12" Text="{Binding Nickname, StringFormat='Hello {0:F0}!'}" HorizontalOptions="End" VerticalOptions="Start" Grid.Column="1" Grid.Row="0" TextColor="#457b9d" FontSize="16"/>
             </Grid>
             
@@ -35,7 +35,7 @@
                     
                 </Image>
             </Grid>
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -50,43 +50,20 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="100" />
                 </Grid.RowDefinitions>
-                
-                <!--<StackLayout Margin="0" Padding="2" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">-->
-                    <ImageButton Source="postFavoriteIcon.png" Command="{Binding NavigateToFavoritesPage}" BackgroundColor="Transparent"  Grid.Row="1" Grid.Column="0" HeightRequest="100" WidthRequest="200"></ImageButton>
-                    <Label Text="המועדפים שלי" Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" TextColor="Black"/>
-                <!--</StackLayout>-->
 
-                <!--<StackLayout Margin="0" Padding="2" Grid.Row="1" Grid.RowSpan="1" Grid.Column="2">-->
+                <ImageButton Source="postFavoriteIcon.png" Command="{Binding NavigateToFavoritesPage}" BackgroundColor="Transparent"  Grid.Row="1" Grid.Column="0" HeightRequest="100" WidthRequest="200"></ImageButton>
+                <Label Text="המועדפים שלי" Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" TextColor="Black"/>
+
                 <ImageButton Source="UpdateLastChance.png" Command="{Binding NavigateToUpdatePage}"  Grid.Row="1" Grid.Column="2" BackgroundColor="Transparent" HeightRequest="300" WidthRequest="200"></ImageButton>
                 <Label Text=" עדכון פרטים"  HorizontalOptions="Center"  Grid.Row="2" Grid.Column="2" TextColor="Black"/>
-                <!--</StackLayout>-->
-                
-                <!--<StackLayout Margin="0" Padding="2" Grid.Row="2" Grid.RowSpan="2" Grid.Column="0">-->
+
                 <ImageButton Source="othereditposticon.png" Command="{Binding NavigateToEditMyPostsPage}" BackgroundColor="Transparent" Grid.Row="3" Grid.Column="0" HeightRequest="100" WidthRequest="100" ></ImageButton>
                 <Label Text="  עריכת המודעות שלי" Grid.Row="4" Grid.Column="0" HorizontalOptions="Center" TextColor="Black"/>
-                <!--</StackLayout>-->
 
-                <!--<StackLayout Margin="0" Padding="2" Grid.Row="3" Grid.RowSpan="2" Grid.Column="2">-->
                 <ImageButton Source="AddPost.png" Command="{Binding NavigateToUploadAPostPage}" BackgroundColor="Transparent"  Grid.Row="3" Grid.Column="2" HeightRequest="500" WidthRequest="500"></ImageButton>
                 <Label Text=" פרסם מודעה"  HorizontalOptions="Center"  Grid.Row="4" Grid.Column="2" TextColor="Black"/>
-                <!--</StackLayout>-->
+
             </Grid>
-            <!--<ImageButton BackgroundColor="Red" Command="{Binding NavigateToFavoritesPageCommand}" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center" Grid.Column="1" Grid.Row="2">
-                    <ImageButton.Source>
-                        <FontImageSource
-                    FontFamily="MyRegularFonts"
-                    Glyph="{x:Static fontAwesome:IconRegularFonts.Bookmark}"                 
-                    Color="blue"/>
-                    </ImageButton.Source>
-                </ImageButton>-->
-
-            <!--<Button FontFamily="MyRegularFonts" Text="{x:Static fontAwesome:IconRegularFonts.Star}" FontSize="Large" BackgroundColor="Transparent"></Button>-->
-            <!--<Button FontFamily="MyRegularFonts" Text="{x:Static fontAwesome:IconRegularFonts.SquarePlus}" FontSize="Large" BackgroundColor="Transparent"  Grid.Column="0" Grid.Row="2"></Button>-->
-
-            <!--<ImageButton Source="NewUpdateIcon.png"  BackgroundColor="Transparent"></ImageButton>-->
-            <!--<Button FontFamily="MyRegularFonts" Text="{x:Static fontAwesome:IconRegularFonts.PenToSquare}" FontSize="Large" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="2"></Button>-->
-
-
         </StackLayout>
 
 

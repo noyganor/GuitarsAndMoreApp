@@ -124,6 +124,22 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
+        #region Count Posts
+        private int countPosts;
+        public int CountPosts
+        {
+            get => this.countPosts;
+            set
+            {
+                if (this.countPosts != value)
+                {
+                    this.countPosts = value;
+                    OnPropertyChanged("CountPosts");
+                }
+            }
+        }
+        #endregion
+
         #region Add Manager Button
         public Command AddManager => new Command(AddManagerButton);
         public async void AddManagerButton()
@@ -157,17 +173,26 @@ namespace GuitarsAndMoreApp.ViewModels
             }
         }
         #endregion
+
         public async void ShowManagerProfilePage()
         {
             try
             {
+
                 App app = (App)App.Current;
 
-                if (app.CurrentUser != null && app.CurrentUser.CheckIsManager())
+                if (app.CurrentUser == null || !app.CurrentUser.CheckIsManager())
                 {
-                    await app.MainPage.Navigation.PushAsync(new ManagerProfile());
+                    await App.Current.MainPage.DisplayAlert("שגיאה", " אינך מוגדר כמנהל...", "אישור", FlowDirection.RightToLeft);
+                    await app.MainPage.Navigation.PopToRootAsync();             
+                }
+
+                else
+                {
+                   
                 }
             }
+
             catch (Exception e)
             {
                 Console.Write(e.Message);
@@ -175,7 +200,7 @@ namespace GuitarsAndMoreApp.ViewModels
 
         }
 
-       
+
         private Chart postByCategoryChart;
         public Chart PostByCategoryChart
         {
@@ -192,8 +217,8 @@ namespace GuitarsAndMoreApp.ViewModels
             GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
             Chart chart = new PieChart();
             List<ChartEntry> chartEntries = new List<ChartEntry>();
-            List<Post> lst = await proxy.GetListOfPostsAsync();      
-            
+            List<Post> lst = await proxy.GetListOfPostsAsync();
+
             int[] count = new int[lst.Count()];
             foreach (Post p in lst)
             {
@@ -219,37 +244,38 @@ namespace GuitarsAndMoreApp.ViewModels
 
             ChartEntry categoryone = new ChartEntry(count[0])
             {
-                TextColor = SKColor.Parse("#3498db"),
-                ValueLabelColor = SKColor.Parse("#FFC6FF"),
-                Color = SKColor.FromHsv(50, 100, 100),
-                Label = $" גיטרות",
+                TextColor = SKColor.Parse("#d8e2dc"),
+                ValueLabelColor = SKColor.Parse("#d8e2dc"),
+                Color = SKColor.Parse("#d8e2dc"),
+                Label = $" Guitars",
                 ValueLabel = $"{count[0]:N0}"
             };
 
             ChartEntry categorytwo = new ChartEntry(count[1])
             {
-                TextColor = SKColor.Parse("#4d6270"),
-                ValueLabelColor = SKColor.Parse("#0e92eb"),
-                Color = SKColor.FromHsv(100, 50, 100),
-                Label = $" סאונד",
+                TextColor = SKColor.Parse("#fff3b0"),
+                ValueLabelColor = SKColor.Parse("#fff3b0"),
+                Color = SKColor.Parse("#fff3b0"),
+                Label = $" Sound",
                 ValueLabel = $"{count[1]:N0}"
             };
 
             ChartEntry categorythree = new ChartEntry(count[2])
             {
-                TextColor = SKColor.Parse("#e691a9"),
-                ValueLabelColor = SKColor.Parse("#c99e49"),
-                Color = SKColor.FromHsv(100, 100, 50),
-                Label = $" קייסים",
+                TextColor = SKColor.Parse("#fec89a"),
+                ValueLabelColor = SKColor.Parse("#fec89a"),
+                Color = SKColor.Parse("#fec89a"),
+                Label = $" Cases",
                 ValueLabel = $"{count[2]:N0}"
             };
 
             ChartEntry categoryfour = new ChartEntry(count[3])
             {
-                TextColor = SKColor.Parse("#86cf34"),
-                ValueLabelColor = SKColor.Parse("#95e4e8"),
-                Color = SKColor.FromHsv(30, 100, 50),
-                Label = $" אביזרים",
+                TextColor = SKColor.Parse("#e0c3fc"),              
+                ValueLabelColor = SKColor.Parse("#e0c3fc"),
+                Color = SKColor.Parse("#e0c3fc"),
+                Label = $" Equipment",
+                
                 ValueLabel = $"{count[3]:N0}"
             };
 
@@ -261,8 +287,8 @@ namespace GuitarsAndMoreApp.ViewModels
 
             this.PostByCategoryChart = chart;
 
+            this.CountPosts = lst.Count();
 
-          
 
         }
 
