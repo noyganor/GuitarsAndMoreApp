@@ -164,33 +164,7 @@ namespace GuitarsAndMoreApp.ViewModels
         }
         #endregion
 
-        //private async Task<bool> OperateFavoriteMethod(Post selected)
-        //{
-        //    try
-        //    {
-        //        HomePageViewModels hp = new HomePageViewModels();
-        //        hp.AddPostToFavorites(selected);
-
-        //        App app = (App)App.Current;
-        //        GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-
-        //        User u = await proxy.LoginAsync(app.CurrentUser.Email, app.CurrentUser.Pass);
-        //        app.CurrentUser = u;
-        //        foreach (UserFavoritePost p in app.CurrentUser.UserFavoritePosts)
-        //        {
-        //            if (p.PostId == selected.PostId)
-        //                hp.AddPostToFavorites(selected);
-        //        }
-
-        //        return true;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        return false;
-        //    }
-
-        //}
+       
 
         #region Edit Button
         public Command EditButton => new Command<Post>(EditPost);

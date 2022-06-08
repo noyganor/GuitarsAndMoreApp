@@ -35,31 +35,7 @@
                                   
                                 </Grid.RowDefinitions>
                             </Grid>
-                            <!--<StackLayout>
-                            <Frame CornerRadius="7" Padding="15" Margin="30,2,30,30">
-                <StackLayout>-->
-                            <!--<Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>-->
+                 
 
                             <Label Text="הכנס מחיר מוצר" Grid.Column="0" Grid.Row="0"/>
                             <Label Text="{Binding SliderValue}" Grid.Column="1" Grid.Row="0"/>

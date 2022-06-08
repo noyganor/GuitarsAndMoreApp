@@ -205,10 +205,7 @@ namespace GuitarsAndMoreApp.ViewModels
             BackToHomePageButton= new Command(BackToHomePage);
             LoginButton = new Command(LoginAsync);
 
-            //On debug only!
-            this.Email = "noiganor12@gmail.com";
-            this.Password = "nganor";
-
+        
 
         }
 
