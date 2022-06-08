@@ -29,15 +29,15 @@
                 </Grid.ColumnDefinitions>
                 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="120" />
+                    <RowDefinition Height="150" />
                 </Grid.RowDefinitions>
                 
-                <Image Source="{Binding ImgUrl}" BackgroundColor="Transparent"  HeightRequest="300" WidthRequest="200" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
+                <Image Source="{Binding ImgUrl}" BackgroundColor="Transparent"  HeightRequest="400" WidthRequest="200" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand">
                     
                 </Image>
             </Grid>
 
-            <Grid>
+            <Grid Margin="0, 50,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="40" />
@@ -49,6 +49,7 @@
                     <RowDefinition Height="120" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="120" />
                     <RowDefinition Height="100" />
                 </Grid.RowDefinitions>
 
@@ -58,11 +59,12 @@
                 <ImageButton Source="UpdateLastChance.png" Command="{Binding NavigateToUpdatePage}"  Grid.Row="1" Grid.Column="2" BackgroundColor="Transparent" HeightRequest="300" WidthRequest="200"></ImageButton>
                 <Label Text=" עדכון פרטים"  HorizontalOptions="Center"  Grid.Row="2" Grid.Column="2" TextColor="Black"/>
 
-                <ImageButton Source="othereditposticon.png" Command="{Binding NavigateToEditMyPostsPage}" BackgroundColor="Transparent" Grid.Row="3" Grid.Column="0" HeightRequest="100" WidthRequest="100" ></ImageButton>
-                <Label Text="  עריכת המודעות שלי" Grid.Row="4" Grid.Column="0" HorizontalOptions="Center" TextColor="Black"/>
+                <BoxView BackgroundColor="Transparent" HeightRequest="70" Grid.Row="3"></BoxView>
+                <ImageButton Source="othereditposticon.png" Command="{Binding NavigateToEditMyPostsPage}" BackgroundColor="Transparent" Grid.Row="4" Grid.Column="0" HeightRequest="100" WidthRequest="100" ></ImageButton>
+                <Label Text="  עריכת המודעות שלי" Grid.Row="5" Grid.Column="0" HorizontalOptions="Center" TextColor="Black"/>
 
-                <ImageButton Source="AddPost.png" Command="{Binding NavigateToUploadAPostPage}" BackgroundColor="Transparent"  Grid.Row="3" Grid.Column="2" HeightRequest="500" WidthRequest="500"></ImageButton>
-                <Label Text=" פרסם מודעה"  HorizontalOptions="Center"  Grid.Row="4" Grid.Column="2" TextColor="Black"/>
+                <ImageButton Source="AddPost.png" Command="{Binding NavigateToUploadAPostPage}" BackgroundColor="Transparent"  Grid.Row="4" Grid.Column="2" HeightRequest="500" WidthRequest="500"></ImageButton>
+                <Label Text=" פרסם מודעה"  HorizontalOptions="Center"  Grid.Row="5" Grid.Column="2" TextColor="Black"/>
 
             </Grid>
         </StackLayout>

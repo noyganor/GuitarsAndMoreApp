@@ -523,13 +523,13 @@ namespace GuitarsAndMoreApp.Services
                 }
 
                 else
-                    return false;
+                    return true;
             }
 
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return true;
             }
         }
     }

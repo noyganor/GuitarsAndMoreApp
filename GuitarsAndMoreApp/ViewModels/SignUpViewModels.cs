@@ -310,16 +310,8 @@ namespace GuitarsAndMoreApp.ViewModels
 
         public async void ValidateForm()
         {
-            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
-            bool isEmailExist = await proxy.IsEmailExistProxy(this.Email);
-            if (isEmailExist)
-            {
-                await App.Current.MainPage.DisplayAlert("המייל שהזנת כבר קיים במערכת", " אנא נסה להזין מייל אחר", "אישור", FlowDirection.RightToLeft);
-                this.IsEnable = false;
-            }
-
-            else
-            {
+           
+          
                 if (ShowEmailError || ShowNicknameError || ShowPasswordError || ShowVerPasswordError)
                 {
                     this.IsEnable = false;
@@ -330,7 +322,7 @@ namespace GuitarsAndMoreApp.ViewModels
                     this.IsEnable = true;
 
                 }
-            }
+            
         }
 
         #region Upload Image
@@ -391,8 +383,17 @@ namespace GuitarsAndMoreApp.ViewModels
         #endregion
 
         public Command SignUpNextButton => new Command(SignUpNextPage);
-        public void SignUpNextPage()
+        public  async void SignUpNextPage()
         {
+            GuitarsAndMoreAPIProxy proxy = GuitarsAndMoreAPIProxy.CreateProxy();
+            bool isEmailExist = await proxy.IsEmailExistProxy(this.Email);
+            if (isEmailExist)
+            {
+                await App.Current.MainPage.DisplayAlert("המייל שהזנת כבר קיים במערכת", " אנא נסה להזין מייל אחר", "אישור", FlowDirection.RightToLeft);
+                this.IsEnable = true;
+                return;
+            }
+
             App app = (App)App.Current;
             app.MainPage = new SignUpSecondPage(Email, Nickname, Password, VerPassword, this.imageFileResult);
         }
